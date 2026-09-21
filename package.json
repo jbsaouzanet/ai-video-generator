@@ -2,6 +2,7 @@
   "name": "ai-video-generator",
   "version": "1.0.0",
   "private": true,
+  "license": "MIT",
   "description": "RocketMod weapon detection explainer video (Remotion)",
   "scripts": {
     "assets": "node scripts/prepare-assets.mjs",

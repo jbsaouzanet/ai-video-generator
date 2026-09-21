@@ -89,7 +89,10 @@ so scenes only own the graphics around it. The device pixels are never repainted
 
 More detail (audio pipeline, subtitles sync, intro variants, final assembly, voice engines) is in [`docs/DEV-NOTES.md`](docs/DEV-NOTES.md).
 
-## Notes
+## License
 
-- RocketMod, Cronus and related names and artwork belong to their respective owners; the brand imagery is intentionally not included here.
-- No license file is provided: all rights reserved unless the author says otherwise.
+The source code in this repository is open source under the [MIT License](LICENSE).
+
+- The license covers the code and docs here. It does not cover third-party names, logos or artwork: RocketMod, Cronus and related brands belong to their respective owners, and their imagery is intentionally not included.
+- [Remotion](https://www.remotion.dev/) has its own license (free for individuals and small teams; companies may need a paid license). Check [its terms](https://www.remotion.dev/docs/license) before commercial use.
+- Contributions are welcome: open an issue or a pull request.
