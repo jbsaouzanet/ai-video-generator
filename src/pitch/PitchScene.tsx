@@ -7,7 +7,7 @@ import subs9 from '../subtitles/pitch-9x16.json';
 import subsShort from '../subtitles/pitch-short-9x16.json';
 import gen from '../config/intro.generated.json';
 import {C, FONT} from '../theme';
-import {E, bump, clamp, prog, springIn} from '../lib/anim';
+import {E, bump, clamp, prog} from '../lib/anim';
 import {FeatureTitle} from '../components/FeatureTitle';
 import {Glass} from '../components/ui';
 import {Subtitles} from '../components/Subtitles';
@@ -52,7 +52,6 @@ export const pitchTimes = (v: PitchVariant) => {
 	};
 };
 
-const BLURPLE = '#5865F2';
 const LOGO = {w: gen.w, h: gen.h};
 const rise = (p: number, dx = -70): React.CSSProperties => ({opacity: clamp(p * 1.4), transform: `translateX(${(1 - p) * dx}px)`, filter: p < 1 ? `blur(${(1 - p) * 10}px)` : undefined});
 
@@ -88,7 +87,7 @@ const Chip: React.FC<{label: string; e: number; state: 'dim' | 'bad' | 'good'; f
 		</div>
 	);
 };
-const Arrow: React.FC<{e: number; font: number}> = ({e, font}) => <div style={{opacity: e, fontSize: font * 1.1, color: C.blueHi, textShadow: '0 0 18px rgba(47,139,255,.8)'}}>→</div>;
+const Arrow: React.FC<{e: number; font: number; down?: boolean}> = ({e, font, down = false}) => <div style={{opacity: e, fontSize: font * 1.1, lineHeight: 1, color: C.blueHi, textShadow: '0 0 18px rgba(47,139,255,.8)'}}>{down ? '↓' : '→'}</div>;
 
 export const PitchScene: React.FC<{tall: boolean; audio?: string; variant?: PitchVariant}> = ({tall, audio, variant = 'full'}) => {
 	const frame = useCurrentFrame();
@@ -97,11 +96,10 @@ export const PitchScene: React.FC<{tall: boolean; audio?: string; variant?: Pitc
 	const T = pitchTimes(variant);
 	const total = pitchFrames(variant);
 	const p = (at: number, dur = 0.5, easing = E.out) => prog(frame, at * 30, dur * 30, easing);
-	const sp = (at: number) => springIn(frame, 30, at * 30, {damping: 15, stiffness: 190, mass: 0.8});
 
 	const L = tall
-		? {colX: 60, colW: 960, titleY: 470, badge1Y: 830, badge2Y: 990, badgeH: 130, flowY: 1190, flowFont: 40, logoH: 300, logoCx: 540, logoCy: 250, titleW: 1000, titleSize: [92, 118] as const, badgeFont: 48}
-		: {colX: 120, colW: 1000, titleY: 90, badge1Y: 420, badge2Y: 570, badgeH: 130, flowY: 770, flowFont: 40, logoH: 340, logoCx: 1490, logoCy: 400, titleW: 1100, titleSize: [66, 104] as const, badgeFont: 48};
+		? {colX: 60, colW: 960, titleY: 440, badge1Y: 770, badge2Y: 930, badgeH: 130, flowY: 1120, flowFont: 44, logoH: 300, logoCx: 540, logoCy: 250, titleW: 1000, titleSize: [92, 118] as const, badgeFont: 48}
+		: {colX: 110, colW: 1140, titleY: 100, badge1Y: 470, badge2Y: 650, badgeH: 150, flowY: 890, flowFont: 44, logoH: 470, logoCx: 1570, logoCy: 440, titleW: 1300, titleSize: [84, 140] as const, badgeFont: 58};
 	const out = prog(frame, total - 8, 8, E.in);
 
 	const badge1 = p(T.perfect1 - 0.25, 0.45);
@@ -139,17 +137,17 @@ export const PitchScene: React.FC<{tall: boolean; audio?: string; variant?: Pitc
 			<Badge x={L.colX} y={L.badge1Y} w={L.colW} h={L.badgeH} label="PERFECT ANTI-RECOIL" sub="EVERY WEAPON · DIALED IN" e={badge1} pop={pop1} font={L.badgeFont} />
 			<Badge x={L.colX} y={L.badge2Y} w={L.colW} h={L.badgeH} label="PERFECT AIM ASSIST" sub="EVERY WEAPON · DIALED IN" e={badge2} pop={pop2} font={L.badgeFont} />
 
-			<div style={{position: 'absolute', left: L.colX, top: L.flowY, width: L.colW, display: 'flex', alignItems: 'center', justifyContent: tall ? 'center' : 'flex-start', gap: 22, flexWrap: 'nowrap'}}>
+			<div style={{position: 'absolute', left: L.colX, top: L.flowY, width: tall ? L.colW : 1700, display: 'flex', flexDirection: tall ? 'column' : 'row', alignItems: 'center', justifyContent: tall ? 'flex-start' : 'flex-start', gap: tall ? 10 : 22, flexWrap: 'nowrap'}}>
 				<Chip label="GAME UPDATE" e={chip1} state="dim" font={L.flowFont} />
-				<Arrow e={arrow1} font={L.flowFont} />
+				<Arrow e={arrow1} font={L.flowFont} down={tall} />
 				{T.wait !== null && (
 					<>
-						<Chip label={tall ? 'WAIT FOR THE DEV' : 'WAIT FOR THE DEVELOPER'} e={chip2} state="bad" font={L.flowFont * (tall ? 0.85 : 1)} struck={strike} />
-						<Arrow e={arrow2} font={L.flowFont} />
+						<Chip label="WAIT FOR THE DEVELOPER" e={chip2} state="bad" font={L.flowFont * (tall ? 0.9 : 1)} struck={strike} />
+						<Arrow e={arrow2} font={L.flowFont} down={tall} />
 					</>
 				)}
 				<div style={{transform: `scale(${1 + 0.05 * bump(t, T.yourself + 0.1, 0.6)})`}}>
-					<Chip label="YOU UPDATE IT ✓" e={chip3} state="good" font={L.flowFont * (tall ? 0.85 : 1)} />
+					<Chip label="YOU UPDATE IT ✓" e={chip3} state="good" font={L.flowFont * (tall ? 0.9 : 1)} />
 				</div>
 			</div>
 
@@ -167,8 +165,6 @@ export const PitchScene: React.FC<{tall: boolean; audio?: string; variant?: Pitc
 			<Scanlines opacity={0.14} />
 			<Subtitles cues={isShort ? subsShort : tall ? subs9 : subs16} y={tall ? 1590 : 976} size={tall ? 52 : 42} maxWidth={tall ? 940 : 1500} opacity={1 - out} />
 			<AbsoluteFill style={{background: '#000', opacity: out, pointerEvents: 'none'}} />
-			{void BLURPLE}
-			{void sp}
 		</AbsoluteFill>
 	);
 };

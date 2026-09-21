@@ -1,4 +1,4 @@
-# rocketmod-video
+# ai-video-generator
 
 Programmatic explainer videos for **RocketMod Weapon Detect**, built with [Remotion](https://www.remotion.dev/) (React + TypeScript).
 One code base renders every cut: the vertical short, the horizontal long-form films, plus animated intro stings and an end card.
