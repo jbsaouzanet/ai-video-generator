@@ -1,0 +1,140 @@
+{
+	"engine": "kokoro",
+	"voice": "am_onyx=0.3,am_michael=0.7",
+	"speed": 1.06,
+	"vc": {
+		"src": "audio/voiceprints/kokoro-onyx30-michael70.se.pth",
+		"tgt": "audio/voiceprints/user.se.pth",
+		"alpha": 1,
+		"tau": 0.3
+	},
+	"lines": [
+		{
+			"id": "p1",
+			"start": 1.05,
+			"text": "Per Weapon mode. Every weapon gets its own anti-recoil."
+		},
+		{
+			"id": "w1",
+			"gap": 1.3,
+			"text": "Other modes pick a category, and switch between two profiles."
+		},
+		{
+			"id": "w2",
+			"gap": 0.45,
+			"text": "Wrong category, wrong setting."
+		},
+		{
+			"id": "w3",
+			"gap": 0.6,
+			"text": "In Per Weapon, every weapon has its own slot. No profile to confuse."
+		},
+		{
+			"id": "t1",
+			"gap": 1.3,
+			"text": "You still need a DualSense, with adaptive triggers on."
+		},
+		{
+			"id": "t2",
+			"gap": 0.45,
+			"text": "Hold L2, release Options. Go to Combat, Weapon Detect, and enable it."
+		},
+		{
+			"id": "t3",
+			"gap": 0.45,
+			"text": "Press Cross. Device stays PS5. Press Down, and set Type to Per Weapon."
+		},
+		{
+			"id": "t4",
+			"gap": 0.45,
+			"text": "A new row appears: Teach Weapon. Leave with Circle. It saves itself."
+		},
+		{
+			"id": "f1",
+			"gap": 1.3,
+			"text": "Fire once. The weapon claims its own slot, automatically."
+		},
+		{
+			"id": "f2",
+			"gap": 0.45,
+			"text": "Known weapons show their real name. Unknown ones become Custom, plus a number."
+		},
+		{
+			"id": "u1",
+			"gap": 1.3,
+			"text": "Too high or too low? Hold L2 and press Up or Down, while firing."
+		},
+		{
+			"id": "u2",
+			"gap": 0.45,
+			"text": "It's permanent, for that exact weapon."
+		},
+		{
+			"id": "u3",
+			"gap": 0.45,
+			"text": "Switch weapons, and the next one has its own values."
+		},
+		{
+			"id": "a1",
+			"gap": 1.3,
+			"text": "Two weapons sharing a signature show a question mark. Press L2 and Right, to switch to the other one."
+		},
+		{
+			"id": "a2",
+			"gap": 0.6,
+			"text": "Totally wrong? Hold L2, Circle and Down, to open your sixty-four slots, and pick."
+		},
+		{
+			"id": "h1",
+			"gap": 1.3,
+			"text": "Weapon missing? Teach it. Open Teach Weapon, and pick a slot."
+		},
+		{
+			"id": "h2",
+			"gap": 0.45,
+			"text": "Fire with the weapon. The screen shows the measured values. Fire two or three times: they should stay the same."
+		},
+		{
+			"id": "h3",
+			"gap": 0.45,
+			"text": "Confirm with Cross, pick its category, then a name if you want."
+		},
+		{
+			"id": "h4",
+			"gap": 0.45,
+			"text": "Saved. Slots even survive a power off, and a re-flash."
+		},
+		{
+			"id": "e1",
+			"gap": 1.3,
+			"text": "To tweak a saved weapon, open its slot, pick a row, and change the value with Left and Right."
+		},
+		{
+			"id": "e2",
+			"gap": 0.45,
+			"text": "Square deletes it. It asks first."
+		},
+		{
+			"id": "c1",
+			"gap": 1.3,
+			"text": "One anti-recoil switch covers all your weapons."
+		},
+		{
+			"id": "c2",
+			"gap": 0.45,
+			"text": "Custom weapon badly tuned mid-fight? Hold Share and Triangle for a second, to fall back to the manual profile."
+		},
+		{
+			"id": "n1",
+			"gap": 1.3,
+			"text": "The full guide is on Rocket Mod dot org.",
+			"caption": "The full guide is on rocketmod.org."
+		},
+		{
+			"id": "n2",
+			"gap": 0.6,
+			"text": "Rocket Mod. Per Weapon.",
+			"caption": "RocketMod. Per Weapon."
+		}
+	]
+}

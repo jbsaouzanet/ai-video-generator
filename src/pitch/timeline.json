@@ -1,0 +1,148 @@
+[
+  {
+    "id": "p1",
+    "text": "The first system of its kind.",
+    "caption": "The first system of its kind.",
+    "start": 0.35,
+    "dur": 1.859,
+    "end": 2.209,
+    "file": "audio/build/pitch/voice/p1.wav",
+    "words": [
+      {
+        "t": "The",
+        "from": 0.03,
+        "to": 0.106
+      },
+      {
+        "t": "first",
+        "from": 0.106,
+        "to": 0.456
+      },
+      {
+        "t": "system",
+        "from": 0.456,
+        "to": 0.919
+      },
+      {
+        "t": "of",
+        "from": 0.919,
+        "to": 1.006
+      },
+      {
+        "t": "its",
+        "from": 1.006,
+        "to": 1.206
+      },
+      {
+        "t": "kind.",
+        "from": 1.206,
+        "to": 1.739
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "p2",
+    "text": "Perfect anti-recoil. Perfect aim assist.",
+    "caption": "Perfect anti-recoil. Perfect aim assist.",
+    "start": 2.659,
+    "dur": 2.599,
+    "end": 5.258,
+    "file": "audio/build/pitch/voice/p2.wav",
+    "words": [
+      {
+        "t": "Perfect",
+        "from": 0.03,
+        "to": 0.375
+      },
+      {
+        "t": "anti-recoil.",
+        "from": 0.375,
+        "to": 1.145
+      },
+      {
+        "t": "Perfect",
+        "from": 1.328,
+        "to": 1.65
+      },
+      {
+        "t": "aim",
+        "from": 1.65,
+        "to": 1.925
+      },
+      {
+        "t": "assist.",
+        "from": 1.925,
+        "to": 2.479
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "p3",
+    "text": "Game updated? No more waiting for the developer. Update it yourself.",
+    "caption": "Game updated? No more waiting for the developer. Update it yourself.",
+    "start": 5.758,
+    "dur": 4.075,
+    "end": 9.833,
+    "file": "audio/build/pitch/voice/p3.wav",
+    "words": [
+      {
+        "t": "Game",
+        "from": 0.03,
+        "to": 0.253
+      },
+      {
+        "t": "updated?",
+        "from": 0.253,
+        "to": 0.846
+      },
+      {
+        "t": "No",
+        "from": 1.116,
+        "to": 1.278
+      },
+      {
+        "t": "more",
+        "from": 1.278,
+        "to": 1.503
+      },
+      {
+        "t": "waiting",
+        "from": 1.503,
+        "to": 1.853
+      },
+      {
+        "t": "for",
+        "from": 1.853,
+        "to": 1.966
+      },
+      {
+        "t": "the",
+        "from": 1.966,
+        "to": 2.053
+      },
+      {
+        "t": "developer.",
+        "from": 2.053,
+        "to": 2.647
+      },
+      {
+        "t": "Update",
+        "from": 2.871,
+        "to": 3.216
+      },
+      {
+        "t": "it",
+        "from": 3.216,
+        "to": 3.303
+      },
+      {
+        "t": "yourself.",
+        "from": 3.303,
+        "to": 3.956
+      }
+    ],
+    "wordsQuality": "exact"
+  }
+]

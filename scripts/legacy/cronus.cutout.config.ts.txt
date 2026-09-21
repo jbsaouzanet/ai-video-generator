@@ -1,0 +1,20 @@
+import gen from './cronus.generated.json';
+
+// Everything in native pixels of assets/cronus-transparent.png (trimmed).
+// Re-run `npm run assets` if the source photo changes, then tune SCREEN if needed.
+export const CRONUS = {
+	file: 'cronus.png',
+	w: gen.trim.width,
+	h: gen.trim.height,
+	// OLED display rectangle (the pure-black window in the photo).
+	screen: {
+		x: gen.screenPx.x - gen.trim.x,
+		y: gen.screenPx.y - gen.trim.y + 6,
+		w: gen.screenPx.w,
+		h: gen.screenPx.h - 12,
+	},
+	// alien-head logo centre (for accent light)
+	logo: {x: 520, y: 790},
+};
+
+export const CRONUS_ASPECT = CRONUS.w / CRONUS.h;

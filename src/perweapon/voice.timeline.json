@@ -1,0 +1,1702 @@
+[
+  {
+    "id": "p1",
+    "text": "Per Weapon mode. Every weapon gets its own anti-recoil.",
+    "caption": "Per Weapon mode. Every weapon gets its own anti-recoil.",
+    "start": 1.05,
+    "dur": 3.599,
+    "end": 4.649,
+    "file": "audio/build/pw/voice/p1.wav",
+    "words": [
+      {
+        "t": "Per",
+        "from": 0.03,
+        "to": 0.184
+      },
+      {
+        "t": "Weapon",
+        "from": 0.184,
+        "to": 0.571
+      },
+      {
+        "t": "mode.",
+        "from": 0.571,
+        "to": 0.971
+      },
+      {
+        "t": "Every",
+        "from": 1.355,
+        "to": 1.609
+      },
+      {
+        "t": "weapon",
+        "from": 1.609,
+        "to": 1.971
+      },
+      {
+        "t": "gets",
+        "from": 1.971,
+        "to": 2.184
+      },
+      {
+        "t": "its",
+        "from": 2.184,
+        "to": 2.384
+      },
+      {
+        "t": "own",
+        "from": 2.384,
+        "to": 2.671
+      },
+      {
+        "t": "anti-recoil.",
+        "from": 2.671,
+        "to": 3.479
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "w1",
+    "text": "Other modes pick a category, and switch between two profiles.",
+    "caption": "Other modes pick a category, and switch between two profiles.",
+    "start": 5.949,
+    "dur": 3.663,
+    "end": 9.612,
+    "file": "audio/build/pw/voice/w1.wav",
+    "words": [
+      {
+        "t": "Other",
+        "from": 0.03,
+        "to": 0.2
+      },
+      {
+        "t": "modes",
+        "from": 0.2,
+        "to": 0.6
+      },
+      {
+        "t": "pick",
+        "from": 0.6,
+        "to": 0.762
+      },
+      {
+        "t": "a",
+        "from": 0.762,
+        "to": 0.825
+      },
+      {
+        "t": "category,",
+        "from": 0.825,
+        "to": 1.456
+      },
+      {
+        "t": "and",
+        "from": 1.739,
+        "to": 1.85
+      },
+      {
+        "t": "switch",
+        "from": 1.85,
+        "to": 2.225
+      },
+      {
+        "t": "between",
+        "from": 2.225,
+        "to": 2.587
+      },
+      {
+        "t": "two",
+        "from": 2.587,
+        "to": 2.8
+      },
+      {
+        "t": "profiles.",
+        "from": 2.8,
+        "to": 3.543
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "w2",
+    "text": "Wrong category, wrong setting.",
+    "caption": "Wrong category, wrong setting.",
+    "start": 10.062,
+    "dur": 1.781,
+    "end": 11.843,
+    "file": "audio/build/pw/voice/w2.wav",
+    "words": [
+      {
+        "t": "Wrong",
+        "from": 0.03,
+        "to": 0.28
+      },
+      {
+        "t": "category,",
+        "from": 0.28,
+        "to": 0.905
+      },
+      {
+        "t": "wrong",
+        "from": 0.98,
+        "to": 1.318
+      },
+      {
+        "t": "setting.",
+        "from": 1.318,
+        "to": 1.661
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "w3",
+    "text": "In Per Weapon, every weapon has its own slot. No profile to confuse.",
+    "caption": "In Per Weapon, every weapon has its own slot. No profile to confuse.",
+    "start": 12.443,
+    "dur": 4.548,
+    "end": 16.991,
+    "file": "audio/build/pw/voice/w3.wav",
+    "words": [
+      {
+        "t": "In",
+        "from": 0.03,
+        "to": 0.117
+      },
+      {
+        "t": "Per",
+        "from": 0.117,
+        "to": 0.317
+      },
+      {
+        "t": "Weapon,",
+        "from": 0.317,
+        "to": 0.692
+      },
+      {
+        "t": "every",
+        "from": 0.767,
+        "to": 1.092
+      },
+      {
+        "t": "weapon",
+        "from": 1.092,
+        "to": 1.442
+      },
+      {
+        "t": "has",
+        "from": 1.442,
+        "to": 1.63
+      },
+      {
+        "t": "its",
+        "from": 1.63,
+        "to": 1.767
+      },
+      {
+        "t": "own",
+        "from": 1.767,
+        "to": 2.03
+      },
+      {
+        "t": "slot.",
+        "from": 2.03,
+        "to": 2.692
+      },
+      {
+        "t": "No",
+        "from": 2.888,
+        "to": 3.055
+      },
+      {
+        "t": "profile",
+        "from": 3.055,
+        "to": 3.617
+      },
+      {
+        "t": "to",
+        "from": 3.617,
+        "to": 3.717
+      },
+      {
+        "t": "confuse.",
+        "from": 3.717,
+        "to": 4.428
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "t1",
+    "text": "You still need a DualSense, with adaptive triggers on.",
+    "caption": "You still need a DualSense, with adaptive triggers on.",
+    "start": 18.291,
+    "dur": 2.987,
+    "end": 21.278,
+    "file": "audio/build/pw/voice/t1.wav",
+    "words": [
+      {
+        "t": "You",
+        "from": 0.03,
+        "to": 0.095
+      },
+      {
+        "t": "still",
+        "from": 0.095,
+        "to": 0.37
+      },
+      {
+        "t": "need",
+        "from": 0.37,
+        "to": 0.557
+      },
+      {
+        "t": "a",
+        "from": 0.557,
+        "to": 0.645
+      },
+      {
+        "t": "DualSense,",
+        "from": 0.645,
+        "to": 1.34
+      },
+      {
+        "t": "with",
+        "from": 1.574,
+        "to": 1.67
+      },
+      {
+        "t": "adaptive",
+        "from": 1.67,
+        "to": 2.17
+      },
+      {
+        "t": "triggers",
+        "from": 2.17,
+        "to": 2.595
+      },
+      {
+        "t": "on.",
+        "from": 2.595,
+        "to": 2.867
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "t2",
+    "text": "Hold L2, release Options. Go to Combat, Weapon Detect, and enable it.",
+    "caption": "Hold L2, release Options. Go to Combat, Weapon Detect, and enable it.",
+    "start": 21.728,
+    "dur": 4.539,
+    "end": 26.267,
+    "file": "audio/build/pw/voice/t2.wav",
+    "words": [
+      {
+        "t": "Hold",
+        "from": 0.03,
+        "to": 0.239
+      },
+      {
+        "t": "L2,",
+        "from": 0.239,
+        "to": 0.739
+      },
+      {
+        "t": "release",
+        "from": 0.789,
+        "to": 1.189
+      },
+      {
+        "t": "Options.",
+        "from": 1.189,
+        "to": 2.014
+      },
+      {
+        "t": "Go",
+        "from": 2.139,
+        "to": 2.301
+      },
+      {
+        "t": "to",
+        "from": 2.301,
+        "to": 2.414
+      },
+      {
+        "t": "Combat,",
+        "from": 2.414,
+        "to": 2.964
+      },
+      {
+        "t": "Weapon",
+        "from": 3.014,
+        "to": 3.339
+      },
+      {
+        "t": "Detect,",
+        "from": 3.339,
+        "to": 3.739
+      },
+      {
+        "t": "and",
+        "from": 3.776,
+        "to": 3.889
+      },
+      {
+        "t": "enable",
+        "from": 3.889,
+        "to": 4.339
+      },
+      {
+        "t": "it.",
+        "from": 4.339,
+        "to": 4.419
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "t3",
+    "text": "Press Cross. Device stays PS5. Press Down, and set Type to Per Weapon.",
+    "caption": "Press Cross. Device stays PS5. Press Down, and set Type to Per Weapon.",
+    "start": 26.717,
+    "dur": 4.753,
+    "end": 31.47,
+    "file": "audio/build/pw/voice/t3.wav",
+    "words": [
+      {
+        "t": "Press",
+        "from": 0.03,
+        "to": 0.221
+      },
+      {
+        "t": "Cross.",
+        "from": 0.221,
+        "to": 0.571
+      },
+      {
+        "t": "Device",
+        "from": 0.608,
+        "to": 0.921
+      },
+      {
+        "t": "stays",
+        "from": 0.921,
+        "to": 1.308
+      },
+      {
+        "t": "PS5.",
+        "from": 1.308,
+        "to": 2.446
+      },
+      {
+        "t": "Press",
+        "from": 2.675,
+        "to": 2.896
+      },
+      {
+        "t": "Down,",
+        "from": 2.896,
+        "to": 3.221
+      },
+      {
+        "t": "and",
+        "from": 3.258,
+        "to": 3.383
+      },
+      {
+        "t": "set",
+        "from": 3.383,
+        "to": 3.646
+      },
+      {
+        "t": "Type",
+        "from": 3.646,
+        "to": 3.946
+      },
+      {
+        "t": "to",
+        "from": 3.946,
+        "to": 4.046
+      },
+      {
+        "t": "Per",
+        "from": 4.046,
+        "to": 4.221
+      },
+      {
+        "t": "Weapon.",
+        "from": 4.221,
+        "to": 4.633
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "t4",
+    "text": "A new row appears: Teach Weapon. Leave with Circle. It saves itself.",
+    "caption": "A new row appears: Teach Weapon. Leave with Circle. It saves itself.",
+    "start": 31.92,
+    "dur": 3.841,
+    "end": 35.761,
+    "file": "audio/build/pw/voice/t4.wav",
+    "words": [
+      {
+        "t": "A",
+        "from": 0.03,
+        "to": 0.105
+      },
+      {
+        "t": "new",
+        "from": 0.105,
+        "to": 0.305
+      },
+      {
+        "t": "row",
+        "from": 0.305,
+        "to": 0.53
+      },
+      {
+        "t": "appears:",
+        "from": 0.53,
+        "to": 1.005
+      },
+      {
+        "t": "Teach",
+        "from": 1.08,
+        "to": 1.38
+      },
+      {
+        "t": "Weapon.",
+        "from": 1.38,
+        "to": 1.791
+      },
+      {
+        "t": "Leave",
+        "from": 1.964,
+        "to": 2.217
+      },
+      {
+        "t": "with",
+        "from": 2.217,
+        "to": 2.393
+      },
+      {
+        "t": "Circle.",
+        "from": 2.393,
+        "to": 2.805
+      },
+      {
+        "t": "It",
+        "from": 2.842,
+        "to": 2.993
+      },
+      {
+        "t": "saves",
+        "from": 2.993,
+        "to": 3.317
+      },
+      {
+        "t": "itself.",
+        "from": 3.317,
+        "to": 3.721
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "f1",
+    "text": "Fire once. The weapon claims its own slot, automatically.",
+    "caption": "Fire once. The weapon claims its own slot, automatically.",
+    "start": 37.061,
+    "dur": 3.626,
+    "end": 40.687,
+    "file": "audio/build/pw/voice/f1.wav",
+    "words": [
+      {
+        "t": "Fire",
+        "from": 0.03,
+        "to": 0.352
+      },
+      {
+        "t": "once.",
+        "from": 0.352,
+        "to": 0.811
+      },
+      {
+        "t": "The",
+        "from": 1.102,
+        "to": 1.202
+      },
+      {
+        "t": "weapon",
+        "from": 1.202,
+        "to": 1.527
+      },
+      {
+        "t": "claims",
+        "from": 1.527,
+        "to": 1.84
+      },
+      {
+        "t": "its",
+        "from": 1.84,
+        "to": 2.015
+      },
+      {
+        "t": "own",
+        "from": 2.015,
+        "to": 2.29
+      },
+      {
+        "t": "slot,",
+        "from": 2.29,
+        "to": 2.677
+      },
+      {
+        "t": "automatically.",
+        "from": 2.727,
+        "to": 3.506
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "f2",
+    "text": "Known weapons show their real name. Unknown ones become Custom, plus a number.",
+    "caption": "Known weapons show their real name. Unknown ones become Custom, plus a number.",
+    "start": 41.137,
+    "dur": 4.679,
+    "end": 45.816,
+    "file": "audio/build/pw/voice/f2.wav",
+    "words": [
+      {
+        "t": "Known",
+        "from": 0.03,
+        "to": 0.279
+      },
+      {
+        "t": "weapons",
+        "from": 0.279,
+        "to": 0.742
+      },
+      {
+        "t": "show",
+        "from": 0.742,
+        "to": 0.979
+      },
+      {
+        "t": "their",
+        "from": 0.979,
+        "to": 1.179
+      },
+      {
+        "t": "real",
+        "from": 1.179,
+        "to": 1.454
+      },
+      {
+        "t": "name.",
+        "from": 1.454,
+        "to": 2.079
+      },
+      {
+        "t": "Unknown",
+        "from": 2.29,
+        "to": 2.704
+      },
+      {
+        "t": "ones",
+        "from": 2.704,
+        "to": 2.954
+      },
+      {
+        "t": "become",
+        "from": 2.954,
+        "to": 3.342
+      },
+      {
+        "t": "Custom,",
+        "from": 3.342,
+        "to": 3.804
+      },
+      {
+        "t": "plus",
+        "from": 3.854,
+        "to": 4.117
+      },
+      {
+        "t": "a",
+        "from": 4.117,
+        "to": 4.204
+      },
+      {
+        "t": "number.",
+        "from": 4.204,
+        "to": 4.559
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "u1",
+    "text": "Too high or too low? Hold L2 and press Up or Down, while firing.",
+    "caption": "Too high or too low? Hold L2 and press Up or Down, while firing.",
+    "start": 47.116,
+    "dur": 4.06,
+    "end": 51.176,
+    "file": "audio/build/pw/voice/u1.wav",
+    "words": [
+      {
+        "t": "Too",
+        "from": 0.03,
+        "to": 0.205
+      },
+      {
+        "t": "high",
+        "from": 0.205,
+        "to": 0.517
+      },
+      {
+        "t": "or",
+        "from": 0.517,
+        "to": 0.68
+      },
+      {
+        "t": "too",
+        "from": 0.68,
+        "to": 0.892
+      },
+      {
+        "t": "low?",
+        "from": 0.892,
+        "to": 1.204
+      },
+      {
+        "t": "Hold",
+        "from": 1.593,
+        "to": 1.792
+      },
+      {
+        "t": "L2",
+        "from": 1.792,
+        "to": 2.267
+      },
+      {
+        "t": "and",
+        "from": 2.267,
+        "to": 2.392
+      },
+      {
+        "t": "press",
+        "from": 2.392,
+        "to": 2.655
+      },
+      {
+        "t": "Up",
+        "from": 2.655,
+        "to": 2.805
+      },
+      {
+        "t": "or",
+        "from": 2.805,
+        "to": 2.917
+      },
+      {
+        "t": "Down,",
+        "from": 2.917,
+        "to": 3.217
+      },
+      {
+        "t": "while",
+        "from": 3.255,
+        "to": 3.467
+      },
+      {
+        "t": "firing.",
+        "from": 3.467,
+        "to": 3.94
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "u2",
+    "text": "It's permanent, for that exact weapon.",
+    "caption": "It's permanent, for that exact weapon.",
+    "start": 51.626,
+    "dur": 2.182,
+    "end": 53.808,
+    "file": "audio/build/pw/voice/u2.wav",
+    "words": [
+      {
+        "t": "It's",
+        "from": 0.03,
+        "to": 0.185
+      },
+      {
+        "t": "permanent,",
+        "from": 0.185,
+        "to": 0.71
+      },
+      {
+        "t": "for",
+        "from": 0.76,
+        "to": 0.885
+      },
+      {
+        "t": "that",
+        "from": 0.885,
+        "to": 1.135
+      },
+      {
+        "t": "exact",
+        "from": 1.135,
+        "to": 1.635
+      },
+      {
+        "t": "weapon.",
+        "from": 1.635,
+        "to": 2.062
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "u3",
+    "text": "Switch weapons, and the next one has its own values.",
+    "caption": "Switch weapons, and the next one has its own values.",
+    "start": 54.258,
+    "dur": 2.921,
+    "end": 57.179,
+    "file": "audio/build/pw/voice/u3.wav",
+    "words": [
+      {
+        "t": "Switch",
+        "from": 0.03,
+        "to": 0.339
+      },
+      {
+        "t": "weapons,",
+        "from": 0.339,
+        "to": 0.874
+      },
+      {
+        "t": "and",
+        "from": 1.007,
+        "to": 1.065
+      },
+      {
+        "t": "the",
+        "from": 1.065,
+        "to": 1.152
+      },
+      {
+        "t": "next",
+        "from": 1.152,
+        "to": 1.414
+      },
+      {
+        "t": "one",
+        "from": 1.414,
+        "to": 1.552
+      },
+      {
+        "t": "has",
+        "from": 1.552,
+        "to": 1.764
+      },
+      {
+        "t": "its",
+        "from": 1.764,
+        "to": 1.952
+      },
+      {
+        "t": "own",
+        "from": 1.952,
+        "to": 2.202
+      },
+      {
+        "t": "values.",
+        "from": 2.202,
+        "to": 2.801
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "a1",
+    "text": "Two weapons sharing a signature show a question mark. Press L2 and Right, to switch to the other one.",
+    "caption": "Two weapons sharing a signature show a question mark. Press L2 and Right, to switch to the other one.",
+    "start": 58.479,
+    "dur": 5.937,
+    "end": 64.416,
+    "file": "audio/build/pw/voice/a1.wav",
+    "words": [
+      {
+        "t": "Two",
+        "from": 0.03,
+        "to": 0.201
+      },
+      {
+        "t": "weapons",
+        "from": 0.201,
+        "to": 0.676
+      },
+      {
+        "t": "sharing",
+        "from": 0.676,
+        "to": 1.001
+      },
+      {
+        "t": "a",
+        "from": 1.001,
+        "to": 1.101
+      },
+      {
+        "t": "signature",
+        "from": 1.101,
+        "to": 1.651
+      },
+      {
+        "t": "show",
+        "from": 1.651,
+        "to": 1.876
+      },
+      {
+        "t": "a",
+        "from": 1.876,
+        "to": 1.939
+      },
+      {
+        "t": "question",
+        "from": 1.939,
+        "to": 2.414
+      },
+      {
+        "t": "mark.",
+        "from": 2.414,
+        "to": 3.039
+      },
+      {
+        "t": "Press",
+        "from": 3.296,
+        "to": 3.489
+      },
+      {
+        "t": "L2",
+        "from": 3.489,
+        "to": 4.064
+      },
+      {
+        "t": "and",
+        "from": 4.064,
+        "to": 4.189
+      },
+      {
+        "t": "Right,",
+        "from": 4.189,
+        "to": 4.482
+      },
+      {
+        "t": "to",
+        "from": 4.667,
+        "to": 4.751
+      },
+      {
+        "t": "switch",
+        "from": 4.751,
+        "to": 5.114
+      },
+      {
+        "t": "to",
+        "from": 5.114,
+        "to": 5.201
+      },
+      {
+        "t": "the",
+        "from": 5.201,
+        "to": 5.339
+      },
+      {
+        "t": "other",
+        "from": 5.339,
+        "to": 5.614
+      },
+      {
+        "t": "one.",
+        "from": 5.614,
+        "to": 5.816
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "a2",
+    "text": "Totally wrong? Hold L2, Circle and Down, to open your sixty-four slots, and pick.",
+    "caption": "Totally wrong? Hold L2, Circle and Down, to open your sixty-four slots, and pick.",
+    "start": 65.016,
+    "dur": 4.977,
+    "end": 69.993,
+    "file": "audio/build/pw/voice/a2.wav",
+    "words": [
+      {
+        "t": "Totally",
+        "from": 0.03,
+        "to": 0.357
+      },
+      {
+        "t": "wrong?",
+        "from": 0.357,
+        "to": 0.698
+      },
+      {
+        "t": "Hold",
+        "from": 1.058,
+        "to": 1.232
+      },
+      {
+        "t": "L2,",
+        "from": 1.232,
+        "to": 1.832
+      },
+      {
+        "t": "Circle",
+        "from": 1.919,
+        "to": 2.269
+      },
+      {
+        "t": "and",
+        "from": 2.269,
+        "to": 2.382
+      },
+      {
+        "t": "Down,",
+        "from": 2.382,
+        "to": 2.757
+      },
+      {
+        "t": "to",
+        "from": 2.794,
+        "to": 2.907
+      },
+      {
+        "t": "open",
+        "from": 2.907,
+        "to": 3.194
+      },
+      {
+        "t": "your",
+        "from": 3.194,
+        "to": 3.344
+      },
+      {
+        "t": "sixty-four",
+        "from": 3.344,
+        "to": 3.944
+      },
+      {
+        "t": "slots,",
+        "from": 3.944,
+        "to": 4.357
+      },
+      {
+        "t": "and",
+        "from": 4.394,
+        "to": 4.519
+      },
+      {
+        "t": "pick.",
+        "from": 4.519,
+        "to": 4.857
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "h1",
+    "text": "Weapon missing? Teach it. Open Teach Weapon, and pick a slot.",
+    "caption": "Weapon missing? Teach it. Open Teach Weapon, and pick a slot.",
+    "start": 71.293,
+    "dur": 3.531,
+    "end": 74.824,
+    "file": "audio/build/pw/voice/h1.wav",
+    "words": [
+      {
+        "t": "Weapon",
+        "from": 0.03,
+        "to": 0.318
+      },
+      {
+        "t": "missing?",
+        "from": 0.318,
+        "to": 0.743
+      },
+      {
+        "t": "Teach",
+        "from": 0.83,
+        "to": 1.291
+      },
+      {
+        "t": "it.",
+        "from": 1.168,
+        "to": 1.518
+      },
+      {
+        "t": "Open",
+        "from": 1.707,
+        "to": 1.955
+      },
+      {
+        "t": "Teach",
+        "from": 1.955,
+        "to": 2.268
+      },
+      {
+        "t": "Weapon,",
+        "from": 2.268,
+        "to": 2.593
+      },
+      {
+        "t": "and",
+        "from": 2.63,
+        "to": 2.743
+      },
+      {
+        "t": "pick",
+        "from": 2.743,
+        "to": 2.93
+      },
+      {
+        "t": "a",
+        "from": 2.93,
+        "to": 3.03
+      },
+      {
+        "t": "slot.",
+        "from": 3.03,
+        "to": 3.411
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "h2",
+    "text": "Fire with the weapon. The screen shows the measured values. Fire two or three times: they should stay the same.",
+    "caption": "Fire with the weapon. The screen shows the measured values. Fire two or three times: they should stay the same.",
+    "start": 75.274,
+    "dur": 6.168,
+    "end": 81.442,
+    "file": "audio/build/pw/voice/h2.wav",
+    "words": [
+      {
+        "t": "Fire",
+        "from": 0.03,
+        "to": 0.346
+      },
+      {
+        "t": "with",
+        "from": 0.346,
+        "to": 0.483
+      },
+      {
+        "t": "the",
+        "from": 0.483,
+        "to": 0.596
+      },
+      {
+        "t": "weapon.",
+        "from": 0.596,
+        "to": 1.022
+      },
+      {
+        "t": "The",
+        "from": 1.271,
+        "to": 1.371
+      },
+      {
+        "t": "screen",
+        "from": 1.371,
+        "to": 1.808
+      },
+      {
+        "t": "shows",
+        "from": 1.808,
+        "to": 2.108
+      },
+      {
+        "t": "the",
+        "from": 2.108,
+        "to": 2.196
+      },
+      {
+        "t": "measured",
+        "from": 2.196,
+        "to": 2.571
+      },
+      {
+        "t": "values.",
+        "from": 2.571,
+        "to": 3.151
+      },
+      {
+        "t": "Fire",
+        "from": 3.498,
+        "to": 3.808
+      },
+      {
+        "t": "two",
+        "from": 3.808,
+        "to": 4.071
+      },
+      {
+        "t": "or",
+        "from": 4.071,
+        "to": 4.196
+      },
+      {
+        "t": "three",
+        "from": 4.196,
+        "to": 4.421
+      },
+      {
+        "t": "times:",
+        "from": 4.421,
+        "to": 4.896
+      },
+      {
+        "t": "they",
+        "from": 4.933,
+        "to": 5.071
+      },
+      {
+        "t": "should",
+        "from": 5.071,
+        "to": 5.271
+      },
+      {
+        "t": "stay",
+        "from": 5.271,
+        "to": 5.546
+      },
+      {
+        "t": "the",
+        "from": 5.546,
+        "to": 5.683
+      },
+      {
+        "t": "same.",
+        "from": 5.683,
+        "to": 6.048
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "h3",
+    "text": "Confirm with Cross, pick its category, then a name if you want.",
+    "caption": "Confirm with Cross, pick its category, then a name if you want.",
+    "start": 81.892,
+    "dur": 3.545,
+    "end": 85.437,
+    "file": "audio/build/pw/voice/h3.wav",
+    "words": [
+      {
+        "t": "Confirm",
+        "from": 0.03,
+        "to": 0.446
+      },
+      {
+        "t": "with",
+        "from": 0.446,
+        "to": 0.621
+      },
+      {
+        "t": "Cross,",
+        "from": 0.621,
+        "to": 1.033
+      },
+      {
+        "t": "pick",
+        "from": 1.083,
+        "to": 1.246
+      },
+      {
+        "t": "its",
+        "from": 1.246,
+        "to": 1.433
+      },
+      {
+        "t": "category,",
+        "from": 1.433,
+        "to": 2.062
+      },
+      {
+        "t": "then",
+        "from": 2.283,
+        "to": 2.421
+      },
+      {
+        "t": "a",
+        "from": 2.421,
+        "to": 2.483
+      },
+      {
+        "t": "name",
+        "from": 2.483,
+        "to": 2.771
+      },
+      {
+        "t": "if",
+        "from": 2.771,
+        "to": 2.896
+      },
+      {
+        "t": "you",
+        "from": 2.896,
+        "to": 3.021
+      },
+      {
+        "t": "want.",
+        "from": 3.021,
+        "to": 3.425
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "h4",
+    "text": "Saved. Slots even survive a power off, and a re-flash.",
+    "caption": "Saved. Slots even survive a power off, and a re-flash.",
+    "start": 85.887,
+    "dur": 3.413,
+    "end": 89.3,
+    "file": "audio/build/pw/voice/h4.wav",
+    "words": [
+      {
+        "t": "Saved.",
+        "from": 0.03,
+        "to": 0.48
+      },
+      {
+        "t": "Slots",
+        "from": 0.542,
+        "to": 0.905
+      },
+      {
+        "t": "even",
+        "from": 0.905,
+        "to": 1.205
+      },
+      {
+        "t": "survive",
+        "from": 1.205,
+        "to": 1.592
+      },
+      {
+        "t": "a",
+        "from": 1.592,
+        "to": 1.655
+      },
+      {
+        "t": "power",
+        "from": 1.655,
+        "to": 2.03
+      },
+      {
+        "t": "off,",
+        "from": 2.03,
+        "to": 2.314
+      },
+      {
+        "t": "and",
+        "from": 2.476,
+        "to": 2.542
+      },
+      {
+        "t": "a",
+        "from": 2.542,
+        "to": 2.63
+      },
+      {
+        "t": "re-flash.",
+        "from": 2.63,
+        "to": 3.293
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "e1",
+    "text": "To tweak a saved weapon, open its slot, pick a row, and change the value with Left and Right.",
+    "caption": "To tweak a saved weapon, open its slot, pick a row, and change the value with Left and Right.",
+    "start": 90.6,
+    "dur": 5.186,
+    "end": 95.786,
+    "file": "audio/build/pw/voice/e1.wav",
+    "words": [
+      {
+        "t": "To",
+        "from": 0.03,
+        "to": 0.094
+      },
+      {
+        "t": "tweak",
+        "from": 0.094,
+        "to": 0.331
+      },
+      {
+        "t": "a",
+        "from": 0.331,
+        "to": 0.444
+      },
+      {
+        "t": "saved",
+        "from": 0.444,
+        "to": 0.844
+      },
+      {
+        "t": "weapon,",
+        "from": 0.844,
+        "to": 1.271
+      },
+      {
+        "t": "open",
+        "from": 1.481,
+        "to": 1.706
+      },
+      {
+        "t": "its",
+        "from": 1.706,
+        "to": 1.881
+      },
+      {
+        "t": "slot,",
+        "from": 1.881,
+        "to": 2.262
+      },
+      {
+        "t": "pick",
+        "from": 2.49,
+        "to": 2.581
+      },
+      {
+        "t": "a",
+        "from": 2.581,
+        "to": 2.681
+      },
+      {
+        "t": "row,",
+        "from": 2.681,
+        "to": 3.043
+      },
+      {
+        "t": "and",
+        "from": 3.261,
+        "to": 3.356
+      },
+      {
+        "t": "change",
+        "from": 3.356,
+        "to": 3.706
+      },
+      {
+        "t": "the",
+        "from": 3.706,
+        "to": 3.794
+      },
+      {
+        "t": "value",
+        "from": 3.794,
+        "to": 4.194
+      },
+      {
+        "t": "with",
+        "from": 4.194,
+        "to": 4.381
+      },
+      {
+        "t": "Left",
+        "from": 4.381,
+        "to": 4.706
+      },
+      {
+        "t": "and",
+        "from": 4.706,
+        "to": 4.819
+      },
+      {
+        "t": "Right.",
+        "from": 4.819,
+        "to": 5.066
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "e2",
+    "text": "Square deletes it. It asks first.",
+    "caption": "Square deletes it. It asks first.",
+    "start": 96.236,
+    "dur": 1.916,
+    "end": 98.152,
+    "file": "audio/build/pw/voice/e2.wav",
+    "words": [
+      {
+        "t": "Square",
+        "from": 0.03,
+        "to": 0.31
+      },
+      {
+        "t": "deletes",
+        "from": 0.31,
+        "to": 0.685
+      },
+      {
+        "t": "it.",
+        "from": 0.685,
+        "to": 0.81
+      },
+      {
+        "t": "It",
+        "from": 0.847,
+        "to": 0.96
+      },
+      {
+        "t": "asks",
+        "from": 0.96,
+        "to": 1.322
+      },
+      {
+        "t": "first.",
+        "from": 1.322,
+        "to": 1.796
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "c1",
+    "text": "One anti-recoil switch covers all your weapons.",
+    "caption": "One anti-recoil switch covers all your weapons.",
+    "start": 99.452,
+    "dur": 2.783,
+    "end": 102.235,
+    "file": "audio/build/pw/voice/c1.wav",
+    "words": [
+      {
+        "t": "One",
+        "from": 0.03,
+        "to": 0.215
+      },
+      {
+        "t": "anti-recoil",
+        "from": 0.215,
+        "to": 0.877
+      },
+      {
+        "t": "switch",
+        "from": 0.877,
+        "to": 1.302
+      },
+      {
+        "t": "covers",
+        "from": 1.302,
+        "to": 1.752
+      },
+      {
+        "t": "all",
+        "from": 1.752,
+        "to": 1.99
+      },
+      {
+        "t": "your",
+        "from": 1.99,
+        "to": 2.164
+      },
+      {
+        "t": "weapons.",
+        "from": 2.164,
+        "to": 2.663
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "c2",
+    "text": "Custom weapon badly tuned mid-fight? Hold Share and Triangle for a second, to fall back to the manual profile.",
+    "caption": "Custom weapon badly tuned mid-fight? Hold Share and Triangle for a second, to fall back to the manual profile.",
+    "start": 102.685,
+    "dur": 6.781,
+    "end": 109.466,
+    "file": "audio/build/pw/voice/c2.wav",
+    "words": [
+      {
+        "t": "Custom",
+        "from": 0.03,
+        "to": 0.409
+      },
+      {
+        "t": "weapon",
+        "from": 0.409,
+        "to": 0.771
+      },
+      {
+        "t": "badly",
+        "from": 0.771,
+        "to": 1.221
+      },
+      {
+        "t": "tuned",
+        "from": 1.221,
+        "to": 1.584
+      },
+      {
+        "t": "mid-fight?",
+        "from": 1.584,
+        "to": 2.484
+      },
+      {
+        "t": "Hold",
+        "from": 2.7,
+        "to": 2.909
+      },
+      {
+        "t": "Share",
+        "from": 2.909,
+        "to": 3.259
+      },
+      {
+        "t": "and",
+        "from": 3.259,
+        "to": 3.396
+      },
+      {
+        "t": "Triangle",
+        "from": 3.396,
+        "to": 4.034
+      },
+      {
+        "t": "for",
+        "from": 4.034,
+        "to": 4.146
+      },
+      {
+        "t": "a",
+        "from": 4.146,
+        "to": 4.246
+      },
+      {
+        "t": "second,",
+        "from": 4.246,
+        "to": 4.631
+      },
+      {
+        "t": "to",
+        "from": 4.865,
+        "to": 4.946
+      },
+      {
+        "t": "fall",
+        "from": 4.946,
+        "to": 5.234
+      },
+      {
+        "t": "back",
+        "from": 5.234,
+        "to": 5.509
+      },
+      {
+        "t": "to",
+        "from": 5.509,
+        "to": 5.596
+      },
+      {
+        "t": "the",
+        "from": 5.596,
+        "to": 5.684
+      },
+      {
+        "t": "manual",
+        "from": 5.684,
+        "to": 6.109
+      },
+      {
+        "t": "profile.",
+        "from": 6.109,
+        "to": 6.661
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "n1",
+    "text": "The full guide is on Rocket Mod dot org.",
+    "caption": "The full guide is on rocketmod.org.",
+    "start": 110.766,
+    "dur": 2.39,
+    "end": 113.156,
+    "file": "audio/build/pw/voice/n1.wav",
+    "words": [
+      {
+        "t": "The",
+        "from": 0.03,
+        "to": 0.086
+      },
+      {
+        "t": "full",
+        "from": 0.086,
+        "to": 0.323
+      },
+      {
+        "t": "guide",
+        "from": 0.323,
+        "to": 0.698
+      },
+      {
+        "t": "is",
+        "from": 0.698,
+        "to": 0.811
+      },
+      {
+        "t": "on",
+        "from": 0.811,
+        "to": 1.011
+      },
+      {
+        "t": "rocketmod.org.",
+        "from": 1.011,
+        "to": 2.27
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "n2",
+    "text": "Rocket Mod. Per Weapon.",
+    "caption": "RocketMod. Per Weapon.",
+    "start": 113.756,
+    "dur": 1.612,
+    "end": 115.368,
+    "file": "audio/build/pw/voice/n2.wav",
+    "words": [
+      {
+        "t": "RocketMod.",
+        "from": 0.03,
+        "to": 0.79
+      },
+      {
+        "t": "Per",
+        "from": 0.84,
+        "to": 1.052
+      },
+      {
+        "t": "Weapon.",
+        "from": 1.052,
+        "to": 1.492
+      }
+    ],
+    "wordsQuality": "exact"
+  }
+]

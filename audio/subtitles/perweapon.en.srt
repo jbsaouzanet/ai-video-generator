@@ -1,0 +1,199 @@
+1
+00:00:01,030 --> 00:00:02,321
+Per Weapon mode.
+
+2
+00:00:02,355 --> 00:00:04,829
+Every weapon gets its own anti-recoil.
+
+3
+00:00:05,929 --> 00:00:08,749
+Other modes pick a category, and switch between two
+
+4
+00:00:08,749 --> 00:00:09,792
+profiles.
+
+5
+00:00:10,042 --> 00:00:12,023
+Wrong category, wrong setting.
+
+6
+00:00:12,423 --> 00:00:15,261
+In Per Weapon, every weapon has its own slot.
+
+7
+00:00:15,281 --> 00:00:17,171
+No profile to confuse.
+
+8
+00:00:18,271 --> 00:00:21,458
+You still need a DualSense, with adaptive triggers on.
+
+9
+00:00:21,708 --> 00:00:23,797
+Hold L2, release Options.
+
+10
+00:00:23,817 --> 00:00:26,447
+Go to Combat, Weapon Detect, and enable it.
+
+11
+00:00:26,697 --> 00:00:27,288
+Press Cross.
+
+12
+00:00:27,288 --> 00:00:29,322
+Device stays PS5.
+
+13
+00:00:29,342 --> 00:00:31,650
+Press Down, and set Type to Per Weapon.
+
+14
+00:00:31,900 --> 00:00:33,814
+A new row appears: Teach Weapon.
+
+15
+00:00:33,834 --> 00:00:34,725
+Leave with Circle.
+
+16
+00:00:34,725 --> 00:00:35,941
+It saves itself.
+
+17
+00:00:37,041 --> 00:00:38,093
+Fire once.
+
+18
+00:00:38,113 --> 00:00:40,867
+The weapon claims its own slot, automatically.
+
+19
+00:00:41,117 --> 00:00:43,357
+Known weapons show their real name.
+
+20
+00:00:43,377 --> 00:00:45,996
+Unknown ones become Custom, plus a number.
+
+21
+00:00:47,096 --> 00:00:48,620
+Too high or too low?
+
+22
+00:00:48,659 --> 00:00:51,356
+Hold L2 and press Up or Down, while firing.
+
+23
+00:00:51,606 --> 00:00:53,988
+It's permanent, for that exact weapon.
+
+24
+00:00:54,238 --> 00:00:57,359
+Switch weapons, and the next one has its own values.
+
+25
+00:00:58,459 --> 00:01:01,705
+Two weapons sharing a signature show a question mark.
+
+26
+00:01:01,725 --> 00:01:04,595
+Press L2 and Right, to switch to the other one.
+
+27
+00:01:04,996 --> 00:01:06,004
+Totally wrong?
+
+28
+00:01:06,024 --> 00:01:09,373
+Hold L2, Circle and Down, to open your sixty-four slots,
+
+29
+00:01:09,373 --> 00:01:10,173
+and pick.
+
+30
+00:01:11,273 --> 00:01:12,053
+Weapon missing?
+
+31
+00:01:12,073 --> 00:01:12,930
+Teach it.
+
+32
+00:01:12,950 --> 00:01:15,004
+Open Teach Weapon, and pick a slot.
+
+33
+00:01:15,254 --> 00:01:16,475
+Fire with the weapon.
+
+34
+00:01:16,495 --> 00:01:18,702
+The screen shows the measured values.
+
+35
+00:01:18,722 --> 00:01:21,622
+Fire two or three times: they should stay the same.
+
+36
+00:01:21,872 --> 00:01:24,105
+Confirm with Cross, pick its category,
+
+37
+00:01:24,125 --> 00:01:25,617
+then a name if you want.
+
+38
+00:01:25,867 --> 00:01:26,367
+Saved.
+
+39
+00:01:26,379 --> 00:01:29,480
+Slots even survive a power off, and a re-flash.
+
+40
+00:01:30,580 --> 00:01:33,020
+To tweak a saved weapon, open its slot,
+
+41
+00:01:33,040 --> 00:01:35,966
+pick a row, and change the value with Left and Right.
+
+42
+00:01:36,216 --> 00:01:37,046
+Square deletes it.
+
+43
+00:01:37,046 --> 00:01:38,332
+It asks first.
+
+44
+00:01:39,432 --> 00:01:42,415
+One anti-recoil switch covers all your weapons.
+
+45
+00:01:42,665 --> 00:01:45,315
+Custom weapon badly tuned mid-fight?
+
+46
+00:01:45,335 --> 00:01:47,480
+Hold Share and Triangle for a second,
+
+47
+00:01:47,500 --> 00:01:49,646
+to fall back to the manual profile.
+
+48
+00:01:50,746 --> 00:01:53,336
+The full guide is on rocketmod.org.
+
+49
+00:01:53,736 --> 00:01:54,546
+RocketMod.
+
+50
+00:01:54,546 --> 00:01:55,548
+Per Weapon.

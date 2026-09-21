@@ -1,0 +1,11 @@
+{
+	"voice": "en_US-ryan-high",
+	"lengthScale": 0.93,
+	"lines": [
+		{"id": "o1", "start": 0.5, "text": "Thanks for watching!"},
+		{"id": "o2", "gap": 0.35, "text": "If you liked it, hit like, and subscribe."},
+		{"id": "o3", "gap": 0.5, "text": "Not on our Discord yet? Come join us!"},
+		{"id": "o4", "gap": 0.35, "text": "The whole community is there to help you."},
+		{"id": "o5", "gap": 0.6, "text": "See you in the next one!"}
+	]
+}

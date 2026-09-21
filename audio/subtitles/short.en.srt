@@ -1,0 +1,71 @@
+1
+00:00:01,030 --> 00:00:02,853
+Automatic weapon detection.
+
+2
+00:00:03,980 --> 00:00:04,954
+Two profiles.
+
+3
+00:00:04,974 --> 00:00:06,792
+Each with its own anti-recoil.
+
+4
+00:00:08,280 --> 00:00:10,037
+Every weapon has its own trigger
+
+5
+00:00:10,037 --> 00:00:10,848
+signature.
+
+6
+00:00:10,980 --> 00:00:12,707
+Fire once, and the right profile
+
+7
+00:00:12,707 --> 00:00:13,900
+switches on its own.
+
+8
+00:00:15,680 --> 00:00:17,570
+Every weapon change is detected,
+
+9
+00:00:17,590 --> 00:00:18,994
+matched, and applied.
+
+10
+00:00:19,080 --> 00:00:20,613
+No manual switching.
+
+11
+00:00:22,080 --> 00:00:23,592
+The full step-by-step setup
+
+12
+00:00:23,612 --> 00:00:25,952
+guide is on rocketmod.org.
+
+13
+00:00:27,580 --> 00:00:28,480
+Set it once.
+
+14
+00:00:28,500 --> 00:00:29,090
+Play.
+
+15
+00:00:29,110 --> 00:00:29,810
+Switch.
+
+16
+00:00:29,830 --> 00:00:30,680
+Detected.
+
+17
+00:00:30,700 --> 00:00:31,680
+RocketMod.
+
+18
+00:00:31,700 --> 00:00:33,523
+Automatic weapon detection.

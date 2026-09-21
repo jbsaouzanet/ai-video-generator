@@ -1,0 +1,36 @@
+# --- dependencies / tooling ---
+node_modules/
+.context-compress/
+.claude/
+*.log
+.DS_Store
+Thumbs.db
+.env
+.env.*
+
+# --- PRIVATE inputs: photos, product shots, personal recordings (never published) ---
+assets/
+
+# --- PRIVATE audio: voice-conversion voiceprints (personal timbre) ---
+audio/voiceprints/
+
+# --- generated output (rebuild with the npm scripts) ---
+out/
+public/
+audio/build/
+audio/**/*.wav
+audio/**/*.ogg
+audio/**/*.mp3
+
+# --- media anywhere else ---
+*.mp4
+*.mov
+*.wav
+*.ogg
+*.mp3
+
+# --- scratch / diagnostics ---
+_diag*
+_diag/
+*.tmp
+.remotion/

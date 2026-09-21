@@ -1,0 +1,159 @@
+1
+00:00:01,030 --> 00:00:02,853
+Automatic weapon detection.
+
+2
+00:00:03,980 --> 00:00:04,956
+Two profiles.
+
+3
+00:00:04,976 --> 00:00:06,794
+Each with its own anti-recoil.
+
+4
+00:00:08,980 --> 00:00:11,076
+First, you need a DualSense controller,
+
+5
+00:00:11,096 --> 00:00:12,810
+the one with adaptive triggers.
+
+6
+00:00:12,830 --> 00:00:15,041
+Then turn adaptive trigger effects on,
+
+7
+00:00:15,061 --> 00:00:15,948
+in the game.
+
+8
+00:00:15,968 --> 00:00:18,123
+It's the number one reason it doesn't work.
+
+9
+00:00:18,580 --> 00:00:19,617
+Now, turn it on.
+
+10
+00:00:19,637 --> 00:00:21,742
+Hold L2, then release Options.
+
+11
+00:00:23,280 --> 00:00:26,791
+Go to the Combat category, and find the Weapon Detect row.
+
+12
+00:00:27,580 --> 00:00:28,927
+Make sure it's enabled.
+
+13
+00:00:28,955 --> 00:00:30,933
+Press right on the D-pad if it isn't.
+
+14
+00:00:31,580 --> 00:00:32,239
+Press Cross.
+
+15
+00:00:32,239 --> 00:00:35,642
+Set Device to PS5, and Type to Per Profile.
+
+16
+00:00:36,680 --> 00:00:37,839
+Press Circle to leave.
+
+17
+00:00:37,859 --> 00:00:38,616
+You'll see saved.
+
+18
+00:00:38,616 --> 00:00:39,418
+That's it.
+
+19
+00:00:42,010 --> 00:00:44,578
+Every weapon has its own trigger signature.
+
+20
+00:00:44,710 --> 00:00:47,622
+Fire once, and the right profile switches on its own.
+
+21
+00:00:49,580 --> 00:00:51,929
+Rarely, two weapons share one signature,
+
+22
+00:00:51,949 --> 00:00:53,760
+and the screen shows a question mark.
+
+23
+00:00:53,780 --> 00:00:56,712
+Hold L2, Circle and Down, pick the weapon you're holding,
+
+24
+00:00:56,712 --> 00:00:57,717
+and confirm.
+
+25
+00:00:57,737 --> 00:00:58,895
+It remembers.
+
+26
+00:01:00,480 --> 00:01:01,401
+Wrong profile?
+
+27
+00:01:01,421 --> 00:01:02,810
+One gesture fixes it.
+
+28
+00:01:02,830 --> 00:01:05,050
+L2 plus left restores Primary.
+
+29
+00:01:05,070 --> 00:01:07,140
+Hold it longer to wipe and re-learn.
+
+30
+00:01:07,160 --> 00:01:09,222
+Right does the same for Secondary.
+
+31
+00:01:12,150 --> 00:01:14,040
+Every weapon change is detected,
+
+32
+00:01:14,060 --> 00:01:15,463
+matched, and applied.
+
+33
+00:01:15,550 --> 00:01:17,082
+No manual switching.
+
+34
+00:01:18,550 --> 00:01:22,422
+The full step-by-step setup guide is on rocketmod.org.
+
+35
+00:01:24,050 --> 00:01:24,950
+Set it once.
+
+36
+00:01:24,970 --> 00:01:25,560
+Play.
+
+37
+00:01:25,580 --> 00:01:26,280
+Switch.
+
+38
+00:01:26,300 --> 00:01:27,150
+Detected.
+
+39
+00:01:27,170 --> 00:01:28,150
+RocketMod.
+
+40
+00:01:28,170 --> 00:01:29,993
+Automatic weapon detection.

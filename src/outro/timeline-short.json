@@ -1,0 +1,66 @@
+[
+  {
+    "id": "s1",
+    "text": "Enjoyed it? Like, and subscribe!",
+    "caption": "Enjoyed it? Like, and subscribe!",
+    "start": 0.4,
+    "dur": 1.752,
+    "end": 2.152,
+    "file": "audio/build/outro-short/voice/s1.wav",
+    "words": [
+      {
+        "t": "Enjoyed",
+        "from": 0.03,
+        "to": 0.45
+      },
+      {
+        "t": "it?",
+        "from": 0.45,
+        "to": 0.55
+      },
+      {
+        "t": "Like,",
+        "from": 0.6,
+        "to": 0.8
+      },
+      {
+        "t": "and",
+        "from": 0.838,
+        "to": 0.95
+      },
+      {
+        "t": "subscribe!",
+        "from": 0.95,
+        "to": 1.632
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "s2",
+    "text": "Join our Discord!",
+    "caption": "Join our Discord!",
+    "start": 2.452,
+    "dur": 1.164,
+    "end": 3.616,
+    "file": "audio/build/outro-short/voice/s2.wav",
+    "words": [
+      {
+        "t": "Join",
+        "from": 0.03,
+        "to": 0.261
+      },
+      {
+        "t": "our",
+        "from": 0.261,
+        "to": 0.411
+      },
+      {
+        "t": "Discord!",
+        "from": 0.411,
+        "to": 1.044
+      }
+    ],
+    "wordsQuality": "exact"
+  }
+]

@@ -1,0 +1,457 @@
+// Procedural soundtrack: music bed + sound effects + voice-over mix. No samples, no licences.
+// Reads  audio/build/voice.timeline.json (from voice.mjs)
+// Writes audio/build/soundtrack.raw.wav  (+ stems in audio/build/stems/), then finalize.mjs masters it.
+//
+// Every time below is in SECONDS on the video timeline (frame / 30). Frame numbers are quoted in comments
+// so events can be re-synced when timeline.ts changes.
+import fs from 'node:fs';
+import {
+	SR, Stereo, clamp, curve, lerp, midi, pingPong, readWav, reverb, rng, secs, smooth, svf, writeWav,
+} from './dsp.mjs';
+
+const FPS = 30;
+const DURATION = 1005 / FPS; // 33.5 s
+const N = secs(DURATION + 2.5);
+const rnd = rng(20260920);
+const noise = (n) => Float32Array.from({length: n}, () => rnd() * 2 - 1);
+const TAU = Math.PI * 2;
+
+// ───────────────────────── buses ─────────────────────────
+const pad = new Stereo(N);
+const bass = new Stereo(N);
+const arp = new Stereo(N);
+const drums = new Stereo(N);
+const sfx = new Stereo(N);
+const voice = new Stereo(N);
+const wet = new Float32Array(N); // mono reverb send
+const sendSfx = (mono, at, amt) => {
+	const o = secs(at);
+	for (let i = 0; i < mono.length && o + i < N; i++) wet[o + i] += mono[i] * amt;
+};
+
+// ───────────────────────── sound design primitives (return mono buffers) ─────────────────────────
+const expEnv = (t, a, tau) => (t < a ? t / a : 1) * Math.exp(-Math.max(0, t - a) / tau);
+
+function osc(dur, freq, {wave = 'sin', a = 0.002, tau = 0.1, tone = 0} = {}) {
+	const n = secs(dur);
+	const out = new Float32Array(n);
+	let ph = 0;
+	for (let i = 0; i < n; i++) {
+		const t = i / SR;
+		const fr = typeof freq === 'function' ? freq(t, i / n) : freq;
+		ph += fr / SR;
+		const s = wave === 'sin' ? Math.sin(TAU * ph)
+			: wave === 'tri' ? 2 * Math.abs(2 * (ph - Math.floor(ph + 0.5))) - 1
+			: wave === 'sq' ? Math.tanh(4 * Math.sin(TAU * ph))
+			: 2 * (ph - Math.floor(ph)) - 1;
+		out[i] = (s + tone * Math.sin(TAU * ph * 2)) * expEnv(t, a, tau);
+	}
+	return out;
+}
+
+const bell = (i, n) => Math.sin(Math.PI * (i / n)) ** 1.6;
+
+function sweepNoise(dur, f0, f1, {q = 1.2, curveP = 1.6, env = 'bell'} = {}) {
+	const n = secs(dur);
+	const x = noise(n);
+	const y = svf(x, (i) => f0 * (f1 / f0) ** ((i / n) ** curveP), q, 'band');
+	for (let i = 0; i < n; i++) y[i] *= env === 'bell' ? bell(i, n) : (i / n) ** 2;
+	return y;
+}
+
+const put = (bus, mono, at, gain = 1, pan = 0, send = 0) => {
+	bus.addMono(mono, at, gain, pan);
+	if (send) sendSfx(mono, at, send * gain);
+};
+
+/** panned travelling sweep: pan glides from p0 to p1 */
+function putSweep(mono, at, gain, p0, p1, send = 0.3) {
+	const n = mono.length;
+	const o = secs(at);
+	for (let i = 0; i < n && o + i < N; i++) {
+		const pan = lerp(p0, p1, i / n);
+		const a = ((pan + 1) * Math.PI) / 4;
+		sfx.l[o + i] += mono[i] * Math.cos(a) * gain;
+		sfx.r[o + i] += mono[i] * Math.sin(a) * gain;
+		wet[o + i] += mono[i] * send * gain;
+	}
+}
+
+const whoosh = (t, dur, gain = 0.5, dir = 1) =>
+	putSweep(dir > 0 ? sweepNoise(dur, 300, 7500) : sweepNoise(dur, 7500, 300), t, gain, -0.7 * dir, 0.7 * dir, 0.35);
+
+const riser = (t0, t1, gain = 0.5) => {
+	const dur = t1 - t0;
+	putSweep(sweepNoise(dur, 220, 9000, {q: 1.6, curveP: 1.3, env: 'ramp'}), t0, gain, -0.4, 0.4, 0.3);
+	const tone = osc(dur, (t, u) => 180 * 9 ** (u ** 1.5), {wave: 'saw', a: dur * 0.5, tau: 9999});
+	const lp = svf(tone, 2500, 0.8, 'low');
+	for (let i = 0; i < lp.length; i++) lp[i] *= (i / lp.length) ** 2.2 * 0.5;
+	put(sfx, lp, t0, gain * 0.35, 0, 0.3);
+};
+
+function boom(t, gain = 1, long = 1) {
+	const sub = osc(2.4 * long, (tt) => 34 + 90 * Math.exp(-tt / 0.16), {tau: 0.9 * long, a: 0.003});
+	put(sfx, sub, t, gain * 0.9, 0, 0.1);
+	const crash = svf(noise(secs(2.2 * long)), 1400, 0.7, 'low');
+	for (let i = 0; i < crash.length; i++) crash[i] *= expEnv(i / SR, 0.002, 0.45 * long);
+	put(sfx, crash, t, gain * 0.35, 0, 0.6);
+	const air = svf(noise(secs(2.6 * long)), 5000, 0.7, 'high');
+	for (let i = 0; i < air.length; i++) air[i] *= expEnv(i / SR, 0.01, 0.9 * long);
+	put(sfx, air, t, gain * 0.16, 0, 0.7);
+}
+
+const slam = (t, gain = 0.8, f = 62) => {
+	put(sfx, osc(0.7, (tt) => f + 80 * Math.exp(-tt / 0.05), {tau: 0.16, a: 0.002}), t, gain * 0.8, 0, 0.15);
+	const b = svf(noise(secs(0.25)), 2200, 0.9, 'high');
+	for (let i = 0; i < b.length; i++) b[i] *= expEnv(i / SR, 0.001, 0.05);
+	put(sfx, b, t, gain * 0.3, 0, 0.3);
+};
+
+const blip = (t, freq, gain = 0.3, pan = 0) => {
+	put(sfx, osc(0.22, freq, {wave: 'tri', tau: 0.05, a: 0.002}), t, gain, pan, 0.35);
+	put(sfx, osc(0.22, freq * 1.5, {wave: 'tri', tau: 0.05, a: 0.002}), t + 0.05, gain * 0.8, pan, 0.35);
+};
+
+const tick = (t, freq = 1400, gain = 0.25, pan = 0) => put(sfx, osc(0.08, freq, {tau: 0.02, a: 0.001}), t, gain, pan, 0.25);
+
+const click = (t, gain = 0.22, fc = 3200) => {
+	const c = svf(noise(secs(0.03)), fc, 2, 'band');
+	for (let i = 0; i < c.length; i++) c[i] *= expEnv(i / SR, 0.0005, 0.006);
+	put(sfx, c, t, gain * 3, 0, 0.2);
+};
+
+const swish = (t, gain = 0.22, up = true) =>
+	putSweep(up ? sweepNoise(0.26, 2200, 7200, {q: 2}) : sweepNoise(0.26, 7200, 2200, {q: 2}), t, gain, -0.3, 0.3, 0.3);
+
+/** rising "confirm" arpeggio in A minor: A5 C6 E6 */
+function chime(t, gain = 0.32, root = 81) {
+	[0, 3, 7].forEach((semi, k) => {
+		const fr = midi(root + semi);
+		const n = osc(1.6, fr, {tau: 0.4, a: 0.003, tone: 0.28});
+		put(sfx, n, t + k * 0.045, gain * (1 - k * 0.12), (k - 1) * 0.25, 0.8);
+	});
+}
+
+function zip(t, dur, gain = 0.2, dir = 1) {
+	const z = osc(dur, (tt, u) => 420 * 6.5 ** (u * u), {wave: 'sin', a: 0.02, tau: 9999, tone: 0.25});
+	for (let i = 0; i < z.length; i++) z[i] *= bell(i, z.length) * (0.75 + 0.25 * Math.sin(TAU * 34 * (i / SR)));
+	putSweep(z, t, gain, -0.6 * dir, 0.6 * dir, 0.4);
+}
+
+function scan(t, dur, gain = 0.14) {
+	const steps = [440, 660, 520, 880, 600, 990, 700, 1180];
+	const n = secs(dur);
+	const x = osc(dur, (tt, u) => steps[Math.min(steps.length - 1, Math.floor(u * steps.length))], {wave: 'sq', a: 0.01, tau: 9999});
+	const y = svf(x, 3000, 0.7, 'low');
+	for (let i = 0; i < n; i++) y[i] *= bell(i, n) ** 0.5;
+	put(sfx, y, t, gain, -0.35, 0.3);
+}
+
+const powerOn = (t, gain = 0.25) => {
+	put(sfx, osc(0.12, (tt) => 200 * 10 ** Math.min(1, tt / 0.07), {tau: 0.05, a: 0.002, wave: 'tri'}), t, gain, 0.2, 0.4);
+	[0.06, 0.1, 0.135].forEach((d) => tick(t + d, 2200, gain * 0.6, 0.2));
+};
+
+const pop = (t, gain = 0.28) => {
+	put(sfx, osc(0.2, (tt) => 500 + 900 * Math.min(1, tt / 0.07), {tau: 0.06, a: 0.002}), t, gain, 0, 0.5);
+};
+
+function shimmer(t, gain = 0.2) {
+	[81 + 12, 84 + 12, 88 + 12, 93 + 12].forEach((m, k) => {
+		const s = osc(3.2, midi(m), {tau: 1.2, a: 0.18, tone: 0.2});
+		put(sfx, s, t + k * 0.06, gain * (1 - k * 0.15), (k % 2 ? 0.5 : -0.5), 0.9);
+	});
+}
+
+// ───────────────────────── music ─────────────────────────
+const CHORDS = [
+	{root: 33, pad: [45, 57, 60, 64], arp: [69, 72, 76, 81]}, // Am
+	{root: 29, pad: [41, 53, 57, 60], arp: [65, 69, 72, 77]}, // F
+	{root: 36, pad: [48, 55, 60, 64], arp: [72, 76, 79, 84]}, // C
+	{root: 31, pad: [43, 50, 55, 59], arp: [67, 71, 74, 79]}, // G
+];
+const BAR = 4; // s per chord (2 bars @120 bpm)
+const CHORD_COUNT = Math.ceil((DURATION + 1) / BAR) + 1;
+
+const PAD_FC = [[0, 260], [2.6, 420], [3.4, 700], [8, 1100], [12, 1700], [15.2, 2200], [19, 1500], [21.2, 900], [24, 1100], [27, 1500], [27.5, 2600], [31, 3200], [33.5, 2000]];
+const PAD_G = [[0, 0], [0.7, 0.2], [2.6, 0.42], [8, 0.46], [21, 0.5], [21.2, 0.42], [27, 0.46], [27.5, 0.6], [32.5, 0.55], [34, 0.2]];
+const BASS_G = [[0, 0], [0.5, 0.1], [2.5, 0.22], [2.7, 0.5], [21.2, 0.5], [21.3, 0.34], [27.3, 0.34], [27.5, 0.55], [33, 0.5], [34, 0]];
+const ARP_G = [[0, 0], [3.2, 0], [3.4, 0.22], [8, 0.3], [8.2, 0.5], [15, 0.55], [18.4, 0.42], [18.6, 0], [19.0, 0], [19.1, 0.5], [21.2, 0.5], [21.4, 0.16], [27.0, 0.16], [27.5, 0.6], [30.5, 0.72], [32.5, 0.5], [33.5, 0]];
+
+// kicks (also drive the sidechain "pump" on pad/bass/arp)
+const kicks = [];
+for (let t = 8.0; t < 18.4; t += 0.5) kicks.push(t);
+for (let t = 19.0; t < 21.0; t += 0.5) kicks.push(t);
+for (let t = 27.5; t < 32.6; t += 0.5) kicks.push(t);
+
+const pump = new Float32Array(N).fill(1);
+for (const k of kicks) {
+	const o = secs(k);
+	for (let i = 0; i < secs(0.5) && o + i < N; i++) pump[o + i] = Math.min(pump[o + i], 1 - 0.34 * Math.exp(-(i / SR) / 0.15));
+}
+
+function buildPad() {
+	const L = new Float32Array(N);
+	const R = new Float32Array(N);
+	const A = 1.3;
+	const REL = 1.8;
+	for (let k = 0; k < CHORD_COUNT; k++) {
+		const ch = CHORDS[k % 4];
+		const t0 = k * BAR;
+		const s = Math.max(0, secs(t0 - A * 0.6));
+		const e = Math.min(N, secs(t0 + BAR + REL));
+		for (const m of ch.pad) {
+			[-7, 3, -3, 7].forEach((det, v) => {
+				const fr = midi(m) * 2 ** (det / 1200);
+				const target = v < 2 ? L : R;
+				let ph = rnd();
+				for (let i = s; i < e; i++) {
+					const t = i / SR;
+					const en = smooth((t - (t0 - A * 0.6)) / A) * smooth((t0 + BAR + REL - t) / REL);
+					ph += fr / SR;
+					if (ph >= 1) ph -= 1;
+					target[i] += (2 * ph - 1) * en * 0.05;
+				}
+			});
+		}
+	}
+	const fc = (i) => curve(i / SR, PAD_FC);
+	const fl = svf(L, fc, 0.8);
+	const fr2 = svf(R, fc, 0.8);
+	for (let i = 0; i < N; i++) {
+		const g = curve(i / SR, PAD_G) * (0.35 + 0.65 * pump[i]);
+		pad.l[i] = fl[i] * g;
+		pad.r[i] = fr2[i] * g;
+	}
+}
+
+function buildBass() {
+	const out = new Float32Array(N);
+	for (let k = 0; k < CHORD_COUNT; k++) {
+		const ch = CHORDS[k % 4];
+		const t0 = k * BAR;
+		const fr = midi(ch.root);
+		const s = Math.max(0, secs(t0 - 0.05));
+		const e = Math.min(N, secs(t0 + BAR + 0.25));
+		let ph = 0;
+		for (let i = s; i < e; i++) {
+			const t = i / SR;
+			const en = smooth((t - (t0 - 0.05)) / 0.25) * smooth((t0 + BAR + 0.25 - t) / 0.25);
+			ph += fr / SR;
+			out[i] += (Math.sin(TAU * ph) + 0.28 * Math.sin(TAU * ph * 2) + 0.1 * Math.sin(TAU * ph * 3)) * en;
+		}
+	}
+	for (let i = 0; i < N; i++) {
+		const g = curve(i / SR, BASS_G) * (0.4 + 0.6 * pump[i]) * 0.55;
+		bass.l[i] = bass.r[i] = out[i] * g;
+	}
+}
+
+function pluck(freq, len = 0.6) {
+	const n = secs(len);
+	const x = new Float32Array(n);
+	let p1 = rnd();
+	let p2 = rnd();
+	for (let i = 0; i < n; i++) {
+		p1 += freq / SR;
+		p2 += (freq * 1.004) / SR;
+		x[i] = (2 * (p1 - Math.floor(p1)) - 1) * 0.6 + Math.tanh(3 * Math.sin(TAU * p2)) * 0.35;
+	}
+	const y = svf(x, (i) => 520 + 4300 * Math.exp(-i / SR / 0.055), 1.1);
+	for (let i = 0; i < n; i++) y[i] *= expEnv(i / SR, 0.002, 0.2);
+	return y;
+}
+
+function buildArp() {
+	const pattern = [0, 1, 2, 3, 2, 1, 2, 3];
+	for (let j = 0; ; j++) {
+		const t = 3.25 + j * 0.25;
+		if (t > DURATION + 0.2) break;
+		const ch = CHORDS[Math.floor(t / BAR) % 4];
+		const step = Math.round((t % 2) / 0.25) % 8;
+		if (t > 21.2 && t < 27.3 && step % 2) continue; // docs scene: calmer, half density
+		const g = curve(t, ARP_G) * (step === 0 ? 1.15 : 0.82 + 0.18 * rnd());
+		if (g < 0.01) continue;
+		const y = pluck(midi(ch.arp[pattern[step]]));
+		arp.addMono(y, t, g * 0.55 * (0.5 + 0.5 * pump[secs(t)]), Math.sin(t * 1.3) * 0.45);
+	}
+	pingPong(arp, {time: 0.375, feedback: 0.4, mix: 0.36, lp: 3000});
+}
+
+function buildDrums() {
+	kicks.forEach((t) => {
+		const g = t < 21.5 ? 0.62 : 0.85;
+		const k = osc(0.55, (tt) => 46 + 130 * Math.exp(-tt / 0.035), {tau: 0.2, a: 0.001});
+		drums.addMono(k, t, g, 0);
+		const c = svf(noise(secs(0.02)), 4200, 1, 'band');
+		for (let i = 0; i < c.length; i++) c[i] *= expEnv(i / SR, 0.0003, 0.004);
+		drums.addMono(c, t, g * 0.8, 0);
+	});
+	const hat = (t, g) => {
+		const h = svf(noise(secs(0.12)), 7000, 0.8, 'high');
+		for (let i = 0; i < h.length; i++) h[i] *= expEnv(i / SR, 0.0005, 0.03);
+		drums.addMono(h, t, g, (rnd() - 0.5) * 0.4);
+	};
+	for (let t = 15.25; t < 18.4; t += 0.5) hat(t, 0.16);
+	for (let t = 19.25; t < 21.0; t += 0.5) hat(t, 0.16);
+	for (let t = 27.75; t < 32.6; t += 0.5) hat(t, 0.19);
+	for (let t = 30.6; t < 32.4; t += 0.25) hat(t + 0.125, 0.08);
+}
+
+// ───────────────────────── sound effects, synced to timeline.ts ─────────────────────────
+function buildSfx() {
+	// 1 · hook
+	riser(0.15, 1.0, 0.5); // rise into the title (f30)
+	whoosh(0.85, 0.7, 0.4);
+	boom(2.55, 0.95, 1.2); // Cronus lands (f80)
+	swish(1.45, 0.14);
+
+	// 2 · profiles
+	whoosh(3.15, 0.7, 0.42, -1); // f100 streak
+	blip(3.73, 660, 0.24, -0.4); // PRIMARY card (f112)
+	powerOn(3.93, 0.28); // OLED on (f118)
+	blip(4.27, 880, 0.24, -0.4); // SECONDARY card (f128)
+	zip(6.13, 0.75, 0.16, 1); // pulse card 1 -> screen (f184)
+	zip(6.6, 0.75, 0.16, 1); // f198
+	tick(6.93, 1800, 0.18); // 3RD CATEGORY rule (f208)
+
+	// 3 · detection
+	whoosh(8.0, 0.75, 0.4); // f240/f246 hand-off
+	blip(8.25, 520, 0.2, -0.6);
+	blip(8.55, 520, 0.2, -0.6);
+	click(8.73); // AR in hand (f262)
+	scan(9.0, 0.6); // R2 trace A (f270-288)
+	blip(9.6, 1180, 0.2, -0.3); // MATCH (f288)
+	zip(9.87, 0.75, 0.24, 1); // weapon -> Cronus (f296-318)
+	chime(10.6, 0.34); // Primary / AR (f318)
+	zip(10.7, 0.8, 0.2, -1); // Cronus -> profile (f320-344)
+	tick(11.53, 1500, 0.16, 0.5);
+	click(12.4); // Triangle (f372)
+	blip(12.42, 440, 0.2, -0.3);
+	scan(12.73, 0.5); // R2 trace B (f382-398)
+	blip(13.27, 1180, 0.2, -0.3);
+	zip(13.27, 0.75, 0.24, 1);
+	chime(14.0, 0.34, 84); // Secondary / SMG (f420), one third higher
+	zip(14.07, 0.8, 0.2, -1);
+
+	// 4 · pipeline + punchline
+	whoosh(15.2, 0.75, 0.4); // f456/f462
+	[69, 72, 76, 79, 81].forEach((m, i) => blip(15.8 + i * (14 / FPS), midi(m), 0.2, -0.5 + i * 0.05)); // nodes f474.. every 14 f
+	chime(17.27, 0.28, 76); // f518 profile applied
+	riser(17.9, 18.87, 0.5); // -> NO MANUAL SWITCHING (f566)
+	whoosh(18.4, 0.6, 0.35, -1); // nodes collapse (f552)
+	boom(18.87, 0.95, 0.8);
+
+	// 5 · docs
+	whoosh(21.2, 0.7, 0.4); // f636/f642
+	swish(21.55, 0.16); // panel in
+	swish(22.3, 0.2); // marker: "which weapon you're holding" (f34 local -> f670)
+	swish(22.8, 0.2); // "switches automatically"
+	click(23.07);
+	swish(24.1, 0.2); // adaptive trigger line
+	pop(24.35, 0.22); // "#1 CAUSE"
+	click(24.53);
+	blip(25.6, 1320, 0.16, 0.3); // L2 / Options keys lit (f768)
+	swish(25.7, 0.18);
+	click(25.8);
+	blip(26.07, 660, 0.18, -0.2); // Device = PS5 (f782)
+	blip(26.5, 880, 0.18, 0.2); // Type = Per Profile (f794)
+	click(26.73);
+	pop(26.93, 0.3); // SAVED (f808)
+	chime(26.98, 0.26, 88);
+
+	// 6 · ending
+	whoosh(27.15, 0.65, 0.4); // f818
+	boom(27.5, 0.35, 0.9); // SET IT ONCE (f824)
+	slam(28.73, 0.5, 62); // PLAY. (f862)
+	slam(29.2, 0.55, 58); // SWITCH. (f876)
+	slam(29.67, 0.62, 55); // DETECTED. (f890)
+	chime(29.7, 0.2);
+	riser(30.1, 30.55, 0.3);
+	boom(30.55, 1.05, 1.1); // logo lock-up (f916)
+	shimmer(30.7, 0.14);
+	whoosh(31.2, 1.2, 0.42); // light beam (f936-972)
+}
+
+// ───────────────────────── voice ─────────────────────────
+function buildVoice() {
+	const tl = JSON.parse(fs.readFileSync('audio/build/voice.timeline.json', 'utf8'));
+	const TARGET_RMS = 0.11; // ≈ -19 dBFS
+	for (const l of tl) {
+		const w = readWav(l.file);
+		let sum = 0;
+		let cnt = 0;
+		for (let i = 0; i < w.n; i++) {
+			const v = (w.l[i] + w.r[i]) / 2;
+			if (Math.abs(v) > 0.01) {sum += v * v; cnt++;}
+		}
+		const g = TARGET_RMS / Math.sqrt(sum / Math.max(1, cnt));
+		voice.add({l: w.l, r: w.r}, l.start, g);
+		const mono = new Float32Array(w.n);
+		for (let i = 0; i < w.n; i++) mono[i] = (w.l[i] + w.r[i]) * 0.5 * g;
+		sendSfx(mono, l.start, 0.16);
+	}
+	return tl;
+}
+
+// ───────────────────────── mix ─────────────────────────
+console.log('pad…');
+buildPad();
+console.log('bass…');
+buildBass();
+console.log('arp…');
+buildArp();
+console.log('drums…');
+buildDrums();
+console.log('sfx…');
+buildSfx();
+console.log('voice…');
+const tl = buildVoice();
+
+// reverb send from the musical buses too
+for (let i = 0; i < N; i++) {
+	wet[i] += (pad.l[i] + pad.r[i]) * 0.5 * 0.34 + (arp.l[i] + arp.r[i]) * 0.5 * 0.3 + (drums.l[i] + drums.r[i]) * 0.5 * 0.04;
+}
+console.log('reverb…');
+const rv = reverb(wet, {room: 0.87, damp: 0.34, gain: 0.03});
+
+// voice-driven ducking of music / sfx
+const duck = new Float32Array(N).fill(0);
+for (const l of tl) {
+	for (let i = Math.max(0, secs(l.start - 0.08)); i < Math.min(N, secs(l.end + 0.18)); i++) duck[i] = 1;
+}
+let s = 0;
+for (let i = 0; i < N; i++) {
+	const a = duck[i] > s ? 1 - Math.exp(-1 / (0.1 * SR)) : 1 - Math.exp(-1 / (0.4 * SR));
+	s += (duck[i] - s) * a;
+	duck[i] = s;
+}
+const musicDuck = (i) => 1 - (1 - 10 ** (-13 / 20)) * duck[i];
+const sfxDuck = (i) => 1 - (1 - 10 ** (-8 / 20)) * duck[i];
+
+const MUSIC_TRIM = 0.75; // -2.5 dB: keep the bed clearly under the voice
+const F = secs(DURATION);
+const L = new Float32Array(F);
+const R = new Float32Array(F);
+const stems = {music: new Stereo(F), sfx: new Stereo(F), voice: new Stereo(F)};
+for (let i = 0; i < F; i++) {
+	const t = i / SR;
+	const master = smooth(t / 0.25) * smooth((DURATION - t) / 0.97);
+	const mL = (pad.l[i] + bass.l[i] + arp.l[i] + drums.l[i] + rv.l[i] * 0.9) * MUSIC_TRIM;
+	const mR = (pad.r[i] + bass.r[i] + arp.r[i] + drums.r[i] + rv.r[i] * 0.9) * MUSIC_TRIM;
+	const md = musicDuck(i);
+	const sd = sfxDuck(i);
+	L[i] = (mL * md + sfx.l[i] * sd + voice.l[i]) * master;
+	R[i] = (mR * md + sfx.r[i] * sd + voice.r[i]) * master;
+	stems.music.l[i] = mL; stems.music.r[i] = mR;
+	stems.sfx.l[i] = sfx.l[i]; stems.sfx.r[i] = sfx.r[i];
+	stems.voice.l[i] = voice.l[i]; stems.voice.r[i] = voice.r[i];
+}
+
+let peak = 0;
+for (let i = 0; i < F; i++) peak = Math.max(peak, Math.abs(L[i]), Math.abs(R[i]));
+const norm = 0.7 / peak; // −3 dBFS headroom for the mastering step
+for (let i = 0; i < F; i++) {L[i] *= norm; R[i] *= norm;}
+writeWav('audio/build/soundtrack.raw.wav', L, R);
+for (const [k, v] of Object.entries(stems)) writeWav(`audio/build/stems/${k}.wav`, v.l.map((x) => x * norm), v.r.map((x) => x * norm));
+console.log(`raw mix written · peak before norm ${peak.toFixed(2)} · ${DURATION.toFixed(2)} s`);

@@ -1,0 +1,466 @@
+[
+  {
+    "id": "s1",
+    "text": "Per Weapon mode. Every weapon gets its own anti-recoil.",
+    "caption": "Per Weapon mode. Every weapon gets its own anti-recoil.",
+    "start": 0.6,
+    "dur": 3.584,
+    "end": 4.184,
+    "file": "audio/build/pwshort/voice/s1.wav",
+    "words": [
+      {
+        "t": "Per",
+        "from": 0.03,
+        "to": 0.165
+      },
+      {
+        "t": "Weapon",
+        "from": 0.165,
+        "to": 0.552
+      },
+      {
+        "t": "mode.",
+        "from": 0.552,
+        "to": 0.952
+      },
+      {
+        "t": "Every",
+        "from": 1.337,
+        "to": 1.59
+      },
+      {
+        "t": "weapon",
+        "from": 1.59,
+        "to": 1.952
+      },
+      {
+        "t": "gets",
+        "from": 1.952,
+        "to": 2.165
+      },
+      {
+        "t": "its",
+        "from": 2.165,
+        "to": 2.365
+      },
+      {
+        "t": "own",
+        "from": 2.365,
+        "to": 2.652
+      },
+      {
+        "t": "anti-recoil.",
+        "from": 2.652,
+        "to": 3.464
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "s2",
+    "text": "Other modes switch between two profiles. Per Weapon gives every weapon its own slot.",
+    "caption": "Other modes switch between two profiles. Per Weapon gives every weapon its own slot.",
+    "start": 4.684,
+    "dur": 4.946,
+    "end": 9.63,
+    "file": "audio/build/pwshort/voice/s2.wav",
+    "words": [
+      {
+        "t": "Other",
+        "from": 0.03,
+        "to": 0.225
+      },
+      {
+        "t": "modes",
+        "from": 0.225,
+        "to": 0.613
+      },
+      {
+        "t": "switch",
+        "from": 0.613,
+        "to": 0.925
+      },
+      {
+        "t": "between",
+        "from": 0.925,
+        "to": 1.288
+      },
+      {
+        "t": "two",
+        "from": 1.288,
+        "to": 1.5
+      },
+      {
+        "t": "profiles.",
+        "from": 1.5,
+        "to": 2.229
+      },
+      {
+        "t": "Per",
+        "from": 2.63,
+        "to": 2.725
+      },
+      {
+        "t": "Weapon",
+        "from": 2.725,
+        "to": 3.075
+      },
+      {
+        "t": "gives",
+        "from": 3.075,
+        "to": 3.363
+      },
+      {
+        "t": "every",
+        "from": 3.363,
+        "to": 3.713
+      },
+      {
+        "t": "weapon",
+        "from": 3.713,
+        "to": 4.013
+      },
+      {
+        "t": "its",
+        "from": 4.013,
+        "to": 4.2
+      },
+      {
+        "t": "own",
+        "from": 4.2,
+        "to": 4.463
+      },
+      {
+        "t": "slot.",
+        "from": 4.463,
+        "to": 4.826
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "s3",
+    "text": "Hold L2, release Options. Go to Combat, Weapon Detect, and set Type to Per Weapon.",
+    "caption": "Hold L2, release Options. Go to Combat, Weapon Detect, and set Type to Per Weapon.",
+    "start": 10.08,
+    "dur": 5.337,
+    "end": 15.417,
+    "file": "audio/build/pwshort/voice/s3.wav",
+    "words": [
+      {
+        "t": "Hold",
+        "from": 0.03,
+        "to": 0.245
+      },
+      {
+        "t": "L2,",
+        "from": 0.245,
+        "to": 0.77
+      },
+      {
+        "t": "release",
+        "from": 0.82,
+        "to": 1.22
+      },
+      {
+        "t": "Options.",
+        "from": 1.22,
+        "to": 2.07
+      },
+      {
+        "t": "Go",
+        "from": 2.207,
+        "to": 2.382
+      },
+      {
+        "t": "to",
+        "from": 2.382,
+        "to": 2.495
+      },
+      {
+        "t": "Combat,",
+        "from": 2.495,
+        "to": 3.045
+      },
+      {
+        "t": "Weapon",
+        "from": 3.095,
+        "to": 3.42
+      },
+      {
+        "t": "Detect,",
+        "from": 3.42,
+        "to": 3.82
+      },
+      {
+        "t": "and",
+        "from": 3.857,
+        "to": 3.982
+      },
+      {
+        "t": "set",
+        "from": 3.982,
+        "to": 4.245
+      },
+      {
+        "t": "Type",
+        "from": 4.245,
+        "to": 4.545
+      },
+      {
+        "t": "to",
+        "from": 4.545,
+        "to": 4.645
+      },
+      {
+        "t": "Per",
+        "from": 4.645,
+        "to": 4.82
+      },
+      {
+        "t": "Weapon.",
+        "from": 4.82,
+        "to": 5.217
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "s4",
+    "text": "Fire once. The weapon claims its own slot, automatically.",
+    "caption": "Fire once. The weapon claims its own slot, automatically.",
+    "start": 15.917,
+    "dur": 3.624,
+    "end": 19.541,
+    "file": "audio/build/pwshort/voice/s4.wav",
+    "words": [
+      {
+        "t": "Fire",
+        "from": 0.03,
+        "to": 0.352
+      },
+      {
+        "t": "once.",
+        "from": 0.352,
+        "to": 0.81
+      },
+      {
+        "t": "The",
+        "from": 1.102,
+        "to": 1.202
+      },
+      {
+        "t": "weapon",
+        "from": 1.202,
+        "to": 1.527
+      },
+      {
+        "t": "claims",
+        "from": 1.527,
+        "to": 1.84
+      },
+      {
+        "t": "its",
+        "from": 1.84,
+        "to": 2.015
+      },
+      {
+        "t": "own",
+        "from": 2.015,
+        "to": 2.29
+      },
+      {
+        "t": "slot,",
+        "from": 2.29,
+        "to": 2.677
+      },
+      {
+        "t": "automatically.",
+        "from": 2.727,
+        "to": 3.504
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "s5",
+    "text": "Too high or too low? Hold L2 and press Up or Down, while firing. It's permanent, for that exact weapon.",
+    "caption": "Too high or too low? Hold L2 and press Up or Down, while firing. It's permanent, for that exact weapon.",
+    "start": 20.041,
+    "dur": 6.491,
+    "end": 26.532,
+    "file": "audio/build/pwshort/voice/s5.wav",
+    "words": [
+      {
+        "t": "Too",
+        "from": 0.03,
+        "to": 0.206
+      },
+      {
+        "t": "high",
+        "from": 0.206,
+        "to": 0.518
+      },
+      {
+        "t": "or",
+        "from": 0.518,
+        "to": 0.681
+      },
+      {
+        "t": "too",
+        "from": 0.681,
+        "to": 0.893
+      },
+      {
+        "t": "low?",
+        "from": 0.893,
+        "to": 1.224
+      },
+      {
+        "t": "Hold",
+        "from": 1.543,
+        "to": 1.743
+      },
+      {
+        "t": "L2",
+        "from": 1.743,
+        "to": 2.293
+      },
+      {
+        "t": "and",
+        "from": 2.293,
+        "to": 2.418
+      },
+      {
+        "t": "press",
+        "from": 2.418,
+        "to": 2.681
+      },
+      {
+        "t": "Up",
+        "from": 2.681,
+        "to": 2.856
+      },
+      {
+        "t": "or",
+        "from": 2.856,
+        "to": 2.968
+      },
+      {
+        "t": "Down,",
+        "from": 2.968,
+        "to": 3.268
+      },
+      {
+        "t": "while",
+        "from": 3.306,
+        "to": 3.506
+      },
+      {
+        "t": "firing.",
+        "from": 3.506,
+        "to": 4.343
+      },
+      {
+        "t": "It's",
+        "from": 4.532,
+        "to": 4.681
+      },
+      {
+        "t": "permanent,",
+        "from": 4.681,
+        "to": 5.193
+      },
+      {
+        "t": "for",
+        "from": 5.243,
+        "to": 5.368
+      },
+      {
+        "t": "that",
+        "from": 5.368,
+        "to": 5.581
+      },
+      {
+        "t": "exact",
+        "from": 5.581,
+        "to": 6.043
+      },
+      {
+        "t": "weapon.",
+        "from": 6.043,
+        "to": 6.371
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "s6",
+    "text": "The full guide is on Rocket Mod dot org.",
+    "caption": "The full guide is on rocketmod.org.",
+    "start": 27.132,
+    "dur": 2.375,
+    "end": 29.507,
+    "file": "audio/build/pwshort/voice/s6.wav",
+    "words": [
+      {
+        "t": "The",
+        "from": 0.03,
+        "to": 0.117
+      },
+      {
+        "t": "full",
+        "from": 0.117,
+        "to": 0.355
+      },
+      {
+        "t": "guide",
+        "from": 0.355,
+        "to": 0.705
+      },
+      {
+        "t": "is",
+        "from": 0.705,
+        "to": 0.818
+      },
+      {
+        "t": "on",
+        "from": 0.818,
+        "to": 1.017
+      },
+      {
+        "t": "rocketmod.org.",
+        "from": 1.017,
+        "to": 2.255
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "s7",
+    "text": "Rocket Mod. Per Weapon.",
+    "caption": "RocketMod. Per Weapon.",
+    "start": 29.907,
+    "dur": 1.557,
+    "end": 31.464,
+    "file": "audio/build/pwshort/voice/s7.wav",
+    "words": [
+      {
+        "t": "RocketMod.",
+        "from": 0.03,
+        "to": 0.778
+      },
+      {
+        "t": "Per",
+        "from": 0.828,
+        "to": 1.028
+      },
+      {
+        "t": "Weapon.",
+        "from": 1.028,
+        "to": 1.436
+      }
+    ],
+    "wordsQuality": "exact"
+  }
+]

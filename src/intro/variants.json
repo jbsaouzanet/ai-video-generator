@@ -1,0 +1,14 @@
+{
+	"variants": [
+		{"id": "glitch", "frames": 45, "title": "Glitch", "desc": "Décalage RVB + bandes déplacées, se stabilise. Logo visible dès 0,17 s."},
+		{"id": "lockon", "frames": 45, "title": "Lock-on", "desc": "Un viseur se referme, puis le logo arrive avec un impact à 0,47 s."},
+		{"id": "launch", "frames": 45, "title": "Launch", "desc": "Le logo se révèle de bas en haut derrière une ligne lumineuse."},
+		{"id": "scan", "frames": 45, "title": "Scan", "desc": "Une barre de scan balaie l'écran de gauche à droite et révèle le logo, avec un compteur."},
+		{"id": "pixel", "frames": 45, "title": "Pixel", "desc": "Le logo se reconstruit depuis de gros pixels qui s'affinent, façon donnée qui se décode."},
+		{"id": "matrix", "frames": 45, "title": "Matrix", "desc": "Une pluie de 0 et de 1 tombe et laisse le logo derrière elle (clin d'oeil au « core dump » du logo)."},
+		{"id": "neon", "frames": 45, "title": "Néon", "desc": "Le logo s'allume par à-coups comme une enseigne néon, avec un pic de lumière."},
+		{"id": "slam", "frames": 45, "title": "Slam", "desc": "Le logo s'écrase à l'écran depuis très gros, secousse de caméra et onde de choc. Le plus agressif."},
+		{"id": "warp", "frames": 45, "title": "Warp", "desc": "Filets de lumière qui partent du centre (vitesse lumière), puis le logo jaillit."},
+		{"id": "minimal", "frames": 36, "title": "Minimal (1,2 s)", "desc": "Apparition nette avec un reflet, sans effet lourd. Le plus court : 1,2 s."}
+	]
+}

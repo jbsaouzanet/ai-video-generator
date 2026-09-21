@@ -1,0 +1,227 @@
+[
+  {
+    "id": "o1",
+    "text": "Thanks for watching!",
+    "caption": "Thanks for watching!",
+    "start": 0.5,
+    "dur": 1.11,
+    "end": 1.61,
+    "file": "audio/build/outro/voice/o1.wav",
+    "words": [
+      {
+        "t": "Thanks",
+        "from": 0.03,
+        "to": 0.268
+      },
+      {
+        "t": "for",
+        "from": 0.268,
+        "to": 0.418
+      },
+      {
+        "t": "watching!",
+        "from": 0.418,
+        "to": 0.99
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "o2",
+    "text": "If you liked it, hit like, and subscribe.",
+    "caption": "If you liked it, hit like, and subscribe.",
+    "start": 1.96,
+    "dur": 2.315,
+    "end": 4.275,
+    "file": "audio/build/outro/voice/o2.wav",
+    "words": [
+      {
+        "t": "If",
+        "from": 0.03,
+        "to": 0.138
+      },
+      {
+        "t": "you",
+        "from": 0.138,
+        "to": 0.263
+      },
+      {
+        "t": "liked",
+        "from": 0.263,
+        "to": 0.638
+      },
+      {
+        "t": "it,",
+        "from": 0.638,
+        "to": 0.759
+      },
+      {
+        "t": "hit",
+        "from": 0.928,
+        "to": 1.088
+      },
+      {
+        "t": "like,",
+        "from": 1.088,
+        "to": 1.363
+      },
+      {
+        "t": "and",
+        "from": 1.4,
+        "to": 1.513
+      },
+      {
+        "t": "subscribe.",
+        "from": 1.513,
+        "to": 2.195
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "o3",
+    "text": "Not on our Discord yet? Come join us!",
+    "caption": "Not on our Discord yet? Come join us!",
+    "start": 4.775,
+    "dur": 2.342,
+    "end": 7.117,
+    "file": "audio/build/outro/voice/o3.wav",
+    "words": [
+      {
+        "t": "Not",
+        "from": 0.03,
+        "to": 0.125
+      },
+      {
+        "t": "on",
+        "from": 0.125,
+        "to": 0.225
+      },
+      {
+        "t": "our",
+        "from": 0.225,
+        "to": 0.363
+      },
+      {
+        "t": "Discord",
+        "from": 0.363,
+        "to": 0.838
+      },
+      {
+        "t": "yet?",
+        "from": 0.838,
+        "to": 1.08
+      },
+      {
+        "t": "Come",
+        "from": 1.357,
+        "to": 1.55
+      },
+      {
+        "t": "join",
+        "from": 1.55,
+        "to": 1.888
+      },
+      {
+        "t": "us!",
+        "from": 1.888,
+        "to": 2.222
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "o4",
+    "text": "The whole community is there to help you.",
+    "caption": "The whole community is there to help you.",
+    "start": 7.467,
+    "dur": 2.084,
+    "end": 9.551,
+    "file": "audio/build/outro/voice/o4.wav",
+    "words": [
+      {
+        "t": "The",
+        "from": 0.03,
+        "to": 0.089
+      },
+      {
+        "t": "whole",
+        "from": 0.089,
+        "to": 0.314
+      },
+      {
+        "t": "community",
+        "from": 0.314,
+        "to": 0.976
+      },
+      {
+        "t": "is",
+        "from": 0.976,
+        "to": 1.139
+      },
+      {
+        "t": "there",
+        "from": 1.139,
+        "to": 1.364
+      },
+      {
+        "t": "to",
+        "from": 1.364,
+        "to": 1.489
+      },
+      {
+        "t": "help",
+        "from": 1.489,
+        "to": 1.789
+      },
+      {
+        "t": "you.",
+        "from": 1.789,
+        "to": 1.964
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "o5",
+    "text": "See you in the next one!",
+    "caption": "See you in the next one!",
+    "start": 10.151,
+    "dur": 1.343,
+    "end": 11.494,
+    "file": "audio/build/outro/voice/o5.wav",
+    "words": [
+      {
+        "t": "See",
+        "from": 0.03,
+        "to": 0.21
+      },
+      {
+        "t": "you",
+        "from": 0.21,
+        "to": 0.397
+      },
+      {
+        "t": "in",
+        "from": 0.397,
+        "to": 0.485
+      },
+      {
+        "t": "the",
+        "from": 0.485,
+        "to": 0.572
+      },
+      {
+        "t": "next",
+        "from": 0.572,
+        "to": 0.922
+      },
+      {
+        "t": "one!",
+        "from": 0.922,
+        "to": 1.223
+      }
+    ],
+    "wordsQuality": "exact"
+  }
+]

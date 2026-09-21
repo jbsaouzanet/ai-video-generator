@@ -1,0 +1,50 @@
+{
+	"engine": "kokoro",
+	"voice": "am_onyx=0.3,am_michael=0.7",
+	"speed": 1.08,
+	"vc": {
+		"src": "audio/voiceprints/kokoro-onyx30-michael70.se.pth",
+		"tgt": "audio/voiceprints/user.se.pth",
+		"alpha": 1,
+		"tau": 0.3
+	},
+	"lines": [
+		{
+			"id": "s1",
+			"start": 0.6,
+			"text": "Per Weapon mode. Every weapon gets its own anti-recoil."
+		},
+		{
+			"id": "s2",
+			"gap": 0.5,
+			"text": "Other modes switch between two profiles. Per Weapon gives every weapon its own slot."
+		},
+		{
+			"id": "s3",
+			"gap": 0.45,
+			"text": "Hold L2, release Options. Go to Combat, Weapon Detect, and set Type to Per Weapon."
+		},
+		{
+			"id": "s4",
+			"gap": 0.5,
+			"text": "Fire once. The weapon claims its own slot, automatically."
+		},
+		{
+			"id": "s5",
+			"gap": 0.5,
+			"text": "Too high or too low? Hold L2 and press Up or Down, while firing. It's permanent, for that exact weapon."
+		},
+		{
+			"id": "s6",
+			"gap": 0.6,
+			"text": "The full guide is on Rocket Mod dot org.",
+			"caption": "The full guide is on rocketmod.org."
+		},
+		{
+			"id": "s7",
+			"gap": 0.4,
+			"text": "Rocket Mod. Per Weapon.",
+			"caption": "RocketMod. Per Weapon."
+		}
+	]
+}

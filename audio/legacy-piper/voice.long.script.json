@@ -1,0 +1,128 @@
+{
+	"voice": "en_US-ryan-high",
+	"lengthScale": 1,
+	"lines": [
+		{
+			"id": "a1-hook",
+			"start": 1.05,
+			"text": "Automatic weapon detection."
+		},
+		{
+			"id": "a2-profiles",
+			"start": 4,
+			"text": "Two profiles. Each with its own anti-recoil."
+		},
+		{
+			"id": "b1-dualsense",
+			"start": 9,
+			"text": "First, you need a DualSense controller, the one with adaptive triggers."
+		},
+		{
+			"id": "b2-trigger",
+			"start": 12.85,
+			"text": "Then turn adaptive trigger effects on, in the game. It's the number one reason it doesn't work."
+		},
+		{
+			"id": "c1-menu",
+			"start": 18.6,
+			"text": "Now, turn it on. Hold L2, then release Options."
+		},
+		{
+			"id": "c2-combat",
+			"start": 23.3,
+			"text": "Go to the Combat category, and find the Weapon Detect row."
+		},
+		{
+			"id": "c3-enable",
+			"start": 27.6,
+			"text": "Make sure it's enabled. Press right on the D-pad if it isn't."
+		},
+		{
+			"id": "c4-settings",
+			"start": 31.6,
+			"text": "Press Cross. Set Device to PS5, and Type to Per Profile."
+		},
+		{
+			"id": "c5-saved",
+			"start": 36.7,
+			"text": "Press Circle to leave. You'll see saved. That's it."
+		},
+		{
+			"id": "d1-signature",
+			"start": 42.03,
+			"text": "Every weapon has its own trigger signature."
+		},
+		{
+			"id": "d2-switch",
+			"start": 44.73,
+			"text": "Fire once, and the right profile switches on its own."
+		},
+		{
+			"id": "e1-unsure",
+			"start": 49.6,
+			"text": "Rarely, two weapons share one signature, and the screen shows a question mark."
+		},
+		{
+			"id": "e2-pick",
+			"start": 53.8,
+			"text": "Hold L2, Circle and Down, pick the weapon you're holding, and confirm. It remembers."
+		},
+		{
+			"id": "f1-wrong",
+			"start": 60.5,
+			"text": "Wrong profile? One gesture fixes it."
+		},
+		{
+			"id": "f2-gestures",
+			"start": 62.85,
+			"text": "L2 plus left restores Primary. Hold it longer to wipe and re-learn. Right does the same for Secondary."
+		},
+		{
+			"id": "g1-pipeline",
+			"start": 72.17,
+			"text": "Every weapon change is detected, matched, and applied."
+		},
+		{
+			"id": "g2-punch",
+			"start": 75.57,
+			"text": "No manual switching."
+		},
+		{
+			"id": "g3-docs",
+			"start": 78.57,
+			"text": "The full step-by-step setup guide is on Rocket Mod dot org.",
+			"caption": "The full step-by-step setup guide is on rocketmod.org."
+		},
+		{
+			"id": "g4-once",
+			"start": 84.07,
+			"text": "Set it once."
+		},
+		{
+			"id": "g5-play",
+			"start": 85.22,
+			"text": "Play."
+		},
+		{
+			"id": "g6-switch",
+			"start": 85.69,
+			"text": "Switch."
+		},
+		{
+			"id": "g7-detected",
+			"start": 86.15,
+			"text": "Detected."
+		},
+		{
+			"id": "g8-brand",
+			"start": 87.19,
+			"text": "Rocket Mod.",
+			"caption": "RocketMod."
+		},
+		{
+			"id": "g9-tag",
+			"start": 87.97,
+			"text": "Automatic weapon detection."
+		}
+	]
+}

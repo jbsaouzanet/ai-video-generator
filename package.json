@@ -1,0 +1,44 @@
+{
+  "name": "rocketmod-video",
+  "version": "1.0.0",
+  "private": true,
+  "description": "RocketMod weapon detection explainer video (Remotion)",
+  "scripts": {
+    "assets": "node scripts/prepare-assets.mjs",
+    "dev": "remotion studio src/index.ts",
+    "render": "node scripts/render.mjs draft",
+    "preview": "node scripts/extract-frames.mjs",
+    "still": "remotion still src/index.ts RocketModWeaponDetection",
+    "typecheck": "tsc --noEmit",
+    "audio:voice": "node scripts/audio/voice.mjs",
+    "audio:synth": "node scripts/audio/soundtrack.mjs && node scripts/audio/finalize.mjs",
+    "audio:report": "node scripts/audio/report.mjs",
+    "audio": "npm run audio:synth && npm run audio:report",
+    "mux": "node scripts/audio/mux.mjs",
+    "render:short": "node scripts/render.mjs short",
+    "render:long": "node scripts/render.mjs long",
+    "render:perweapon": "node scripts/render.mjs perweapon",
+    "render:draft": "node scripts/render.mjs draft",
+    "intro:assets": "node scripts/prepare-intro.mjs",
+    "intro:audio": "node scripts/audio/intro-sting.mjs all",
+    "intro:render": "node scripts/render-intro.mjs all",
+    "intro:deliver": "node scripts/deliver-intro.mjs",
+    "render:perweaponshort": "node scripts/render.mjs perweaponshort"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.526",
+    "@remotion/google-fonts": "^4.0.526",
+    "@remotion/motion-blur": "^4.0.526",
+    "@remotion/shapes": "^4.0.526",
+    "@remotion/transitions": "^4.0.526",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "remotion": "^4.0.526",
+    "sharp": "^0.35.4"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "typescript": "^7.0.2"
+  }
+}

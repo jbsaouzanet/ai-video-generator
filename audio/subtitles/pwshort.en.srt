@@ -1,0 +1,87 @@
+1
+00:00:00,580 --> 00:00:01,852
+Per Weapon mode.
+
+2
+00:00:01,887 --> 00:00:03,252
+Every weapon gets its own
+
+3
+00:00:03,252 --> 00:00:04,364
+anti-recoil.
+
+4
+00:00:04,664 --> 00:00:06,184
+Other modes switch between two
+
+5
+00:00:06,184 --> 00:00:07,213
+profiles.
+
+6
+00:00:07,264 --> 00:00:08,697
+Per Weapon gives every weapon
+
+7
+00:00:08,697 --> 00:00:09,810
+its own slot.
+
+8
+00:00:10,060 --> 00:00:12,217
+Hold L2, release Options.
+
+9
+00:00:12,237 --> 00:00:13,900
+Go to Combat, Weapon Detect,
+
+10
+00:00:13,900 --> 00:00:15,597
+and set Type to Per Weapon.
+
+11
+00:00:15,897 --> 00:00:16,949
+Fire once.
+
+12
+00:00:16,969 --> 00:00:18,594
+The weapon claims its own slot,
+
+13
+00:00:18,594 --> 00:00:19,721
+automatically.
+
+14
+00:00:20,021 --> 00:00:21,514
+Too high or too low?
+
+15
+00:00:21,534 --> 00:00:23,309
+Hold L2 and press Up or Down,
+
+16
+00:00:23,309 --> 00:00:24,503
+while firing.
+
+17
+00:00:24,523 --> 00:00:26,084
+It's permanent, for that exact
+
+18
+00:00:26,084 --> 00:00:26,712
+weapon.
+
+19
+00:00:27,112 --> 00:00:28,149
+The full guide is on
+
+20
+00:00:28,149 --> 00:00:29,687
+rocketmod.org.
+
+21
+00:00:29,887 --> 00:00:30,685
+RocketMod.
+
+22
+00:00:30,685 --> 00:00:31,643
+Per Weapon.

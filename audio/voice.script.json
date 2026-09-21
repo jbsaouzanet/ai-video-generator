@@ -1,0 +1,80 @@
+{
+	"engine": "kokoro",
+	"voice": "am_onyx=0.3,am_michael=0.7",
+	"speed": 1.15,
+	"vc": {
+		"src": "audio/voiceprints/kokoro-onyx30-michael70.se.pth",
+		"tgt": "audio/voiceprints/user.se.pth",
+		"alpha": 1,
+		"tau": 0.3
+	},
+	"lines": [
+		{
+			"id": "v1-hook",
+			"start": 1.05,
+			"text": "Automatic weapon detection."
+		},
+		{
+			"id": "v2-profiles",
+			"start": 4,
+			"text": "Two profiles. Each with its own anti-recoil."
+		},
+		{
+			"id": "v3a-signature",
+			"start": 8.3,
+			"text": "Every weapon has its own trigger signature."
+		},
+		{
+			"id": "v3b-switch",
+			"start": 11,
+			"text": "Fire once, and the right profile switches on its own."
+		},
+		{
+			"id": "v4a-pipeline",
+			"start": 15.7,
+			"text": "Every weapon change is detected, matched, and applied."
+		},
+		{
+			"id": "v4b-punch",
+			"start": 19.1,
+			"text": "No manual switching."
+		},
+		{
+			"id": "v5-docs",
+			"start": 22.1,
+			"text": "The full step-by-step setup guide is on Rocket Mod dot org.",
+			"caption": "The full step-by-step setup guide is on rocketmod.org."
+		},
+		{
+			"id": "v6a-once",
+			"start": 27.6,
+			"text": "Set it once."
+		},
+		{
+			"id": "v6b-play",
+			"start": 28.52,
+			"text": "Play."
+		},
+		{
+			"id": "v6c-switch",
+			"start": 29.13,
+			"text": "Switch."
+		},
+		{
+			"id": "v6d-detected",
+			"start": 29.85,
+			"text": "Detected."
+		},
+		{
+			"id": "v6e-brand",
+			"start": 30.72,
+			"text": "Rocket Mod.",
+			"caption": "RocketMod."
+		},
+		{
+			"id": "v6f-tag",
+			"start": 31.72,
+			"text": "Automatic weapon detection."
+		}
+	]
+}

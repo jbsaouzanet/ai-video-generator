@@ -1,0 +1,230 @@
+import React from 'react';
+import {Img, staticFile} from 'remotion';
+import {CRONUS} from '../config/cronus';
+import {C} from '../theme';
+import {
+	SCREEN_PULSES,
+	cronusOpacity,
+	poseAt,
+	poseVelocity,
+	screenAt,
+	screenHighlight,
+	sweepAt,
+} from '../timeline';
+import {clamp, bump} from '../lib/anim';
+import {OledContent} from './OledContent';
+
+const W = CRONUS.w;
+const H = CRONUS.h;
+const S = CRONUS.screen;
+
+/**
+ * The hero object. The photo pixels are never repainted: everything here is transform,
+ * mask, shadow, light and overlay. The OLED overlay draws only where the photo has the black display window.
+ */
+export const CronusHero: React.FC<{frame: number}> = ({frame}) => {
+	const pose = poseAt(frame);
+	const op = cronusOpacity(frame);
+	const screen = screenAt(frame);
+	const hl = screenHighlight(frame);
+	const sweep = sweepAt(frame);
+	const vel = poseVelocity(frame);
+	const url = staticFile(CRONUS.file);
+	const s = pose.h / H;
+
+	const bx = Math.min(16, Math.abs(vel.vx) * 0.22);
+	const by = Math.min(16, Math.abs(vel.vy) * 0.22 + Math.abs(vel.vh) * 0.05);
+	const useBlur = bx > 0.4 || by > 0.4;
+
+	let pulse = 0;
+	for (const p of SCREEN_PULSES) pulse = Math.max(pulse, bump(frame, p + 4, 22));
+	const logoGlow = 0.22 + 0.78 * pulse;
+
+	const maskBase: React.CSSProperties = {
+		WebkitMaskRepeat: 'no-repeat',
+		maskRepeat: 'no-repeat',
+		WebkitMaskSize: '100% 100%',
+		maskSize: '100% 100%',
+	};
+	const edgeMask = (dx: number, dy: number): React.CSSProperties => ({
+		...maskBase,
+		WebkitMaskImage: `url("${url}"), url("${url}")`,
+		maskImage: `url("${url}"), url("${url}")`,
+		WebkitMaskPosition: `0 0, ${dx}px ${dy}px`,
+		maskPosition: `0 0, ${dx}px ${dy}px`,
+		WebkitMaskComposite: 'source-out',
+		maskComposite: 'subtract',
+	});
+	const alphaMask: React.CSSProperties = {
+		...maskBase,
+		WebkitMaskImage: `url("${url}")`,
+		maskImage: `url("${url}")`,
+	};
+
+	const sweepC = sweep * 100;
+
+	return (
+		<>
+			<svg width={0} height={0} style={{position: 'absolute'}}>
+				<filter id="cronus-mb" x="-30%" y="-30%" width="160%" height="160%" colorInterpolationFilters="sRGB">
+					<feGaussianBlur stdDeviation={`${bx} ${by}`} />
+				</filter>
+			</svg>
+			<div style={{position: 'absolute', inset: 0, opacity: op, filter: useBlur ? 'url(#cronus-mb)' : undefined}}>
+				<div
+					style={{
+						position: 'absolute',
+						left: pose.x - W / 2,
+						top: pose.y - H / 2,
+						width: W,
+						height: H,
+						transform: `perspective(2600px) rotateX(${pose.rx}deg) rotateY(${pose.ry}deg) rotateZ(${pose.rz}deg) scale(${s})`,
+						transformOrigin: '50% 50%',
+					}}
+				>
+					{/* blue back light */}
+					<div
+						style={{
+							position: 'absolute',
+							left: -W * 0.25,
+							top: -H * 0.2,
+							width: W * 1.5,
+							height: H * 1.4,
+							background: 'radial-gradient(closest-side, rgba(47,139,255,0.55), rgba(47,139,255,0.16) 55%, transparent)',
+							filter: 'blur(40px)',
+							opacity: 0.85,
+						}}
+					/>
+					{/* ground shadow */}
+					<div
+						style={{
+							position: 'absolute',
+							left: W * 0.02,
+							top: H * 0.9,
+							width: W * 0.96,
+							height: H * 0.2,
+							background: 'radial-gradient(closest-side, rgba(0,0,0,0.95), transparent)',
+							filter: 'blur(26px)',
+						}}
+					/>
+					{/* floor reflection */}
+					<Img
+						src={url}
+						style={{
+							position: 'absolute',
+							left: 0,
+							top: H + 14,
+							width: W,
+							height: H,
+							transform: 'scaleY(-1)',
+							opacity: 0.16,
+							WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,0.9), transparent 42%)',
+							maskImage: 'linear-gradient(to top, rgba(0,0,0,0.9), transparent 42%)',
+						}}
+					/>
+					{/* the device */}
+					<Img
+						src={url}
+						style={{
+							position: 'absolute',
+							inset: 0,
+							width: W,
+							height: H,
+							filter: 'drop-shadow(0 0 2px rgba(130,195,255,0.85)) drop-shadow(0 0 46px rgba(47,139,255,0.35))',
+						}}
+					/>
+					{/* rim light: top + side edges of the silhouette */}
+					<div style={{position: 'absolute', inset: 0, background: `linear-gradient(180deg, rgba(190,225,255,0.95), ${C.blue} 45%, rgba(47,139,255,0.15))`, opacity: 0.85, ...edgeMask(0, 8)}} />
+					<div style={{position: 'absolute', inset: 0, background: `linear-gradient(90deg, rgba(150,210,255,0.9), rgba(47,139,255,0.1) 60%)`, opacity: 0.45, ...edgeMask(7, 0)}} />
+					{/* ambient blue top light over the shell */}
+					<div style={{position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(47,139,255,0.22), transparent 42%)', mixBlendMode: 'screen', ...alphaMask}} />
+					{/* specular sweep */}
+					{sweep > -0.5 && sweep < 1.5 && (
+						<div
+							style={{
+								position: 'absolute',
+								inset: 0,
+								background: `linear-gradient(100deg, transparent ${sweepC - 16}%, rgba(215,238,255,0.6) ${sweepC}%, transparent ${sweepC + 16}%)`,
+								mixBlendMode: 'screen',
+								...alphaMask,
+							}}
+						/>
+					)}
+					{/* alien logo light */}
+					<div
+						style={{
+							position: 'absolute',
+							left: CRONUS.logo.x - 170,
+							top: CRONUS.logo.y - 120,
+							width: 340,
+							height: 240,
+							background: 'radial-gradient(closest-side, rgba(150,210,255,0.85), transparent)',
+							opacity: logoGlow * 0.55,
+							mixBlendMode: 'screen',
+							filter: 'blur(6px)',
+						}}
+					/>
+
+					{/* OLED */}
+					<div
+						style={{
+							position: 'absolute',
+							left: S.x,
+							top: S.y,
+							width: S.w,
+							height: S.h,
+							boxShadow: `0 0 ${70 * hl}px ${10 * hl}px rgba(47,139,255,${0.65 * hl}), inset 0 0 0 ${2 * hl}px rgba(120,190,255,${0.8 * hl})`,
+						}}
+					>
+						<OledContent state={screen} frame={frame} />
+					</div>
+					{/* HUD brackets */}
+					{hl > 0.02 && (
+						<div style={{position: 'absolute', left: S.x - 18, top: S.y - 18, width: S.w + 36, height: S.h + 36, opacity: clamp(hl * 1.4)}}>
+							{(['tl', 'tr', 'bl', 'br'] as const).map((k) => (
+								<div
+									key={k}
+									style={{
+										position: 'absolute',
+										width: 34,
+										height: 34,
+										borderColor: C.blueHi,
+										borderStyle: 'solid',
+										borderWidth: 0,
+										filter: 'drop-shadow(0 0 6px rgba(109,182,255,.9))',
+										...(k === 'tl' && {left: 0, top: 0, borderLeftWidth: 4, borderTopWidth: 4}),
+										...(k === 'tr' && {right: 0, top: 0, borderRightWidth: 4, borderTopWidth: 4}),
+										...(k === 'bl' && {left: 0, bottom: 0, borderLeftWidth: 4, borderBottomWidth: 4}),
+										...(k === 'br' && {right: 0, bottom: 0, borderRightWidth: 4, borderBottomWidth: 4}),
+									}}
+								/>
+							))}
+						</div>
+					)}
+					{/* pulse rings leaving the screen */}
+					{SCREEN_PULSES.map((p) => {
+						const t = (frame - p) / 30;
+						if (t < 0 || t > 1) return null;
+						const e = 1 - Math.pow(1 - t, 3);
+						const grow = 14 + e * 150;
+						return (
+							<div
+								key={p}
+								style={{
+									position: 'absolute',
+									left: S.x - grow,
+									top: S.y - grow * 0.7,
+									width: S.w + grow * 2,
+									height: S.h + grow * 1.4,
+									border: `${4 - 2.5 * t}px solid rgba(109,182,255,${0.9 * (1 - t)})`,
+									borderRadius: 10 + grow * 0.4,
+									boxShadow: `0 0 30px rgba(47,139,255,${0.55 * (1 - t)})`,
+								}}
+							/>
+						);
+					})}
+				</div>
+			</div>
+		</>
+	);
+};

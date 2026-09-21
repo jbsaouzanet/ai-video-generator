@@ -1,0 +1,28 @@
+{
+	"engine": "kokoro",
+	"voice": "am_onyx=0.3,am_michael=0.7",
+	"speed": 1.02,
+	"vc": {
+		"src": "audio/voiceprints/kokoro-onyx30-michael70.se.pth",
+		"tgt": "audio/voiceprints/user.se.pth",
+		"alpha": 1,
+		"tau": 0.3
+	},
+	"lines": [
+		{
+			"id": "p1",
+			"start": 0.35,
+			"text": "The first system of its kind."
+		},
+		{
+			"id": "p2",
+			"gap": 0.45,
+			"text": "Perfect anti-recoil. Perfect aim assist."
+		},
+		{
+			"id": "p3",
+			"gap": 0.5,
+			"text": "Game updated? No more waiting for the developer. Update it yourself."
+		}
+	]
+}
