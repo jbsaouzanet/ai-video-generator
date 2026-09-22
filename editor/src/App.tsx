@@ -85,7 +85,13 @@ export const App: React.FC = () => {
 
 	const commitTiming = async (trackId: string, clipId: string, patch: {start?: number; duration?: number}) => {
 		if (!store) return;
-		store.getState().setClipTiming(trackId, clipId, patch);
+		const result = store.getState().setClipTiming(trackId, clipId, patch);
+		if (!result.ok) {
+			// the Timeline only offers drag handles on clips it already knows are draggable, so trimClip
+			// itself refusing here would mean a real bug, not a normal user mistake — surface it plainly.
+			setSaveStatus({kind: 'error', message: result.error});
+			return;
+		}
 		await persist();
 	};
 

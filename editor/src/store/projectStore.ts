@@ -1,15 +1,14 @@
 import {create} from 'zustand';
 import {temporal} from 'zundo';
 import type {VideoProject} from '@src/video/model/schemas';
+import {trimClip, type CommandResult} from '@src/video/commands';
 
 export type ProjectStoreState = {
 	project: VideoProject;
-	/** direct manipulation, no ripple (docs' remotion-markup/video-editing.md distinction: "independently
-	 * positioned clips" — moving/resizing one clip never repositions another). Only meaningful for
-	 * 'sequence'-mode tracks: GenericChapterScenes reads timing.start/duration directly, so this actually
-	 * changes the render. On a 'self-gating' track (e.g. xboxpw) the clip's own component still owns its
-	 * on/off window internally — timing here stays descriptive, dragging is disabled in the UI for those. */
-	setClipTiming: (trackId: string, clipId: string, patch: {start?: number; duration?: number}) => void;
+	/** calls the SAME src/video/commands/trimClip the CLI and (eventually) an AI agent call — not a
+	 * duplicate mutation, per the mission's own rule that human and AI editing share one model (mission
+	 * Rule 6, docs/ARCHITECTURE.md Phase 4). Direct manipulation, no ripple — see trimClip's own doc comment. */
+	setClipTiming: (trackId: string, clipId: string, patch: {start?: number; duration?: number}) => CommandResult;
 };
 
 // Return type left to inference on purpose — zundo's `temporal` augments the store's type (adds `.temporal`)
@@ -18,24 +17,13 @@ export type ProjectStoreState = {
 export const createProjectStore = (initial: VideoProject) =>
 	create<ProjectStoreState>()(
 		temporal(
-			(set) => ({
+			(set, get) => ({
 				project: initial,
-				setClipTiming: (trackId, clipId, patch) =>
-					set((s) => ({
-						project: {
-							...s.project,
-							tracks: s.project.tracks.map((t) => {
-								if (t.id !== trackId) return t;
-								return {
-									...t,
-									clips: t.clips.map((c) => {
-										if (c.id !== clipId || c.timing.kind !== 'hard') return c;
-										return {...c, timing: {...c.timing, ...patch}};
-									}),
-								};
-							}),
-						},
-					})),
+				setClipTiming: (trackId, clipId, patch) => {
+					const result = trimClip(get().project, trackId, clipId, patch);
+					if (result.ok) set({project: result.project});
+					return result;
+				},
 			}),
 			{limit: 100},
 		),
