@@ -18,21 +18,15 @@
     "mux": "node scripts/audio/mux.mjs",
     "render:short": "node scripts/render.mjs short",
     "render:long": "node scripts/render.mjs long",
-    "render:perweapon": "node scripts/render.mjs perweapon",
     "render:draft": "node scripts/render.mjs draft",
     "intro:assets": "node scripts/prepare-intro.mjs",
     "intro:audio": "node scripts/audio/intro-sting.mjs all",
     "intro:render": "node scripts/render-intro.mjs all",
-    "intro:deliver": "node scripts/deliver-intro.mjs",
-    "render:perweaponshort": "node scripts/render.mjs perweaponshort",
-    "render:perweaponxbox": "node scripts/render.mjs perweaponxbox"
+    "intro:deliver": "node scripts/deliver-intro.mjs"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.526",
     "@remotion/google-fonts": "^4.0.526",
-    "@remotion/motion-blur": "^4.0.526",
-    "@remotion/shapes": "^4.0.526",
-    "@remotion/transitions": "^4.0.526",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "remotion": "^4.0.526",

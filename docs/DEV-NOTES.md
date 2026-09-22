@@ -6,7 +6,7 @@ Cuts of the same story, one code base:
 |---|---|---|---|---|
 | `RocketModWeaponDetectionShort` | 1080x1920 (9:16) | 33.5 s | **short** | `npm run render:short` |
 | `RocketModWeaponDetectionLong` | 1920x1080 | 90 s | **long** | `npm run render:long` |
-| `RocketModPerWeapon` (own entry `src/index-perweapon.ts`) | 1920x1080 | ~117 s | **long** | `npm run render:perweapon` |
+| `RocketModPerWeapon` (own entry `src/index-perweapon.ts`) | 1920x1080 | ~117 s | **long** | `node scripts/render.mjs per-weapon-long` |
 | `RocketModWeaponDetection` | 1920x1080 | 33.5 s | none: draft | `npm run render:draft` (`out/drafts/`, not delivered) |
 
 **Deliverable rules** (enforced by `scripts/render.mjs` before and after each render): **short = always vertical 9:16**; **long = always horizontal and at least 70 s (1 min 10)**. A 16:9 cut of 33 s is neither, so it is only a draft. A render that breaks a rule is moved to `out/rejected/` and not delivered.
@@ -20,7 +20,8 @@ Source of truth for copy/behaviour: <https://rocketmod.org/documentation/weapon-
 ```bash
 npm run assets      # assets/cronus-v2.png -> public/cronus-plate.jpg (2x upscale) + public/cronus-backdrop.jpg (blurred fill)
 npm run dev         # Remotion Studio
-npm run render:short | render:long | render:perweapon   # deliverables (rules enforced), see the table above
+npm run render:short | render:long   # per-profile deliverables (rules enforced), see the table above
+node scripts/render.mjs <slug>-<short|long>   # any other topic, e.g. per-weapon-long, per-weapon-xbox-long
 npm run render:draft   # 16:9 33 s working draft -> out/drafts/rocketmod-per-profile-16x9-draft-vN.mp4 (not delivered)
 npm run preview     # ffmpeg: 00:02 00:06 00:11 00:17 00:23 00:29 00:32 -> out/preview/frame_MM-SS.png
 node scripts/stills.mjs 120 340 560   # quick PNG stills of given frames -> out/preview/dev/
@@ -123,7 +124,7 @@ node scripts/audio/voice.mjs audio/voice.pw.script.json audio/build/pw     # (Pi
 node scripts/audio/pw-cues.mjs                                              # cue sheet + chapter frames
 node scripts/audio/subtitles.mjs audio/build/pw/voice.timeline.json src/subtitles/perweapon.json 58 audio/subtitles/perweapon.en.srt
 node scripts/audio/soundtrack.mjs pw && node scripts/audio/finalize.mjs audio/build/pw/soundtrack.raw.wav public/audio/soundtrack-pw.wav 117.1
-npm run render:perweapon
+node scripts/render.mjs per-weapon-long
 ```
 
 ## Intro (1.5 s, YouTube + TikTok)
@@ -196,7 +197,7 @@ node scripts/audio/voice.mjs audio/voice.pw-short.script.json audio/build/pwshor
 cp audio/build/pwshort/voice.timeline.json src/perweapon/short/timeline.json
 node scripts/audio/subtitles.mjs audio/build/pwshort/voice.timeline.json src/subtitles/pwshort.json 32 audio/subtitles/pwshort.en.srt
 node scripts/audio/soundtrack.mjs pwshort && node scripts/audio/finalize.mjs audio/build/pwshort/soundtrack.raw.wav public/audio/soundtrack-pwshort.wav 33.07
-npm run render:perweaponshort        # -> out/rocketmod-per-weapon-9x16-vN-short.mp4
+node scripts/render.mjs per-weapon-short        # -> out/rocketmod-per-weapon-9x16-vN-short.mp4
 node scripts/attach-clips.mjs out/rocketmod-per-weapon-9x16-vN-short.mp4 --intro warp --outro   # short end card (outro-short-9x16)
 ```
 Decision log: the AI avatar (SadTalker + body motion, `src/config/avatar.ts`) was tried and dropped by the user ("le visage fait vraiment artificiel"): all films render without it (`AVATAR.* = null`). Realistic options offered instead: filmed presenter (recommended), online avatar service, rented GPU model.
@@ -265,8 +266,11 @@ Single source of truth per topic, read by three places instead of five hardcoded
   old hardcoded `TARGETS` entries and `attach-clips.mjs`'s old `SRT_FOR` map used to carry. `cover` carries
   what used to be `Covers.tsx`'s per-mode `COPY`/`HEAD_SIZE` entries verbatim (`kicker`, `head` (2 lines),
   `chips`, `pill`, `screen: {title, line}`, `backgroundLabel`, `headSize: {wide, tall}`).
-- `render.mjs` target names become `<slug>-<short|long>` (e.g. `per-weapon-xbox-long`); the old short-hand
-  names (`short`, `long`, `perweapon`, `perweaponshort`, `perweaponxbox`) still work as `ALIASES` in that file.
+- `render.mjs` target names are `<slug>-<short|long>` (e.g. `per-weapon-xbox-long`, `per-weapon-long`,
+  `per-weapon-short`); only `short`/`long` (-> `per-profile-short`/`-long`) remain as `ALIASES` in that file,
+  kept for `npm run render:short`/`render:long` since that topic predates the registry. Every other topic is
+  addressed by its own registry name, no alias needed — the `perweapon`/`perweaponshort`/`perweaponxbox`
+  aliases and their `package.json` `render:*` scripts were removed once nothing referenced them anymore.
 - Verified behaviour-preserving when built (2026-09-22): re-ran `attach-clips.mjs` on the already-shipped Xbox
   film through the new topic lookup into a scratch delivery dir — identical 139.10 s output and identical 61
   captions; re-rendered all 5 shipped covers under their new `Cover-<slug>-*` ids and diffed pixel-for-pixel

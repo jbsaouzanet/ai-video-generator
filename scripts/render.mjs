@@ -35,13 +35,11 @@ for (const topic of loadTopics()) {
 }
 TARGETS.draft = {comp: 'RocketModWeaponDetection', dir: 'out/drafts', base: 'rocketmod-per-profile-16x9-draft', w: 1920, h: 1080, seconds: 33.5};
 
-// short-hands from before the topic registry existed: still valid, still show up in `npm run`
+// short-hands from before the topic registry existed, kept for `npm run render:short`/`render:long`
+// (the two oldest topics); every other topic is addressed by its own `<slug>-<short|long>` name.
 const ALIASES = {
 	short: 'per-profile-short',
 	long: 'per-profile-long',
-	perweapon: 'per-weapon-long',
-	perweaponshort: 'per-weapon-short',
-	perweaponxbox: 'per-weapon-xbox-long',
 };
 
 /** returns a list of rule violations (empty = OK) */
