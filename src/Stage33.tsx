@@ -7,7 +7,8 @@ import {LightBeam, TransitionStreak} from './components/LightSweep';
 import {SCENES, dur} from './timeline';
 import {prog} from './lib/anim';
 import {useTL} from './tl';
-import {Cue, Subtitles} from './components/Subtitles';
+import type {Caption} from '@remotion/captions';
+import {Subtitles} from './components/Subtitles';
 import {AvatarPip} from './components/AvatarPip';
 
 const seq = (s: {from: number; to: number}) => ({from: s.from, durationInFrames: dur(s)});
@@ -26,7 +27,7 @@ export type SceneSet = {
  * background - profile cards - Cronus (one continuous camera) - scene graphics - light FX - fade.
  * Timing lives in timeline.ts; the wide and vertical compositions differ only in the scene set + timeline pack.
  */
-export type SubtitleSpec = {cues: Cue[]; y: number; size: number; maxWidth: number; x?: number};
+export type SubtitleSpec = {captions: Caption[]; y: number; size: number; maxWidth: number; x?: number};
 
 export const Stage33: React.FC<{scenes: SceneSet; audio?: string; cardsAbove?: boolean; subtitles?: SubtitleSpec; avatar?: {src: string | null; tall: boolean}}> = ({scenes, audio = 'audio/soundtrack.wav', cardsAbove = false, subtitles, avatar}) => {
 	const frame = useCurrentFrame();

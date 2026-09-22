@@ -12,7 +12,7 @@ import {ChapterBefore, ChapterFix, ChapterTurnOn, ChapterUnsure} from './long/Ch
 import {Subtitles} from './components/Subtitles';
 import {AvatarPip} from './components/AvatarPip';
 import {AVATAR} from './config/avatar';
-import cues from './subtitles/long90.json';
+import captions from './subtitles/long90.json';
 import {Scene1Hook} from './scenes/Scene1Hook';
 import {Scene2Profiles} from './scenes/Scene2Profiles';
 import {Scene3Detect} from './scenes/Scene3Detect';
@@ -105,7 +105,7 @@ export const RocketModWeaponDetectionLong: React.FC = () => {
 				))}
 				<LightBeam frame={frame} from={beamAt} dur={36} />
 				<AvatarPip src={AVATAR.long} tall={false} />
-				<Subtitles cues={cues} y={976} size={42} maxWidth={1500} opacity={1 - prog(frame, LONG_DURATION - 40, 12)} />
+				<Subtitles captions={captions} y={976} size={42} maxWidth={1500} opacity={1 - prog(frame, LONG_DURATION - 40, 12)} />
 				<AbsoluteFill style={{background: '#000', opacity: black, pointerEvents: 'none'}} />
 			</AbsoluteFill>
 		</FormatProvider>

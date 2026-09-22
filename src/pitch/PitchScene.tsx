@@ -246,7 +246,7 @@ export const PitchScene: React.FC<{tall: boolean; mode: PitchMode; variant?: Pit
 			)}
 
 			<Scanlines opacity={0.14} />
-			<Subtitles cues={(mode === 'pp' ? (full ? (tall ? sPP9 : sPP16) : sPPShort) : full ? (tall ? sPW9 : sPW16) : sPWShort) as never} y={tall ? 1590 : 976} size={tall ? 52 : 42} maxWidth={tall ? 940 : 1500} opacity={1 - out} />
+			<Subtitles captions={mode === 'pp' ? (full ? (tall ? sPP9 : sPP16) : sPPShort) : full ? (tall ? sPW9 : sPW16) : sPWShort} y={tall ? 1590 : 976} size={tall ? 52 : 42} maxWidth={tall ? 940 : 1500} opacity={1 - out} />
 			<AbsoluteFill style={{background: '#000', opacity: out, pointerEvents: 'none'}} />
 		</AbsoluteFill>
 	);

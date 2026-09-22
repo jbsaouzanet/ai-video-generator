@@ -272,7 +272,7 @@ export const XboxPerWeaponFilm: React.FC = () => {
 						<TransitionStreak key={s} frame={frame} at={fr(s) - 2} strength={0.4} />
 					))}
 					<LightBeam frame={frame} from={beamAt} dur={36} />
-					<Subtitles cues={subs} y={976} size={42} maxWidth={1500} opacity={1 - prog(frame, total - 40, 12)} />
+					<Subtitles captions={subs} y={976} size={42} maxWidth={1500} opacity={1 - prog(frame, total - 40, 12)} />
 					<AbsoluteFill style={{background: '#000', opacity: black, pointerEvents: 'none'}} />
 				</AbsoluteFill>
 			</TLProvider>

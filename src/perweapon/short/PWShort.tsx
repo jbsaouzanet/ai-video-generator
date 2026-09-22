@@ -322,7 +322,7 @@ export const RocketModPerWeaponShort: React.FC = () => {
 						<TransitionStreak key={s} frame={frame} at={fr(s) - 2} strength={0.4} />
 					))}
 					<LightBeam frame={frame} from={brand + 10} dur={36} />
-					<Subtitles cues={subs} y={1590} size={52} maxWidth={940} opacity={1 - prog(frame, total - 30, 12)} />
+					<Subtitles captions={subs} y={1590} size={52} maxWidth={940} opacity={1 - prog(frame, total - 30, 12)} />
 					<AbsoluteFill style={{background: '#000', opacity: black, pointerEvents: 'none'}} />
 				</AbsoluteFill>
 			</TLProvider>

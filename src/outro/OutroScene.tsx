@@ -277,7 +277,7 @@ export const OutroScene: React.FC<{tall: boolean; audio?: string; variant?: Outr
 			{logo}
 			{socials}
 			<Scanlines opacity={0.14} />
-			<Subtitles cues={isShort ? subsShort : tall ? subs9 : subs16} y={tall ? 1590 : 976} size={tall ? 52 : 42} maxWidth={tall ? 940 : 1500} opacity={1 - outP} />
+			<Subtitles captions={isShort ? subsShort : tall ? subs9 : subs16} y={tall ? 1590 : 976} size={tall ? 52 : 42} maxWidth={tall ? 940 : 1500} opacity={1 - outP} />
 			<AbsoluteFill style={{background: '#000', opacity: outP, pointerEvents: 'none'}} />
 			{void rand}
 		</AbsoluteFill>

@@ -74,7 +74,7 @@ export const RocketModPerWeapon: React.FC = () => {
 				))}
 				<LightBeam frame={frame} from={Math.round(cue('end.beam') * FPS)} dur={36} />
 				<AvatarPip src={AVATAR.perweapon} tall={false} />
-				<Subtitles cues={subs} y={976} size={42} maxWidth={1500} opacity={1 - prog(frame, TOTAL - 40, 12)} />
+				<Subtitles captions={subs} y={976} size={42} maxWidth={1500} opacity={1 - prog(frame, TOTAL - 40, 12)} />
 				<AbsoluteFill style={{background: '#000', opacity: black, pointerEvents: 'none'}} />
 			</AbsoluteFill>
 		</FormatProvider>

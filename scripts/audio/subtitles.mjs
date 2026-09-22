@@ -1,6 +1,10 @@
 // Subtitles from the voice timeline. Word times are the REAL ones measured by Piper (voice.mjs -> line.words);
 // only if a timeline has no `words` (old build) does it fall back to a character-count estimate.
-// Cues are short chunks; a cue stays on screen until its last word has been said (+ a short hold), never cut earlier.
+// Cues are short chunks; a cue stays on screen until its last word has been said (+ a short hold), never cut
+// earlier. The JSON written out is the official @remotion/captions `Caption[]` shape (one entry per word,
+// `pageBreakAfter: true` marking where a cue ends) — src/components/Subtitles.tsx turns that back into pages
+// with createTikTokStyleCaptions and re-applies the lead-in/hold/never-overlap window itself; the .srt (still
+// built from the internal `cues` below) is unaffected.
 // usage: node scripts/audio/subtitles.mjs <voice.timeline.json> <out.json> <maxChars> [out.srt]
 import fs from 'node:fs';
 
@@ -56,8 +60,11 @@ cues.forEach((c, i) => {
 	// the next cue may start (lead-in) before this one has said its last word: it waits, this one is never cut
 	if (next && next.from < c.to) next.from = c.to;
 });
+// Caption[] for the JSON output: flatten the cues back into one entry per word (true word times, no LEAD/HOLD
+// baked in — that stays a rendering concern), pageBreakAfter on the last word of each cue.
+const captions = cues.flatMap((c) => c.words.map((w, i) => ({text: `${w.t} `, startMs: Math.round(w.from * 1000), endMs: Math.round(w.to * 1000), timestampMs: null, confidence: null, ...(i === c.words.length - 1 ? {pageBreakAfter: true} : {})})));
 fs.mkdirSync(outJson.replace(/[\\/][^\\/]+$/, ''), {recursive: true});
-fs.writeFileSync(outJson, JSON.stringify(cues));
+fs.writeFileSync(outJson, JSON.stringify(captions));
 
 // sanity: every cue must outlive its own words, and cues must not overlap
 let bad = 0;

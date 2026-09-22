@@ -25,6 +25,7 @@
     "intro:deliver": "node scripts/deliver-intro.mjs"
   },
   "dependencies": {
+    "@remotion/captions": "^4.0.526",
     "@remotion/cli": "^4.0.526",
     "@remotion/google-fonts": "^4.0.526",
     "react": "^19.3.0",
