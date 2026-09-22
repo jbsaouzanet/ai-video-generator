@@ -1,0 +1,28 @@
+{
+	"id": "per-profile",
+	"name": "Per Profile",
+	"settings": {"fps": 30, "width": 1920, "height": 1080, "tailSeconds": 0},
+	"assets": [],
+	"tracks": [
+		{
+			"id": "chapters",
+			"name": "Chapters",
+			"kind": "video",
+			"renderMode": "sequence",
+			"crossDissolveFrames": 10,
+			"crossDissolveSymmetric": false,
+			"clips": [
+				{"id": "intro", "shot": "perprofile/intro", "timing": {"kind": "hard", "start": 0, "duration": 8.4}},
+				{"id": "before", "shot": "perprofile/before", "timing": {"kind": "hard", "start": 8.066667, "duration": 9.333333}},
+				{"id": "turnon", "shot": "perprofile/turnon", "timing": {"kind": "hard", "start": 17.066667, "duration": 25}},
+				{"id": "detect", "shot": "perprofile/detect", "timing": {"kind": "hard", "start": 41.733333, "duration": 7.6}},
+				{"id": "unsure", "shot": "perprofile/unsure", "timing": {"kind": "hard", "start": 49, "duration": 12}},
+				{"id": "fix", "shot": "perprofile/fix", "timing": {"kind": "hard", "start": 60.666667, "duration": 11.333333}},
+				{"id": "outro", "shot": "perprofile/outro", "timing": {"kind": "hard", "start": 71.666667, "duration": 18.333333}}
+			]
+		}
+	],
+	"metadata": {
+		"note": "Third and last topic ported to the model (docs/ARCHITECTURE.md). crossDissolveSymmetric: false — found while porting, not assumed: src/RocketModWeaponDetectionLong.tsx's Chapter only fades IN (opacity: fade), unlike per-weapon PS5's true two-sided crossfade, which is why that field exists on Track at all. start/duration for every clip are the exact CHAPTER_STARTS/CHAPTERS[].dur from that file (OV=10 subtracted at each boundary, same reduce() logic), converted to seconds, not eyeballed. intro/detect/outro chapters reuse Scene1Hook..Scene6End via their own virtual-frame <Sequence from={-orig}> exactly as the original Layers component does. Background/audio/LightBeam/TransitionStreak/AvatarPip/captions/black-fade stay hand-written in src/long/FilmFromProject.tsx, same deferral as the other two topics."
+	}
+}

@@ -3,10 +3,12 @@ import {XboxPerWeaponFilmFromProject} from '@src/xboxpw/FilmFromProject';
 import {xboxPwFrames} from '@src/xboxpw/Film';
 import {RocketModPerWeaponFromProject} from '@src/perweapon/FilmFromProject';
 import {TOTAL as PW_TOTAL} from '@src/perweapon/cues';
-import {RocketModWeaponDetectionLong, LONG_DURATION} from '@src/RocketModWeaponDetectionLong';
+import {LONG_DURATION} from '@src/RocketModWeaponDetectionLong';
+import {RocketModWeaponDetectionLongFromProject} from '@src/RocketModWeaponDetectionLongFromProject';
 import {VideoProjectSchema, type VideoProject} from '@src/video/model/schemas';
 import perWeaponXboxProjectData from '@src/video/projects/per-weapon-xbox.json';
 import perWeaponProjectData from '@src/video/projects/per-weapon.json';
+import perProfileProjectData from '@src/video/projects/per-profile.json';
 
 /**
  * Every shipped topic the editor can preview, not just the one with a VideoProject. `hasProject: false`
@@ -43,11 +45,12 @@ export const EDITOR_TOPICS: EditorTopic[] = [
 	{
 		slug: 'per-profile',
 		name: 'Per Profile',
-		component: RocketModWeaponDetectionLong,
+		component: RocketModWeaponDetectionLongFromProject,
 		durationInFrames: LONG_DURATION,
 		fps: 30,
 		width: 1920,
 		height: 1080,
-		hasProject: false,
+		hasProject: true,
+		project: VideoProjectSchema.parse(perProfileProjectData),
 	},
 ];

@@ -5,6 +5,7 @@ import type {VoiceLine} from '@src/video/primitives/timing';
 import '@src/video/shots/blocks';
 import '@src/video/shots/xboxpw';
 import '@src/video/shots/perweapon';
+import '@src/video/shots/perprofile';
 import xboxTimelineData from '@src/xboxpw/timeline.json';
 import {PlayerPreview} from './preview/PlayerPreview';
 import {Timeline, type PositionedClip} from './timeline/Timeline';

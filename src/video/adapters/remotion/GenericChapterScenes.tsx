@@ -25,7 +25,7 @@ export const GenericChapterScenes: React.FC<{project: VideoProject}> = ({project
 						const durationInFrames = Math.round(clip.timing.duration * fps);
 						return (
 							<Sequence key={clip.id} from={from} durationInFrames={durationInFrames} name={clip.id}>
-								<ChapterFade first={i === 0} last={i === t.clips.length - 1} durationInFrames={durationInFrames} overlapFrames={t.crossDissolveFrames}>
+								<ChapterFade first={i === 0} last={i === t.clips.length - 1} durationInFrames={durationInFrames} overlapFrames={t.crossDissolveFrames} symmetric={t.crossDissolveSymmetric}>
 									{resolveClip(clip, 0)}
 								</ChapterFade>
 							</Sequence>
