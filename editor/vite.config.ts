@@ -13,5 +13,9 @@ export default defineConfig({
 			'@src': path.resolve(__dirname, '../src'),
 		},
 	},
+	// staticFile()'d assets (audio/*.wav, cronus-*.jpg, ...) live in the Remotion project's public/, normally
+	// served by Remotion Studio's own dev server — Vite needs pointing at the same folder or every
+	// staticFile() reference 404s (and Player retries forever, spamming the console).
+	publicDir: path.resolve(__dirname, '../public'),
 	server: {port: 3210},
 });
