@@ -1,38 +1,47 @@
 import React, {useMemo, useRef, useState} from 'react';
 import type {PlayerRef} from '@remotion/player';
-import {VideoProjectSchema} from '@src/video/model/schemas';
 import {resolveTimingStartSeconds} from '@src/video/engine/timing-resolver';
 import type {VoiceLine} from '@src/video/primitives/timing';
-import {xboxPwFrames} from '@src/xboxpw/Film';
 import '@src/video/shots/blocks';
 import '@src/video/shots/xboxpw';
-import projectData from '@src/video/projects/per-weapon-xbox.json';
-import timelineData from '@src/xboxpw/timeline.json';
+import xboxTimelineData from '@src/xboxpw/timeline.json';
 import {PlayerPreview} from './preview/PlayerPreview';
 import {Timeline, type PositionedClip} from './timeline/Timeline';
 import {Inspector} from './inspector/Inspector';
+import {EDITOR_TOPICS} from './topics';
 
-const project = VideoProjectSchema.parse(projectData);
-const LINES = timelineData as unknown as VoiceLine[];
+// only per-weapon-xbox has a VideoProject today — this map exists so a future 2nd/3rd project doesn't need
+// editing here, just an entry with its own real voice timeline.
+const TIMELINE_BY_SLUG: Record<string, VoiceLine[]> = {
+	'per-weapon-xbox': xboxTimelineData as unknown as VoiceLine[],
+};
 
 export const App: React.FC = () => {
-	const fps = project.settings.fps;
-	const totalFrames = xboxPwFrames();
-	const totalSeconds = totalFrames / fps;
+	const [selectedSlug, setSelectedSlug] = useState(EDITOR_TOPICS[0].slug);
+	const topic = EDITOR_TOPICS.find((t) => t.slug === selectedSlug)!;
 
+	const totalSeconds = topic.durationInFrames / topic.fps;
 	const clips = useMemo<PositionedClip[]>(() => {
-		const flat = project.tracks.flatMap((t) => t.clips);
+		if (!topic.hasProject) return [];
+		const lines = TIMELINE_BY_SLUG[topic.slug];
+		const flat = topic.project.tracks.flatMap((t) => t.clips);
 		return flat.map((c, i) => {
-			const startSeconds = resolveTimingStartSeconds(c.timing, LINES);
-			const nextStart = i + 1 < flat.length ? resolveTimingStartSeconds(flat[i + 1].timing, LINES) : totalSeconds;
+			const startSeconds = resolveTimingStartSeconds(c.timing, lines);
+			const nextStart = i + 1 < flat.length ? resolveTimingStartSeconds(flat[i + 1].timing, lines) : totalSeconds;
 			return {...c, startSeconds, endSeconds: Math.max(startSeconds, nextStart)};
 		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [topic.slug]);
 
 	const playerRef = useRef<PlayerRef>(null);
 	const [currentFrame, setCurrentFrame] = useState(0);
 	const [selectedClipId, setSelectedClipId] = useState<string | null>(null);
+
+	const selectTopic = (slug: string) => {
+		setSelectedSlug(slug);
+		setSelectedClipId(null);
+		setCurrentFrame(0);
+	};
 
 	const seek = (frame: number) => {
 		playerRef.current?.seekTo(frame);
@@ -41,17 +50,49 @@ export const App: React.FC = () => {
 
 	return (
 		<div style={{fontFamily: 'system-ui, sans-serif', color: '#e8edf5', padding: 24, maxWidth: 1440, margin: '0 auto'}}>
-			<h1 style={{fontSize: 20, fontWeight: 600, marginBottom: 4}}>{project.name}</h1>
+			<div style={{display: 'flex', gap: 8, marginBottom: 20, flexWrap: 'wrap'}}>
+				{EDITOR_TOPICS.map((t) => (
+					<button
+						key={t.slug}
+						onClick={() => selectTopic(t.slug)}
+						style={{
+							padding: '8px 16px',
+							borderRadius: 8,
+							border: t.slug === selectedSlug ? '1.5px solid #2f8bff' : '1px solid #263041',
+							background: t.slug === selectedSlug ? 'rgba(47,139,255,0.18)' : '#141a24',
+							color: t.slug === selectedSlug ? '#cfe0ff' : '#8892a6',
+							fontSize: 13,
+							fontWeight: t.slug === selectedSlug ? 600 : 400,
+							cursor: 'pointer',
+						}}
+					>
+						{t.name}
+						{!t.hasProject && <span style={{marginLeft: 6, fontSize: 10, opacity: 0.7}}>(no project yet)</span>}
+					</button>
+				))}
+			</div>
+
+			<h1 style={{fontSize: 20, fontWeight: 600, marginBottom: 4}}>{topic.name}</h1>
 			<p style={{fontSize: 13, color: '#8892a6', marginTop: 0, marginBottom: 20}}>
-				<code>src/video/projects/per-weapon-xbox.json</code> — {clips.length} clips, {totalSeconds.toFixed(1)}s.
+				{topic.hasProject ? (
+					<>
+						<code>src/video/projects/{topic.slug}.json</code> — {clips.length} clips, {totalSeconds.toFixed(1)}s.
+					</>
+				) : (
+					<>Not yet ported to a VideoProject — playing the hand-written composition directly, {totalSeconds.toFixed(1)}s.</>
+				)}
 			</p>
 
 			<div style={{display: 'flex', gap: 20, alignItems: 'flex-start'}}>
 				<div style={{flex: 1, minWidth: 0}}>
-					<PlayerPreview playerRef={playerRef} durationInFrames={totalFrames} fps={fps} width={project.settings.width} height={project.settings.height} onFrameUpdate={setCurrentFrame} />
-					<Timeline clips={clips} totalSeconds={totalSeconds} currentFrame={currentFrame} fps={fps} selectedClipId={selectedClipId} onSelectClip={setSelectedClipId} onSeek={seek} />
+					<PlayerPreview topicKey={topic.slug} component={topic.component} playerRef={playerRef} durationInFrames={topic.durationInFrames} fps={topic.fps} width={topic.width} height={topic.height} onFrameUpdate={setCurrentFrame} />
+					{topic.hasProject ? (
+						<Timeline clips={clips} totalSeconds={totalSeconds} currentFrame={currentFrame} fps={topic.fps} selectedClipId={selectedClipId} onSelectClip={setSelectedClipId} onSeek={seek} />
+					) : (
+						<div style={{marginTop: 24, padding: 16, background: '#141a24', borderRadius: 8, fontSize: 13, color: '#5a6478'}}>No VideoProject for this topic yet — nothing to show on a timeline. Preview above is the real, shipped film either way.</div>
+					)}
 				</div>
-				<Inspector clip={clips.find((c) => c.id === selectedClipId) ?? null} />
+				{topic.hasProject && <Inspector clip={clips.find((c) => c.id === selectedClipId) ?? null} />}
 			</div>
 		</div>
 	);

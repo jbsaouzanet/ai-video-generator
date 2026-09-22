@@ -17,5 +17,11 @@ export default defineConfig({
 	// served by Remotion Studio's own dev server — Vite needs pointing at the same folder or every
 	// staticFile() reference 404s (and Player retries forever, spamming the console).
 	publicDir: path.resolve(__dirname, '../public'),
-	server: {port: 3210},
+	server: {
+		port: 3210,
+		// allows a Cloudflare quick tunnel (a fresh random *.trycloudflare.com host each run) or LAN access to
+		// reach the dev server — Vite's default host check rejects any hostname it doesn't already know about.
+		// Fine for this local, no-auth preview tool; do not carry this into anything actually deployed.
+		allowedHosts: true,
+	},
 });
