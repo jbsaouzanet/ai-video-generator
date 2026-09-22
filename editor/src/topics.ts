@@ -14,15 +14,8 @@ import perWeaponProjectData from '@src/video/projects/per-weapon.json';
  * migration strategy step 3, not yet done for per-weapon PS5 or per-profile) — the Player still shows it
  * (real, useful today), but Timeline/Inspector have nothing to read, and say so rather than faking it.
  */
-export type EditorTopic = {
-	slug: string;
-	name: string;
-	component: React.FC;
-	durationInFrames: number;
-	fps: number;
-	width: number;
-	height: number;
-} & ({hasProject: true; project: VideoProject} | {hasProject: false});
+type TopicBase = {slug: string; name: string; durationInFrames: number; fps: number; width: number; height: number};
+export type EditorTopic = (TopicBase & {hasProject: true; project: VideoProject; component: React.FC<{project?: VideoProject}>}) | (TopicBase & {hasProject: false; component: React.FC});
 
 export const EDITOR_TOPICS: EditorTopic[] = [
 	{

@@ -11,7 +11,7 @@ import {CronusHero} from '../components/CronusHero';
 import {LightBeam, TransitionStreak} from '../components/LightSweep';
 import {Subtitles} from '../components/Subtitles';
 import {GenericScenes} from '../video/adapters/remotion/GenericScenes';
-import {VideoProjectSchema} from '../video/model/schemas';
+import {VideoProjectSchema, type VideoProject} from '../video/model/schemas';
 import projectData from '../video/projects/per-weapon-xbox.json';
 import '../video/shots/blocks';
 import '../video/shots/xboxpw';
@@ -22,9 +22,10 @@ import {POSE, events as filmEvents, scene, xboxPwFrames} from './Film';
 // Camera/Background/CronusHero/audio/LightBeam/TransitionStreak/captions/black-fade stay exactly as-is,
 // reusing Film.tsx's own POSE/scene/events exports directly (not duplicated) — deliberately NOT generalized
 // yet, per docs/ARCHITECTURE.md's "First vertical slice" scope. This file exists to prove the model is real
-// and lossless (see scripts/verify-per-weapon-xbox-project.mjs), not to replace src/xboxpw/Film.tsx —
-// nothing renders from this composition in production.
-const project = VideoProjectSchema.parse(projectData);
+// and lossless (see scripts/verify-per-weapon-xbox-project.mjs) and to render for the editor (accepts a live
+// `project` prop via Remotion Player's inputProps so a drag/AI edit shows up without a reload) — nothing
+// renders from this composition in the render/delivery pipeline.
+const defaultProject = VideoProjectSchema.parse(projectData);
 const LINES = tlData as unknown as VoiceLine[];
 
 const poseKeys = [
@@ -60,7 +61,7 @@ const TL_XBOX = makeTL({
 	opacity: cronusOpacity,
 });
 
-export const XboxPerWeaponFilmFromProject: React.FC = () => {
+export const XboxPerWeaponFilmFromProject: React.FC<{project?: VideoProject}> = ({project = defaultProject}) => {
 	const frame = useCurrentFrame();
 	const total = xboxPwFrames();
 	const pose = TL_XBOX.poseAt(frame);
