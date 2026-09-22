@@ -1,11 +1,12 @@
 import React from 'react';
 import {C, FONT} from '../../theme';
-import {E, prog} from '../../lib/anim';
+import {E} from '../../lib/anim';
 import {FeatureTitle} from '../../components/FeatureTitle';
 import {DocumentationPanel} from '../../components/DocumentationPanel';
 import {SceneTransition} from '../../components/SceneTransition';
 import {SCENES, dur} from '../../timeline';
 import {useScene} from '../../lib/useScene';
+import {interpolate} from 'remotion';
 
 // Tall panel: 1000 px wide, content zoomed 1.2x so the copy stays readable on a phone. Scroll offsets are in
 // CONTENT px (pre-zoom); tuned on stills because the narrower column wraps differently from the wide layout.
@@ -36,8 +37,8 @@ const CURSOR = [
 export const SceneTall5Docs: React.FC = () => {
 	const {lf} = useScene(SCENES.docs.from);
 	const total = dur(SCENES.docs);
-	const enter = prog(lf, 4, 30, E.out);
-	const chips = prog(lf, 44, 16);
+	const enter = interpolate(lf, [4, (4) + (30)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const chips = interpolate(lf, [44, (44) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	return (
 		<SceneTransition total={total} inFrames={4} outFrames={16} drift={0}>
 			<FeatureTitle x={540} y={100} width={1040} align="center" delay={14} lines={[{text: 'FULL SETUP GUIDE', size: 92, gradient: true, glow: 'rgba(47,139,255,.35)'}]} />

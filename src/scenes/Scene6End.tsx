@@ -1,7 +1,7 @@
 import React from 'react';
-import {AbsoluteFill} from 'remotion';
+import {AbsoluteFill, interpolate} from 'remotion';
 import {C, FONT} from '../theme';
-import {E, prog, springIn} from '../lib/anim';
+import {E, springIn} from '../lib/anim';
 import {FeatureTitle} from '../components/FeatureTitle';
 import {SCENES} from '../timeline';
 import {TextScrim} from '../components/TextScrim';
@@ -18,7 +18,7 @@ const Word: React.FC<{gf: number; t: string; from: number; to: number; color: st
 	const {fps} = useVideoConfig();
 	if (gf < from || gf >= to) return null;
 	const s = springIn(gf, fps, from, {damping: 14, stiffness: 240, mass: 0.7});
-	const out = prog(gf, to - 5, 5, E.in);
+	const out = interpolate(gf, [to - 5, (to - 5) + (5)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in});
 	return (
 		<div
 			style={{
@@ -46,10 +46,10 @@ const Word: React.FC<{gf: number; t: string; from: number; to: number; color: st
 /** 27–32.5 s. Camera push, the three-word rhythm, the lockup, light sweep, fade to black. */
 export const Scene6End: React.FC = () => {
 	const {gf} = useScene(SCENES.end.from);
-	const setOut = prog(gf, 850, 10, E.in);
+	const setOut = interpolate(gf, [850, (850) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in});
 	return (
 		<AbsoluteFill>
-			<TextScrim x={960} y={240} rx={880} ry={250} opacity={prog(gf, 818, 18) * (1 - prog(gf, 978, 20))} />
+			<TextScrim x={960} y={240} rx={880} ry={250} opacity={interpolate(gf, [818, (818) + (18)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - interpolate(gf, [978, (978) + (20)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}))} />
 			<div style={{opacity: 1 - setOut}}>
 				<FeatureTitle
 					x={960}
@@ -92,8 +92,8 @@ export const Scene6End: React.FC = () => {
 					fontSize: 30,
 					letterSpacing: '0.2em',
 					color: C.blueHi,
-					opacity: prog(gf, 950, 14),
-					transform: `translateY(${(1 - prog(gf, 950, 14)) * 12}px)`,
+					opacity: interpolate(gf, [950, (950) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}),
+					transform: `translateY(${(1 - interpolate(gf, [950, (950) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})) * 12}px)`,
 					textShadow: '0 0 20px rgba(47,139,255,.7)',
 				}}
 			>

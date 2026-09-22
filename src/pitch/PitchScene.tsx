@@ -1,5 +1,5 @@
 import React from 'react';
-import {AbsoluteFill, Audio, Img, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Audio, Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import tlPP from './timeline-pp.json';
 import tlPPShort from './timeline-pp-short.json';
 import tlPW from './timeline-pw.json';
@@ -12,7 +12,7 @@ import sPW9 from '../subtitles/pitch-pw-9x16.json';
 import sPWShort from '../subtitles/pitch-pw-short-9x16.json';
 import gen from '../config/intro.generated.json';
 import {C, FONT} from '../theme';
-import {E, bump, clamp, prog} from '../lib/anim';
+import {E, bump, clamp} from '../lib/anim';
 import {FeatureTitle} from '../components/FeatureTitle';
 import {Glass, Tag} from '../components/ui';
 import {Subtitles} from '../components/Subtitles';
@@ -128,7 +128,7 @@ const Node: React.FC<{x: number; y: number; w: number; h: number; top: string; l
 	</div>
 );
 
-const beat = (f: number, a: number, b: number | null) => prog(f, a * 30, 8, E.out) * (b === null ? 1 : 1 - prog(f, b * 30 - 6, 8, E.in));
+const beat = (f: number, a: number, b: number | null) => interpolate(f, [a * 30, (a * 30) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (b === null ? 1 : 1 - interpolate(f, [b * 30 - 6, (b * 30 - 6) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in}));
 
 export const PitchScene: React.FC<{tall: boolean; mode: PitchMode; variant?: PitchVariant; audio?: string}> = ({tall, mode, variant = 'full', audio}) => {
 	const frame = useCurrentFrame();
@@ -136,13 +136,13 @@ export const PitchScene: React.FC<{tall: boolean; mode: PitchMode; variant?: Pit
 	const full = variant === 'full';
 	const T = pitchTimes(mode, variant);
 	const total = pitchFrames(mode, variant);
-	const p = (at: number, dur = 0.5, easing = E.out) => prog(frame, at * 30, dur * 30, easing);
+	const p = (at: number, dur = 0.5, easing = E.out) => interpolate(frame, [at * 30, (at * 30) + (dur * 30)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: easing});
 	const fr = (s: number) => Math.round(s * 30);
 
 	const L = tall
 		? {colX: 60, colW: 960, hY: 330, h1: 60, h2: 100, hW: 1000, logoH: 200, logoCx: 540, logoCy: 165, labelY: 700, nodeY: 800, nodeH: 190, nodeW: 290, nodeGap: 45, nodeFont: 38, rowY: 810, rowH: 140, rowGap: 170, rowFont: 56, tagY: 1170, badge1Y: 760, badge2Y: 930, badgeH: 140, badgeFont: 48, flowY: 800, flowFont: 52, noteY: 1200}
 		: {colX: 110, colW: 1140, hY: 80, h1: 62, h2: 118, hW: 1300, logoH: 340, logoCx: 1590, logoCy: 250, labelY: 420, nodeY: 500, nodeH: 190, nodeW: 470, nodeGap: 90, nodeFont: 46, rowY: 490, rowH: 104, rowGap: 122, rowFont: 50, tagY: 980, badge1Y: 500, badge2Y: 670, badgeH: 150, badgeFont: 58, flowY: 520, flowFont: 44, noteY: 760};
-	const out = prog(frame, total - 8, 8, E.in);
+	const out = interpolate(frame, [total - 8, (total - 8) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in});
 	const logoW = (LOGO.w / LOGO.h) * L.logoH;
 	const logoP = p(0.15, 0.7);
 

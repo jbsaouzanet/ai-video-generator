@@ -1,9 +1,9 @@
 import React from 'react';
-import {AbsoluteFill, Audio, Img, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Audio, Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import gen from '../config/intro.generated.json';
 import variants from './variants.json';
 import {C, FONT} from '../theme';
-import {E, bump, clamp, lerp, prog, rand} from '../lib/anim';
+import {E, bump, clamp, lerp, rand} from '../lib/anim';
 
 export type Variant = 'glitch' | 'lockon' | 'launch' | 'scan' | 'pixel' | 'matrix' | 'neon' | 'slam' | 'warp' | 'minimal';
 export const introFrames = (v: Variant) => variants.variants.find((x) => x.id === v)?.frames ?? 45;
@@ -157,7 +157,7 @@ const WarpStreaks: React.FC<{cx: number; cy: number; t: number; vis: number}> = 
 const ScanUI: React.FC<{cx: number; cy: number; lw: number; lh: number; p: number; frame: number; tall: boolean; out: number}> = ({cx, cy, lw, lh, p, frame, tall, out}) => {
 	const x = cx - lw / 2 - 30 + p * (lw + 60);
 	const show = p > 0 && p < 1;
-	const br = prog(frame, 2, 6) * (1 - out);
+	const br = interpolate(frame, [2, (2) + (6)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - out);
 	const len = 46;
 	const corner = (k: 'tl' | 'tr' | 'bl' | 'br'): React.CSSProperties => {
 		const base: React.CSSProperties = {position: 'absolute', width: len, height: len, borderColor: CYAN, borderStyle: 'solid', borderWidth: 0, filter: `drop-shadow(0 0 8px ${CYAN})`, opacity: br};
@@ -285,59 +285,59 @@ export const IntroScene: React.FC<{variant: Variant; tall: boolean; audio?: stri
 
 	if (variant === 'glitch') {
 		appear = frame < 5 ? 0 : frame < 9 ? (frame % 2 ? 1 : 0.35) : 1;
-		const k = prog(frame, 9, 12, E.out); // 0..1 settle
+		const k = interpolate(frame, [9, (9) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}); // 0..1 settle
 		scale = lerp(1.1, 1, k);
-		const decay = 1 - prog(frame, 5, 15, E.out);
+		const decay = 1 - interpolate(frame, [5, (5) + (15)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 		split = 22 * decay * (frame >= 5 ? 1 : 0);
 		slice = 60 * decay * (frame >= 5 ? 1 : 0);
 		flash = 0.3 * bump(frame, 9, 4);
-		sweep = -0.3 + 1.6 * prog(frame, 22, 12, E.inOutSoft);
+		sweep = -0.3 + 1.6 * interpolate(frame, [22, (22) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft});
 		const stutter = frame >= 38 && frame <= 39 ? 1 : 0;
 		split += 14 * stutter;
 		slice += 26 * stutter;
 	} else if (variant === 'lockon') {
-		lock = prog(frame, 0, 14, E.out);
+		lock = interpolate(frame, [0, (0) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 		appear = frame < 14 ? 0 : 1;
-		const k = prog(frame, 14, 11, E.out);
+		const k = interpolate(frame, [14, (14) + (11)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 		scale = lerp(1.38, 1, k);
-		blur = lerp(16, 0, prog(frame, 14, 8, E.out));
-		const decay = 1 - prog(frame, 14, 10, E.out);
+		blur = lerp(16, 0, interpolate(frame, [14, (14) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
+		const decay = 1 - interpolate(frame, [14, (14) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 		split = frame >= 14 ? 16 * decay : 0;
 		flash = 0.4 * bump(frame, 14, 5);
-		ring = prog(frame, 14, 14, E.out);
-		sweep = -0.3 + 1.6 * prog(frame, 25, 11, E.inOutSoft);
+		ring = interpolate(frame, [14, (14) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+		sweep = -0.3 + 1.6 * interpolate(frame, [25, (25) + (11)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft});
 	} else if (variant === 'launch') {
-		reveal = prog(frame, 6, 20, E.inOutSoft);
+		reveal = interpolate(frame, [6, (6) + (20)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft});
 		appear = frame < 6 ? 0 : 1;
-		dy = lerp(60, 0, prog(frame, 6, 22, E.out));
+		dy = lerp(60, 0, interpolate(frame, [6, (6) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
 		streaks = bump(frame, 16, 22);
 		const pop = frame >= 26 && frame <= 30 ? 1 : 0;
 		split = 12 * pop * (1 - (frame - 26) / 5);
 		slice = 18 * pop;
 		flash = 0.25 * bump(frame, 26, 4);
-		sweep = -0.3 + 1.6 * prog(frame, 29, 10, E.inOutSoft);
+		sweep = -0.3 + 1.6 * interpolate(frame, [29, (29) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft});
 	} else if (variant === 'scan') {
-		scan = prog(frame, 4, 18, E.inOutSoft);
+		scan = interpolate(frame, [4, (4) + (18)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft});
 		appear = 1;
 		revealX = frame >= 22 ? 1 : scan;
 		flash = 0.3 * bump(frame, 22, 4);
-		const d = frame >= 22 ? 1 - prog(frame, 22, 6) : 0;
+		const d = frame >= 22 ? 1 - interpolate(frame, [22, (22) + (6)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) : 0;
 		split = 10 * d;
 		slice = 20 * d;
-		sweep = -0.3 + 1.6 * prog(frame, 27, 11, E.inOutSoft);
+		sweep = -0.3 + 1.6 * interpolate(frame, [27, (27) + (11)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft});
 	} else if (variant === 'pixel') {
 		pixel = frame < 3 ? 0 : frame < 5 ? 1 : frame < 8 ? 2 : frame < 11 ? 3 : frame < 14 ? 4 : 0;
 		appear = frame < 3 ? 0 : frame < 14 ? (frame % 3 === 0 ? 0.6 : 1) : 1;
 		flash = 0.35 * bump(frame, 14, 4);
-		split = frame >= 14 ? 14 * (1 - prog(frame, 14, 8)) : 0;
-		scale = frame >= 14 ? lerp(1.06, 1, prog(frame, 14, 8, E.out)) : 1;
-		sweep = -0.3 + 1.6 * prog(frame, 24, 11, E.inOutSoft);
+		split = frame >= 14 ? 14 * (1 - interpolate(frame, [14, (14) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})) : 0;
+		scale = frame >= 14 ? lerp(1.06, 1, interpolate(frame, [14, (14) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})) : 1;
+		sweep = -0.3 + 1.6 * interpolate(frame, [24, (24) + (11)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft});
 	} else if (variant === 'matrix') {
-		rain = prog(frame, 0, 20, E.inOutSoft);
+		rain = interpolate(frame, [0, (0) + (20)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft});
 		appear = 1;
 		flash = 0.3 * bump(frame, 20, 4);
-		split = frame >= 20 ? 12 * (1 - prog(frame, 20, 6)) : 0;
-		sweep = -0.3 + 1.6 * prog(frame, 28, 10, E.inOutSoft);
+		split = frame >= 20 ? 12 * (1 - interpolate(frame, [20, (20) + (6)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})) : 0;
+		sweep = -0.3 + 1.6 * interpolate(frame, [28, (28) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft});
 	} else if (variant === 'neon') {
 		const lit = frame >= NEON_ON.length ? 1 : NEON_ON[frame];
 		appear = Math.max(0.04, lit);
@@ -345,11 +345,11 @@ export const IntroScene: React.FC<{variant: Variant; tall: boolean; audio?: stri
 		neon = frame >= 24 ? 1 + 0.9 * surge : 0.15 + 0.6 * lit;
 		flash = 0.16 * bump(frame, 24, 4);
 		scale = 1 + 0.03 * surge;
-		sweep = -0.3 + 1.6 * prog(frame, 29, 10, E.inOutSoft);
+		sweep = -0.3 + 1.6 * interpolate(frame, [29, (29) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft});
 	} else if (variant === 'slam') {
-		const k = prog(frame, 5, 6, E.in);
+		const k = interpolate(frame, [5, (5) + (6)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in});
 		scale = frame < 5 ? 3.6 : lerp(3.6, 1, k);
-		appear = prog(frame, 4, 3);
+		appear = interpolate(frame, [4, (4) + (3)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 		blur = frame < 11 ? lerp(24, 0, k) : 0;
 		const impact = frame >= 11 ? frame - 11 : -1;
 		if (impact >= 0 && impact < 10) {
@@ -357,32 +357,32 @@ export const IntroScene: React.FC<{variant: Variant; tall: boolean; audio?: stri
 			shakeY = (rand(frame * 5.7 + 2) - 0.5) * 2 * 18 * (1 - impact / 10);
 		}
 		flash = 0.55 * bump(frame, 11, 5);
-		ring = prog(frame, 11, 14, E.out);
-		split = impact >= 0 ? 20 * (1 - prog(frame, 11, 10)) : 0;
+		ring = interpolate(frame, [11, (11) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+		split = impact >= 0 ? 20 * (1 - interpolate(frame, [11, (11) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})) : 0;
 		slice = impact >= 0 && impact < 4 ? 30 : 0;
 		streaks = bump(frame, 14, 20);
-		sweep = -0.3 + 1.6 * prog(frame, 26, 11, E.inOutSoft);
+		sweep = -0.3 + 1.6 * interpolate(frame, [26, (26) + (11)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft});
 	} else if (variant === 'warp') {
-		warp = prog(frame, 0, 15, E.in);
-		warpVis = frame < 15 ? 1 : 1 - prog(frame, 15, 8);
-		const k = prog(frame, 9, 8, E.out);
-		scale = frame < 9 ? 0.25 : frame < 17 ? lerp(0.25, 1.06, k) : lerp(1.06, 1, prog(frame, 17, 7, E.out));
-		appear = prog(frame, 9, 3);
+		warp = interpolate(frame, [0, (0) + (15)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in});
+		warpVis = frame < 15 ? 1 : 1 - interpolate(frame, [15, (15) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+		const k = interpolate(frame, [9, (9) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+		scale = frame < 9 ? 0.25 : frame < 17 ? lerp(0.25, 1.06, k) : lerp(1.06, 1, interpolate(frame, [17, (17) + (7)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
+		appear = interpolate(frame, [9, (9) + (3)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 		blur = frame < 17 ? lerp(18, 0, k) : 0;
 		flash = 0.5 * bump(frame, 15, 4);
-		ring = prog(frame, 15, 14, E.out);
-		split = frame >= 15 ? 14 * (1 - prog(frame, 15, 8)) : 0;
-		sweep = -0.3 + 1.6 * prog(frame, 26, 11, E.inOutSoft);
+		ring = interpolate(frame, [15, (15) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+		split = frame >= 15 ? 14 * (1 - interpolate(frame, [15, (15) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})) : 0;
+		sweep = -0.3 + 1.6 * interpolate(frame, [26, (26) + (11)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft});
 	} else {
 		// minimal (36 frames)
-		const k = prog(frame, 0, 10, E.out);
+		const k = interpolate(frame, [0, (0) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 		appear = k;
 		scale = lerp(0.94, 1, k);
 		blur = lerp(10, 0, k);
-		sweep = -0.3 + 1.6 * prog(frame, 10, 14, E.inOutSoft);
+		sweep = -0.3 + 1.6 * interpolate(frame, [10, (10) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft});
 	}
 	const total = introFrames(variant);
-	const outP = prog(frame, total - 7, 7, E.in);
+	const outP = interpolate(frame, [total - 7, (total - 7) + (7)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in});
 	const pulse = 0.55 + 0.45 * bump(frame, HIT[variant], 22) + 0.15 * Math.sin(frame / 5);
 	const sc = scale * (1 + 0.05 * outP);
 	const scanOp = 0.16 + 0.35 * (variant === 'glitch' ? bump(frame, 6, 10) : 0) + 0.2 * bump(frame, 0, 6);
@@ -395,7 +395,7 @@ export const IntroScene: React.FC<{variant: Variant; tall: boolean; audio?: stri
 			<ChannelFilters />
 			<Backdrop frame={frame} flash={flash} pulse={clamp(pulse * (variant === 'neon' ? Math.min(1, neon) : appear) + 0.25)} />
 
-			{lock > -1 && <Crosshair cx={cx} cy={cy} r={Math.min(lw, lh) * 0.5} t={lock} out={prog(frame, 14, 6)} />}
+			{lock > -1 && <Crosshair cx={cx} cy={cy} r={Math.min(lw, lh) * 0.5} t={lock} out={interpolate(frame, [14, (14) + (6)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})} />}
 			{warp > -1 && warpVis > 0 && <WarpStreaks cx={cx} cy={cy} t={warp} vis={warpVis} />}
 			{ring > 0 && ring < 1 && (
 				<div style={{position: 'absolute', left: cx - lw * 0.5 * (0.6 + 1.2 * ring), top: cy - lw * 0.5 * (0.6 + 1.2 * ring), width: lw * (0.6 + 1.2 * ring), height: lw * (0.6 + 1.2 * ring), borderRadius: '50%', border: `${4 - 3 * ring}px solid rgba(160,230,255,${0.8 * (1 - ring)})`, boxShadow: `0 0 40px rgba(95,227,255,${0.6 * (1 - ring)})`}} />
@@ -434,13 +434,13 @@ export const IntroScene: React.FC<{variant: Variant; tall: boolean; audio?: stri
 				{variant === 'matrix' && rain < 1 ? <RainLogo w={lw} h={lh} progress={rain} frame={frame} /> : <Logo w={lw} h={lh} src={logoSrc} split={split} slice={slice} seed={seed} reveal={reveal} revealX={revealX} sweep={sweep} />}
 			</div>
 
-			{variant === 'scan' && <ScanUI cx={cx} cy={cy} lw={lw} lh={lh} p={scan} frame={frame} tall={tall} out={prog(frame, total - 10, 7)} />}
+			{variant === 'scan' && <ScanUI cx={cx} cy={cy} lw={lw} lh={lh} p={scan} frame={frame} tall={tall} out={interpolate(frame, [total - 10, (total - 10) + (7)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})} />}
 			{variant === 'launch' && reveal > 0 && reveal < 1 && (
 				<div style={{position: 'absolute', left: cx - lw * 0.55, width: lw * 1.1, top: cy + lh / 2 + dy - reveal * lh - 3, height: 6, background: `linear-gradient(90deg, transparent, ${CYAN}, #fff, ${PINK}, transparent)`, filter: `drop-shadow(0 0 18px ${CYAN})`, opacity: 0.95}} />
 			)}
 			<Scanlines opacity={scanOp} />
 			{/* tiny HUD tag so the frame never feels empty */}
-			<div style={{position: 'absolute', left: 0, right: 0, bottom: tall ? 150 : 56, textAlign: 'center', fontFamily: FONT.mono, fontSize: tall ? 22 : 17, letterSpacing: '0.34em', color: C.dim, opacity: 0.8 * prog(frame, 20, 8) * (1 - outP)}}>
+			<div style={{position: 'absolute', left: 0, right: 0, bottom: tall ? 150 : 56, textAlign: 'center', fontFamily: FONT.mono, fontSize: tall ? 22 : 17, letterSpacing: '0.34em', color: C.dim, opacity: 0.8 * interpolate(frame, [20, (20) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - outP)}}>
 				ROCKETMOD.ORG
 			</div>
 		</AbsoluteFill>

@@ -1,7 +1,7 @@
 import React from 'react';
-import {useCurrentFrame, useVideoConfig} from 'remotion';
+import {interpolate, useCurrentFrame, useVideoConfig} from 'remotion';
 import {C, FONT} from '../theme';
-import {E, prog, springIn} from '../lib/anim';
+import {E, springIn} from '../lib/anim';
 
 export type TitleLine = {
 	text: string;
@@ -45,7 +45,7 @@ export const FeatureTitle: React.FC<Props> = ({
 }) => {
 	const frame = useCurrentFrame();
 	const {fps} = useVideoConfig();
-	const out = exitAt === undefined ? 0 : prog(frame, exitAt, exitDur, E.in);
+	const out = exitAt === undefined ? 0 : interpolate(frame, [exitAt, (exitAt) + (exitDur)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in});
 	const left = align === 'center' ? x - width / 2 : align === 'right' ? x - width : x;
 	return (
 		<div
@@ -62,7 +62,7 @@ export const FeatureTitle: React.FC<Props> = ({
 		>
 			{lines.map((l, i) => {
 				const p = springIn(frame, fps, delay + i * stagger, {damping: 20, stiffness: 150, mass: 1});
-				const vis = prog(frame, delay + i * stagger, 10, E.outSoft);
+				const vis = interpolate(frame, [delay + i * stagger, (delay + i * stagger) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.outSoft});
 				const tracking = (l.tracking ?? 0) + (1 - Math.min(1, p)) * 0.14;
 				return (
 					// glow lives OUTSIDE the clipping wrapper so its edges are never cut

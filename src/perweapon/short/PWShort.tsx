@@ -1,9 +1,9 @@
 import React from 'react';
-import {AbsoluteFill, Audio, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Audio, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import tlData from './timeline.json';
 import subs from '../../subtitles/pwshort.json';
 import {C, FONT} from '../../theme';
-import {E, clamp, prog} from '../../lib/anim';
+import {E, clamp} from '../../lib/anim';
 import {K, POSES, Pose, ScreenEvent, cronusOpacity, sweepAt} from '../../timeline';
 import {FormatProvider, TALL, TLProvider, makeTL} from '../../tl';
 import {Background} from '../../components/Background';
@@ -91,7 +91,7 @@ const TL_SHORT = makeTL({
 	poseKeys,
 	events,
 	pulses,
-	highlight: (f) => clamp(Math.max(0.25 * prog(f, 4, 20), ...pulses.map((p) => Math.max(0, 1 - Math.abs(f - (p + 6)) / 26)))),
+	highlight: (f) => clamp(Math.max(0.25 * interpolate(f, [4, (4) + (20)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}), ...pulses.map((p) => Math.max(0, 1 - Math.abs(f - (p + 6)) / 26)))),
 	sweep: sweepAt,
 	opacity: cronusOpacity,
 });
@@ -99,14 +99,14 @@ const TL_SHORT = makeTL({
 const mono = (extra: React.CSSProperties = {}): React.CSSProperties => ({fontFamily: FONT.mono, letterSpacing: '0.2em', color: C.dim, ...extra});
 
 /** a scene fades in/out around its window (frames) */
-const win = (f: number, [a, b]: readonly [number, number]) => prog(f, fr(a) - 4, 8, E.out) * (1 - prog(f, fr(b) - 4, 8, E.in));
+const win = (f: number, [a, b]: readonly [number, number]) => interpolate(f, [fr(a) - 4, (fr(a) - 4) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - interpolate(f, [fr(b) - 4, (fr(b) - 4) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in}));
 
 // ───────────── 1 · hook ─────────────
 const SceneHook: React.FC<{f: number}> = ({f}) => (
 	<AbsoluteFill style={{opacity: win(f, S.hook)}}>
-		<TextScrim x={540} y={330} rx={760} ry={330} opacity={prog(f, 6, 24)} />
+		<TextScrim x={540} y={330} rx={760} ry={330} opacity={interpolate(f, [6, (6) + (24)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})} />
 		<FeatureTitle x={540} y={130} width={1000} align="center" delay={8} stagger={9} lines={[{text: 'WEAPON DETECT', size: 62, weight: 600, tracking: 0.3, color: C.blueHi, glow: 'rgba(47,139,255,.6)'}, {text: 'PER WEAPON', size: 168, gradient: true, glow: 'rgba(47,139,255,.35)'}]} lineGap={4} />
-		<div style={{position: 'absolute', left: 0, right: 0, top: 470, display: 'flex', justifyContent: 'center', opacity: prog(f, fr(W('s1', 'Every')) - 6, 16), transform: `translateY(${(1 - prog(f, fr(W('s1', 'Every')) - 6, 16)) * 16}px)`}}>
+		<div style={{position: 'absolute', left: 0, right: 0, top: 470, display: 'flex', justifyContent: 'center', opacity: interpolate(f, [fr(W('s1', 'Every')) - 6, (fr(W('s1', 'Every')) - 6) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}), transform: `translateY(${(1 - interpolate(f, [fr(W('s1', 'Every')) - 6, (fr(W('s1', 'Every')) - 6) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})) * 16}px)`}}>
 			<div style={{padding: '12px 30px', borderRadius: 999, background: 'rgba(4,8,14,.72)', border: '1px solid rgba(109,182,255,.28)', fontFamily: FONT.display, fontWeight: 600, fontSize: 30, letterSpacing: '0.16em', color: C.ice, whiteSpace: 'nowrap'}}>
 				EVERY WEAPON <span style={{color: C.blueHi}}>·</span> ITS OWN ANTI-RECOIL
 			</div>
@@ -117,10 +117,10 @@ const SceneHook: React.FC<{f: number}> = ({f}) => (
 // ───────────── 2 · why: two profiles vs one slot per weapon ─────────────
 const SLOTS = ['S1 · AR · MXR-17', 'S2 · SMG · Dravec 45', 'S3 · HG · 1911', 'S4 · AR · AN-94', 'S5 · SMG · RK-9', 'S6 · SMG · MPC-25', 'S7 · AR · Custom 12', '+ 56 MORE'];
 const SceneWhy: React.FC<{f: number}> = ({f}) => {
-	const inA = prog(f, fr(W('s2', 'Other')) - 6, 18, E.out);
-	const litA = prog(f, fr(W('s2', 'profiles')) - 4, 14);
-	const dimA = prog(f, fr(W('s2', 'Per')) - 4, 18, E.inOut);
-	const inB = prog(f, fr(W('s2', 'Per')) - 4, 18, E.out);
+	const inA = interpolate(f, [fr(W('s2', 'Other')) - 6, (fr(W('s2', 'Other')) - 6) + (18)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const litA = interpolate(f, [fr(W('s2', 'profiles')) - 4, (fr(W('s2', 'profiles')) - 4) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const dimA = interpolate(f, [fr(W('s2', 'Per')) - 4, (fr(W('s2', 'Per')) - 4) + (18)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOut});
+	const inB = interpolate(f, [fr(W('s2', 'Per')) - 4, (fr(W('s2', 'Per')) - 4) + (18)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	const t0 = fr(W('s2', 'gives'));
 	return (
 		<AbsoluteFill style={{opacity: win(f, S.why)}}>
@@ -137,7 +137,7 @@ const SceneWhy: React.FC<{f: number}> = ({f}) => {
 			<div style={{position: 'absolute', inset: 0, ...rise(inB, 0)}}>
 				<div style={mono({position: 'absolute', left: 50, top: 476, fontSize: 24, color: C.blueHi})}>PER WEAPON · 64 SLOTS</div>
 				{SLOTS.map((s, i) => {
-					const e = prog(f, t0 + i * 4, 16, E.out);
+					const e = interpolate(f, [t0 + i * 4, (t0 + i * 4) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 					const col = i % 2;
 					const row = Math.floor(i / 2);
 					const more = i === SLOTS.length - 1;
@@ -169,10 +169,10 @@ const SceneSetup: React.FC<{f: number}> = ({f}) => {
 		{at: a, done: b, body: (
 			<div style={{display: 'flex', alignItems: 'center', gap: 16}}>
 				<span style={mono({fontSize: 24})}>HOLD</span>
-				<KeyCap label="L2" pressed={prog(f, a + 4, 8) * (1 - prog(f, fr(W('s3', 'release')), 6))} size={32} />
+				<KeyCap label="L2" pressed={interpolate(f, [a + 4, (a + 4) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - interpolate(f, [fr(W('s3', 'release')), (fr(W('s3', 'release'))) + (6)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}))} size={32} />
 				<Plus size={28} />
 				<span style={mono({fontSize: 24})}>RELEASE</span>
-				<KeyCap label="OPTIONS" pressed={prog(f, fr(W('s3', 'Options')), 8) * (1 - prog(f, b - 6, 8))} size={30} />
+				<KeyCap label="OPTIONS" pressed={interpolate(f, [fr(W('s3', 'Options')), (fr(W('s3', 'Options'))) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - interpolate(f, [b - 6, (b - 6) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}))} size={30} />
 			</div>
 		)},
 		{at: b, done: c, body: (
@@ -191,8 +191,8 @@ const SceneSetup: React.FC<{f: number}> = ({f}) => {
 		<AbsoluteFill style={{opacity: win(f, S.setup)}}>
 			<FeatureTitle x={540} y={130} width={1000} align="center" delay={fr(S.setup[0]) + 4} lines={[{text: 'TURN IT ON', size: 116, gradient: true, glow: 'rgba(47,139,255,.4)'}]} />
 			{steps.map((s, i) => {
-				const e = prog(f, s.at - 6, 18, E.out);
-				const done = prog(f, s.done, 12);
+				const e = interpolate(f, [s.at - 6, (s.at - 6) + (18)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+				const done = interpolate(f, [s.done, (s.done) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 				return (
 					<div key={i} style={{position: 'absolute', inset: 0, ...rise(e, -60)}}>
 						<Glass x={40} y={330 + i * 190} w={1000} h={150} lit={0.15 + 0.5 * e * (1 - done) + 0.1 * done}>
@@ -214,8 +214,8 @@ const SceneFire: React.FC<{f: number}> = ({f}) => {
 	const fire = fr(W('s4', 'Fire'));
 	const claim = fr(W('s4', 'claims'));
 	const auto = fr(W('s4', 'automatically'));
-	const bars = prog(f, fire, 26, E.out);
-	const tile = prog(f, claim - 4, 18, E.out);
+	const bars = interpolate(f, [fire, (fire) + (26)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const tile = interpolate(f, [claim - 4, (claim - 4) + (18)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	const pulse = Math.max(0, 1 - Math.abs(f - (claim + 8)) / 18);
 	return (
 		<AbsoluteFill style={{opacity: win(f, S.fire)}}>
@@ -226,7 +226,7 @@ const SceneFire: React.FC<{f: number}> = ({f}) => {
 			</div>
 			<div style={{position: 'absolute', left: 0, right: 0, top: 690, textAlign: 'center', fontSize: 60, color: C.blueHi, opacity: tile, textShadow: '0 0 24px rgba(47,139,255,.8)'}}>↓</div>
 			<div style={{position: 'absolute', inset: 0, ...rise(tile, 0)}}>
-				<Glass x={60} y={790} w={960} h={200} lit={0.4 + 0.5 * pulse + 0.15 * prog(f, auto, 14)}>
+				<Glass x={60} y={790} w={960} h={200} lit={0.4 + 0.5 * pulse + 0.15 * interpolate(f, [auto, (auto) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})}>
 					<div style={{display: 'flex', alignItems: 'center', gap: 28, height: '100%', padding: '0 34px'}}>
 						<div style={{fontFamily: FONT.mono, fontWeight: 700, fontSize: 44, color: C.blueHi}}>S1</div>
 						<div style={{flex: 1}}>
@@ -246,19 +246,19 @@ const SceneTune: React.FC<{f: number}> = ({f}) => {
 	const up = fr(W('s5', 'Up'));
 	const down = fr(W('s5', 'Down'));
 	const perm = fr(W('s5', 'permanent'));
-	const pu = prog(f, up, 8) * (1 - prog(f, up + 16, 8));
-	const pd = prog(f, down, 8) * (1 - prog(f, down + 16, 8));
-	const level = 0.5 + 0.14 * prog(f, up + 4, 22, E.inOut) - 0.2 * prog(f, down + 4, 22, E.inOut);
-	const vert = 24 + Math.round(prog(f, up + 8, 10)) - Math.round(prog(f, down + 8, 10));
-	const tag = prog(f, perm - 4, 16, E.out);
-	const held = prog(f, fr(W('s5', 'Hold')), 10) * (1 - prog(f, fr(line('s5').end) - 4, 10));
+	const pu = interpolate(f, [up, (up) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - interpolate(f, [up + 16, (up + 16) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
+	const pd = interpolate(f, [down, (down) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - interpolate(f, [down + 16, (down + 16) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
+	const level = 0.5 + 0.14 * interpolate(f, [up + 4, (up + 4) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOut}) - 0.2 * interpolate(f, [down + 4, (down + 4) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOut});
+	const vert = 24 + Math.round(interpolate(f, [up + 8, (up + 8) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})) - Math.round(interpolate(f, [down + 8, (down + 8) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
+	const tag = interpolate(f, [perm - 4, (perm - 4) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const held = interpolate(f, [fr(W('s5', 'Hold')), (fr(W('s5', 'Hold'))) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - interpolate(f, [fr(line('s5').end) - 4, (fr(line('s5').end) - 4) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
 	return (
 		<AbsoluteFill style={{opacity: win(f, S.tune)}}>
 			<FeatureTitle x={540} y={120} width={1000} align="center" delay={fr(S.tune[0]) + 4} stagger={10} lines={[{text: 'TOO HIGH?', size: 118, gradient: true, glow: 'rgba(47,139,255,.4)'}, {text: 'TOO LOW?', size: 118, gradient: true, glow: 'rgba(47,139,255,.4)'}]} lineGap={0} />
-			<div style={{position: 'absolute', left: 130, top: 520, opacity: prog(f, fr(S.tune[0]) + 20, 16)}}>
+			<div style={{position: 'absolute', left: 130, top: 520, opacity: interpolate(f, [fr(S.tune[0]) + 20, (fr(S.tune[0]) + 20) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})}}>
 				<Gauge level={level} h={430} w={92} lit={1} />
 			</div>
-			<div style={{position: 'absolute', left: 300, top: 520, opacity: prog(f, fr(S.tune[0]) + 20, 16), display: 'flex', flexDirection: 'column', gap: 26}}>
+			<div style={{position: 'absolute', left: 300, top: 520, opacity: interpolate(f, [fr(S.tune[0]) + 20, (fr(S.tune[0]) + 20) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}), display: 'flex', flexDirection: 'column', gap: 26}}>
 				<div style={{display: 'flex', alignItems: 'center', gap: 16}}>
 					<KeyCap label="L2" pressed={held} size={38} />
 					<Plus size={30} />
@@ -285,10 +285,10 @@ const SceneTune: React.FC<{f: number}> = ({f}) => {
 const SceneEnd: React.FC<{f: number}> = ({f}) => {
 	const guide = fr(W('s6', 'guide'));
 	const brand = fr(line('s7').start);
-	const url = prog(f, guide, 14);
+	const url = interpolate(f, [guide, (guide) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	return (
-		<AbsoluteFill style={{opacity: prog(f, fr(S.end[0]) - 4, 8, E.out)}}>
-			<TextScrim x={540} y={400} rx={760} ry={420} opacity={prog(f, brand - 10, 20)} />
+		<AbsoluteFill style={{opacity: interpolate(f, [fr(S.end[0]) - 4, (fr(S.end[0]) - 4) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})}}>
+			<TextScrim x={540} y={400} rx={760} ry={420} opacity={interpolate(f, [brand - 10, (brand - 10) + (20)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})} />
 			<div style={{position: 'absolute', left: 0, right: 0, top: 560, textAlign: 'center', ...mono({fontSize: 34, color: C.blueHi, opacity: url, transform: `translateY(${(1 - url) * 12}px)`, textShadow: '0 0 20px rgba(47,139,255,.7)'})}}>
 				FULL GUIDE · rocketmod.org
 			</div>
@@ -302,8 +302,8 @@ export const RocketModPerWeaponShort: React.FC = () => {
 	const frame = useCurrentFrame();
 	const total = pwShortFrames();
 	const pose = TL_SHORT.poseAt(frame);
-	const hud = Math.min(1, Math.max(0, (frame - 24) / 30)) * (1 - prog(frame, total - 30, 20));
-	const black = prog(frame, total - 20, 20);
+	const hud = Math.min(1, Math.max(0, (frame - 24) / 30)) * (1 - interpolate(frame, [total - 30, (total - 30) + (20)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
+	const black = interpolate(frame, [total - 20, (total - 20) + (20)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	const brand = fr(line('s7').start);
 	return (
 		<FormatProvider format={TALL}>
@@ -322,7 +322,7 @@ export const RocketModPerWeaponShort: React.FC = () => {
 						<TransitionStreak key={s} frame={frame} at={fr(s) - 2} strength={0.4} />
 					))}
 					<LightBeam frame={frame} from={brand + 10} dur={36} />
-					<Subtitles captions={subs} y={1590} size={52} maxWidth={940} opacity={1 - prog(frame, total - 30, 12)} />
+					<Subtitles captions={subs} y={1590} size={52} maxWidth={940} opacity={1 - interpolate(frame, [total - 30, (total - 30) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})} />
 					<AbsoluteFill style={{background: '#000', opacity: black, pointerEvents: 'none'}} />
 				</AbsoluteFill>
 			</TLProvider>

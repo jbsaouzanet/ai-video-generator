@@ -1,6 +1,6 @@
 import React from 'react';
 import {C, FONT} from '../theme';
-import {E, prog} from '../lib/anim';
+import {E} from '../lib/anim';
 import {FeatureTitle} from '../components/FeatureTitle';
 import {PipelineNode} from '../components/PipelineNode';
 import {SignalLine, elbow} from '../components/SignalLine';
@@ -8,6 +8,7 @@ import {SceneTransition} from '../components/SceneTransition';
 import {SCENES, dur, anchor} from '../timeline';
 import {useTL} from '../tl';
 import {useScene} from '../lib/useScene';
+import {interpolate} from 'remotion';
 
 const NODES = [
 	{label: 'CHANGE WEAPON', hint: 'TRIANGLE'},
@@ -32,12 +33,12 @@ export const Scene4Auto: React.FC = () => {
 	const {gf} = useScene(SCENES.auto.from);
 	const total = dur(SCENES.auto);
 
-	const headerOut = prog(gf, COLLAPSE - 4, 12, E.in);
+	const headerOut = interpolate(gf, [COLLAPSE - 4, (COLLAPSE - 4) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in});
 	const titleIn = 566;
 	const pose = tl.poseAt(gf);
 	const contact = anchor(pose, 'left');
 	const toCronus = elbow(X + NW + 10, Y0 + 3 * STEP + NH / 2, contact.x - 6, contact.y, 0.35);
-	const linkOut = 1 - prog(gf, COLLAPSE, 12, E.in);
+	const linkOut = 1 - interpolate(gf, [COLLAPSE, (COLLAPSE) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in});
 
 	return (
 		<SceneTransition total={total} inFrames={8} outFrames={16} drift={0}>
@@ -54,17 +55,17 @@ export const Scene4Auto: React.FC = () => {
 			{NODES.slice(0, -1).map((_, i) => {
 				const y = Y0 + i * STEP + NH;
 				const d = `M${X + 55} ${y + 2} V${y + STEP - NH - 2}`;
-				const exit = prog(gf, COLLAPSE + i * 3, 16, E.in);
+				const exit = interpolate(gf, [COLLAPSE + i * 3, (COLLAPSE + i * 3) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in});
 				return (
 					<div key={i} style={{opacity: 1 - exit}}>
-						<SignalLine d={d} reveal={prog(gf, ACT(i) - 8, 10)} head={prog(gf, ACT(i) + 4, 14, E.inOutSoft) * 1.4} len={0.4} width={2.5} base={0.35} />
+						<SignalLine d={d} reveal={interpolate(gf, [ACT(i) - 8, (ACT(i) - 8) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})} head={interpolate(gf, [ACT(i) + 4, (ACT(i) + 4) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft}) * 1.4} len={0.4} width={2.5} base={0.35} />
 					</div>
 				);
 			})}
 
 			{NODES.map((n, i) => {
 				const next = i < NODES.length - 1 ? ACT(i + 1) : 9999;
-				const active = prog(gf, ACT(i), 8) * (1 - 0.55 * prog(gf, next, 10));
+				const active = interpolate(gf, [ACT(i), (ACT(i)) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - 0.55 * interpolate(gf, [next, (next) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
 				return (
 					<PipelineNode
 						key={i}
@@ -75,16 +76,16 @@ export const Scene4Auto: React.FC = () => {
 						index={i}
 						label={n.label}
 						hint={n.hint}
-						enter={prog(gf, 462 + i * 7, 22, E.out)}
+						enter={interpolate(gf, [462 + i * 7, (462 + i * 7) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})}
 						active={active}
-						done={prog(gf, ACT(i) + 10, 8)}
-						exit={prog(gf, COLLAPSE + i * 3, 16, E.in)}
+						done={interpolate(gf, [ACT(i) + 10, (ACT(i) + 10) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})}
+						exit={interpolate(gf, [COLLAPSE + i * 3, (COLLAPSE + i * 3) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in})}
 					/>
 				);
 			})}
 
 			<div style={{opacity: linkOut}}>
-				<SignalLine d={toCronus} reveal={prog(gf, ACT(3) - 4, 14)} head={prog(gf, ACT(3) + 2, 22, E.inOutSoft) * 1.18} len={0.14} endNode={prog(gf, ACT(3), 14) > 0.9 ? {x: contact.x - 6, y: contact.y} : null} nodeGlow={prog(gf, 516, 4) * (1 - prog(gf, 528, 14))} />
+				<SignalLine d={toCronus} reveal={interpolate(gf, [ACT(3) - 4, (ACT(3) - 4) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})} head={interpolate(gf, [ACT(3) + 2, (ACT(3) + 2) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft}) * 1.18} len={0.14} endNode={interpolate(gf, [ACT(3), (ACT(3)) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) > 0.9 ? {x: contact.x - 6, y: contact.y} : null} nodeGlow={interpolate(gf, [516, (516) + (4)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - interpolate(gf, [528, (528) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}))} />
 			</div>
 
 			{/* the punchline */}
@@ -108,13 +109,13 @@ export const Scene4Auto: React.FC = () => {
 					position: 'absolute',
 					left: X,
 					top: 250,
-					width: 220 * prog(gf, titleIn + 4, 20, E.out),
+					width: 220 * interpolate(gf, [titleIn + 4, (titleIn + 4) + (20)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}),
 					height: 3,
 					background: `linear-gradient(90deg, ${C.blueHi}, transparent)`,
-					opacity: 1 - prog(gf, total + SCENES.auto.from - 20, 12),
+					opacity: 1 - interpolate(gf, [total + SCENES.auto.from - 20, (total + SCENES.auto.from - 20) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}),
 				}}
 			/>
-			<div style={{position: 'absolute', left: X, top: 216, fontFamily: FONT.mono, fontSize: 20, letterSpacing: '0.3em', color: C.blueHi, opacity: prog(gf, titleIn + 6, 14)}}>
+			<div style={{position: 'absolute', left: X, top: 216, fontFamily: FONT.mono, fontSize: 20, letterSpacing: '0.3em', color: C.blueHi, opacity: interpolate(gf, [titleIn + 6, (titleIn + 6) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})}}>
 				IT JUST WORKS
 			</div>
 		</SceneTransition>

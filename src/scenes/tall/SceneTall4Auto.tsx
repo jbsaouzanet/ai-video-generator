@@ -1,6 +1,6 @@
 import React from 'react';
 import {C, FONT} from '../../theme';
-import {E, prog} from '../../lib/anim';
+import {E} from '../../lib/anim';
 import {FeatureTitle} from '../../components/FeatureTitle';
 import {PipelineNode} from '../../components/PipelineNode';
 import {SignalLine} from '../../components/SignalLine';
@@ -8,6 +8,7 @@ import {SceneTransition} from '../../components/SceneTransition';
 import {SCENES, dur} from '../../timeline';
 import {useTL} from '../../tl';
 import {useScene} from '../../lib/useScene';
+import {interpolate} from 'remotion';
 
 const NODES = [
 	{label: 'CHANGE WEAPON', hint: 'TRIANGLE'},
@@ -31,11 +32,11 @@ export const SceneTall4Auto: React.FC = () => {
 	const {gf} = useScene(SCENES.auto.from);
 	const total = dur(SCENES.auto);
 	const pose = tl.poseAt(gf);
-	const headerOut = prog(gf, COLLAPSE - 4, 12, E.in);
+	const headerOut = interpolate(gf, [COLLAPSE - 4, (COLLAPSE - 4) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in});
 	const titleIn = 566;
 	const linkTop = Y0 + 4 * STEP + NH + 10;
 	const linkPath = `M540 ${linkTop} V${pose.y - pose.h / 2 + 30}`;
-	const linkOut = 1 - prog(gf, COLLAPSE, 12, E.in);
+	const linkOut = 1 - interpolate(gf, [COLLAPSE, (COLLAPSE) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in});
 
 	return (
 		<SceneTransition total={total} inFrames={8} outFrames={16} drift={0}>
@@ -46,10 +47,10 @@ export const SceneTall4Auto: React.FC = () => {
 			{NODES.slice(0, -1).map((_, i) => {
 				const y = Y0 + i * STEP + NH;
 				const d = `M${X + 55} ${y + 2} V${y + STEP - NH - 2}`;
-				const exit = prog(gf, COLLAPSE + i * 3, 16, E.in);
+				const exit = interpolate(gf, [COLLAPSE + i * 3, (COLLAPSE + i * 3) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in});
 				return (
 					<div key={i} style={{opacity: 1 - exit}}>
-						<SignalLine d={d} reveal={prog(gf, ACT(i) - 8, 10)} head={prog(gf, ACT(i) + 4, 14, E.inOutSoft) * 1.4} len={0.4} width={2.5} base={0.35} />
+						<SignalLine d={d} reveal={interpolate(gf, [ACT(i) - 8, (ACT(i) - 8) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})} head={interpolate(gf, [ACT(i) + 4, (ACT(i) + 4) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft}) * 1.4} len={0.4} width={2.5} base={0.35} />
 					</div>
 				);
 			})}
@@ -66,20 +67,20 @@ export const SceneTall4Auto: React.FC = () => {
 						index={i}
 						label={n.label}
 						hint={n.hint}
-						enter={prog(gf, 462 + i * 7, 22, E.out)}
-						active={prog(gf, ACT(i), 8) * (1 - 0.55 * prog(gf, next, 10))}
-						done={prog(gf, ACT(i) + 10, 8)}
-						exit={prog(gf, COLLAPSE + i * 3, 16, E.in)}
+						enter={interpolate(gf, [462 + i * 7, (462 + i * 7) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})}
+						active={interpolate(gf, [ACT(i), (ACT(i)) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - 0.55 * interpolate(gf, [next, (next) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}))}
+						done={interpolate(gf, [ACT(i) + 10, (ACT(i) + 10) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})}
+						exit={interpolate(gf, [COLLAPSE + i * 3, (COLLAPSE + i * 3) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in})}
 					/>
 				);
 			})}
 
 			<div style={{opacity: linkOut}}>
-				<SignalLine d={linkPath} reveal={prog(gf, ACT(3) - 4, 14)} head={prog(gf, ACT(3) + 2, 22, E.inOutSoft) * 1.18} len={0.14} nodeGlow={prog(gf, 516, 4) * (1 - prog(gf, 528, 14))} />
+				<SignalLine d={linkPath} reveal={interpolate(gf, [ACT(3) - 4, (ACT(3) - 4) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})} head={interpolate(gf, [ACT(3) + 2, (ACT(3) + 2) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft}) * 1.18} len={0.14} nodeGlow={interpolate(gf, [516, (516) + (4)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - interpolate(gf, [528, (528) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}))} />
 			</div>
 
 			{/* the punchline */}
-			<div style={{position: 'absolute', left: 0, right: 0, top: 250, textAlign: 'center', fontFamily: FONT.mono, fontSize: 24, letterSpacing: '0.3em', color: C.blueHi, opacity: prog(gf, titleIn + 6, 14) * (1 - prog(gf, total + SCENES.auto.from - 20, 12))}}>
+			<div style={{position: 'absolute', left: 0, right: 0, top: 250, textAlign: 'center', fontFamily: FONT.mono, fontSize: 24, letterSpacing: '0.3em', color: C.blueHi, opacity: interpolate(gf, [titleIn + 6, (titleIn + 6) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - interpolate(gf, [total + SCENES.auto.from - 20, (total + SCENES.auto.from - 20) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}))}}>
 				IT JUST WORKS
 			</div>
 			<FeatureTitle

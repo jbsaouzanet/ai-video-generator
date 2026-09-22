@@ -1,18 +1,19 @@
 import React from 'react';
 import {C, FONT} from '../theme';
-import {E, prog} from '../lib/anim';
+import {E} from '../lib/anim';
 import {FeatureTitle} from '../components/FeatureTitle';
 import {DocumentationPanel} from '../components/DocumentationPanel';
 import {SceneTransition} from '../components/SceneTransition';
 import {SCENES, dur} from '../timeline';
 import {useScene} from '../lib/useScene';
+import {interpolate} from 'remotion';
 
 /** 21.2–27.4 s. The written guide, as a live browser view. */
 export const Scene5Docs: React.FC = () => {
 	const {lf} = useScene(SCENES.docs.from);
 	const total = dur(SCENES.docs);
-	const enter = prog(lf, 4, 30, E.out);
-	const chips = prog(lf, 44, 16);
+	const enter = interpolate(lf, [4, (4) + (30)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const chips = interpolate(lf, [44, (44) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	return (
 		<SceneTransition total={total} inFrames={4} outFrames={16} drift={0}>
 			<DocumentationPanel lf={lf} x={96} y={148} enter={enter} exit={0} />

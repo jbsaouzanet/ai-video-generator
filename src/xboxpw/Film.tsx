@@ -1,9 +1,9 @@
 import React from 'react';
-import {AbsoluteFill, Audio, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Audio, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import tlData from './timeline.json';
 import subs from '../subtitles/pw-xbox.json';
 import {C, FONT} from '../theme';
-import {E, clamp, prog} from '../lib/anim';
+import {E, clamp} from '../lib/anim';
 import {beatWindow, filmFrames, fr, VoiceLine, wordAt} from '../lib/beats';
 import {PLATFORMS} from '../config/platforms';
 import {K, Pose, ScreenEvent, cronusOpacity, sweepAt} from '../timeline';
@@ -92,7 +92,7 @@ const TL_XBOX = makeTL({
 	poseKeys,
 	events,
 	pulses,
-	highlight: (f) => clamp(Math.max(0.25 * prog(f, 4, 20), ...pulses.map((p) => Math.max(0, 1 - Math.abs(f - (p + 6)) / 26)))),
+	highlight: (f) => clamp(Math.max(0.25 * interpolate(f, [4, (4) + (20)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}), ...pulses.map((p) => Math.max(0, 1 - Math.abs(f - (p + 6)) / 26)))),
 	sweep: sweepAt,
 	opacity: cronusOpacity,
 });
@@ -104,7 +104,7 @@ const win = (f: number, from: number, to: number | null) => beatWindow(f, from, 
 const SceneHook: React.FC<{f: number}> = ({f}) => (
 	<AbsoluteFill style={{opacity: win(f, scene.hook, scene.why)}}>
 		<TitleBlock x={960} y={110} width={1700} align="center" kicker="CRONUS ZEN" lines={[{text: 'WEAPON DETECT', size: 72, weight: 600, tracking: 0.28, color: C.blueHi, glow: 'rgba(47,139,255,.6)'}, {text: 'PER WEAPON, XBOX', size: 150, gradient: true, glow: 'rgba(47,139,255,.35)'}]} delayF={20} />
-		<div style={{position: 'absolute', left: 0, right: 0, top: 470, display: 'flex', justifyContent: 'center', opacity: prog(f, fr(W('p3', 'vibration')) - 6, 16), transform: `translateY(${(1 - prog(f, fr(W('p3', 'vibration')) - 6, 16)) * 16}px)`}}>
+		<div style={{position: 'absolute', left: 0, right: 0, top: 470, display: 'flex', justifyContent: 'center', opacity: interpolate(f, [fr(W('p3', 'vibration')) - 6, (fr(W('p3', 'vibration')) - 6) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}), transform: `translateY(${(1 - interpolate(f, [fr(W('p3', 'vibration')) - 6, (fr(W('p3', 'vibration')) - 6) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})) * 16}px)`}}>
 			<Tag hot size={30}>VIBRATION, NOT A PS5 TRIGGER</Tag>
 		</div>
 	</AbsoluteFill>
@@ -143,7 +143,7 @@ const SceneSetup: React.FC<{f: number}> = ({f}) => (
 const SceneFirst: React.FC<{f: number}> = ({f}) => (
 	<AbsoluteFill style={{opacity: win(f, scene.first, scene.teach)}}>
 		<TitleBlock x={960} y={120} width={1500} align="center" lines={[{text: 'NOTHING TAUGHT YET', size: 100, gradient: true, glow: 'rgba(47,139,255,.4)'}]} delayF={fr(scene.first) + 4} />
-		<div style={{position: 'absolute', left: 0, right: 0, top: 700, display: 'flex', justifyContent: 'center', opacity: prog(f, fr(W('f2', 'used')) - 6, 16), transform: `translateY(${(1 - prog(f, fr(W('f2', 'used')) - 6, 16)) * 16}px)`}}>
+		<div style={{position: 'absolute', left: 0, right: 0, top: 700, display: 'flex', justifyContent: 'center', opacity: interpolate(f, [fr(W('f2', 'used')) - 6, (fr(W('f2', 'used')) - 6) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}), transform: `translateY(${(1 - interpolate(f, [fr(W('f2', 'used')) - 6, (fr(W('f2', 'used')) - 6) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})) * 16}px)`}}>
 			<Tag size={30}>PROFILE'S MANUAL SETTING USED MEANWHILE</Tag>
 		</div>
 	</AbsoluteFill>
@@ -173,7 +173,7 @@ const SceneTeach: React.FC<{f: number}> = ({f}) => (
 
 // ── 6 · live tune ──
 const SceneTune: React.FC<{f: number}> = ({f}) => {
-	const level = 0.5 + 0.14 * prog(f, fr(W('u1', 'Up')) + 4, 22, E.inOut) - 0.2 * prog(f, fr(W('u1', 'Down')) + 4, 22, E.inOut);
+	const level = 0.5 + 0.14 * interpolate(f, [fr(W('u1', 'Up')) + 4, (fr(W('u1', 'Up')) + 4) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOut}) - 0.2 * interpolate(f, [fr(W('u1', 'Down')) + 4, (fr(W('u1', 'Down')) + 4) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOut});
 	return (
 		<AbsoluteFill style={{opacity: win(f, scene.tune, scene.ambig)}}>
 			<TitleBlock x={960} y={100} width={1500} align="center" lines={[{text: 'LIVE TUNING', size: 116, gradient: true, glow: 'rgba(47,139,255,.4)'}]} delayF={fr(scene.tune) + 4} />
@@ -195,7 +195,7 @@ const SceneAmbig: React.FC<{f: number}> = ({f}) => (
 
 // ── 8 · tolerance (xbox-only) ──
 const ToleranceMeter: React.FC<{f: number; value: number; enterAtF: number}> = ({f, value, enterAtF}) => {
-	const e = prog(f, enterAtF, 18);
+	const e = interpolate(f, [enterAtF, (enterAtF) + (18)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	const pct = clamp((value - 1) / 19);
 	return (
 		<div style={{position: 'absolute', left: 260, top: 470, width: 1400, opacity: e}}>
@@ -211,17 +211,17 @@ const ToleranceMeter: React.FC<{f: number; value: number; enterAtF: number}> = (
 	);
 };
 const SceneTolerance: React.FC<{f: number}> = ({f}) => {
-	const val = 5 + Math.round(2 * prog(f, fr(W('to4', 'tight')) - 30, 20));
+	const val = 5 + Math.round(2 * interpolate(f, [fr(W('to4', 'tight')) - 30, (fr(W('to4', 'tight')) - 30) + (20)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
 	return (
 		<AbsoluteFill style={{opacity: win(f, scene.tolerance, scene.outro)}}>
 			<TitleBlock x={960} y={120} width={1500} align="center" kicker="XBOX-ONLY" lines={[{text: 'TOLERANCE', size: 120, gradient: true, glow: 'rgba(47,139,255,.4)'}]} delayF={fr(scene.tolerance) + 4} />
 			<ToleranceMeter f={f} value={val} enterAtF={fr(scene.tolerance) + 24} />
-			<div style={{position: 'absolute', left: 260, top: 600, width: 620, opacity: prog(f, fr(W('to2', 'tight')) - 6, 16)}}>
+			<div style={{position: 'absolute', left: 260, top: 600, width: 620, opacity: interpolate(f, [fr(W('to2', 'tight')) - 6, (fr(W('to2', 'tight')) - 6) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})}}>
 				<Glass x={0} y={0} w={620} h={110} lit={0.2}>
 					<div style={{padding: '16px 26px', fontFamily: FONT.body, fontSize: 26, color: C.ice, lineHeight: 1.3}}>Too tight: just not recognized — harmless.</div>
 				</Glass>
 			</div>
-			<div style={{position: 'absolute', left: 1040, top: 600, width: 620, opacity: prog(f, fr(W('to3', 'loose')) - 6, 16)}}>
+			<div style={{position: 'absolute', left: 1040, top: 600, width: 620, opacity: interpolate(f, [fr(W('to3', 'loose')) - 6, (fr(W('to3', 'loose')) - 6) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})}}>
 				<Glass x={0} y={0} w={620} h={110} lit={0.2} style={{borderColor: 'rgba(255,107,122,.5)'}}>
 					<div style={{padding: '16px 26px', fontFamily: FONT.body, fontSize: 26, color: '#ffb3ba', lineHeight: 1.3}}>Too loose: applies the WRONG weapon's setting.</div>
 				</Glass>
@@ -234,7 +234,7 @@ const SceneTolerance: React.FC<{f: number}> = ({f}) => {
 const SceneOutro: React.FC<{f: number}> = ({f}) => (
 	<AbsoluteFill style={{opacity: win(f, scene.outro, scene.end)}}>
 		<TitleBlock x={960} y={130} width={1500} align="center" lines={[{text: `${XBOX.slots} PERSONAL SLOTS`, size: 110, gradient: true, glow: 'rgba(47,139,255,.4)'}]} delayF={fr(scene.outro) + 4} />
-		<div style={{position: 'absolute', left: 0, right: 0, top: 340, display: 'flex', justifyContent: 'center', opacity: prog(f, fr(W('e1', 'reflash')) - 6, 16)}}>
+		<div style={{position: 'absolute', left: 0, right: 0, top: 340, display: 'flex', justifyContent: 'center', opacity: interpolate(f, [fr(W('e1', 'reflash')) - 6, (fr(W('e1', 'reflash')) - 6) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})}}>
 			<Tag size={28}>SURVIVES A POWER OFF · A REFLASH</Tag>
 		</div>
 		<ChipFlowBlock x={460} y={560} frame={f} font={40} chips={[
@@ -248,8 +248,8 @@ export const XboxPerWeaponFilm: React.FC = () => {
 	const frame = useCurrentFrame();
 	const total = xboxPwFrames();
 	const pose = TL_XBOX.poseAt(frame);
-	const hud = Math.min(1, Math.max(0, (frame - 24) / 30)) * (1 - prog(frame, total - 40, 20));
-	const black = prog(frame, total - 28, 28);
+	const hud = Math.min(1, Math.max(0, (frame - 24) / 30)) * (1 - interpolate(frame, [total - 40, (total - 40) + (20)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
+	const black = interpolate(frame, [total - 28, (total - 28) + (28)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	const beamAt = fr(LINES.find((l) => l.id === 'n2')!.start) - 6;
 	return (
 		<FormatProvider format={WIDE}>
@@ -272,7 +272,7 @@ export const XboxPerWeaponFilm: React.FC = () => {
 						<TransitionStreak key={s} frame={frame} at={fr(s) - 2} strength={0.4} />
 					))}
 					<LightBeam frame={frame} from={beamAt} dur={36} />
-					<Subtitles captions={subs} y={976} size={42} maxWidth={1500} opacity={1 - prog(frame, total - 40, 12)} />
+					<Subtitles captions={subs} y={976} size={42} maxWidth={1500} opacity={1 - interpolate(frame, [total - 40, (total - 40) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})} />
 					<AbsoluteFill style={{background: '#000', opacity: black, pointerEvents: 'none'}} />
 				</AbsoluteFill>
 			</TLProvider>

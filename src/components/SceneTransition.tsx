@@ -1,6 +1,6 @@
 import React from 'react';
-import {AbsoluteFill, useCurrentFrame} from 'remotion';
-import {E, prog} from '../lib/anim';
+import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
+import {E} from '../lib/anim';
 
 /**
  * Wraps a scene's foreground. Because the Cronus lives OUTSIDE scenes (one continuous camera),
@@ -14,8 +14,8 @@ export const SceneTransition: React.FC<{
 	children: React.ReactNode;
 }> = ({total, inFrames = 12, outFrames = 12, drift = 30, children}) => {
 	const frame = useCurrentFrame();
-	const i = prog(frame, 0, inFrames, E.out);
-	const o = prog(frame, total - outFrames, outFrames, E.in);
+	const i = interpolate(frame, [0, (0) + (inFrames)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const o = interpolate(frame, [total - outFrames, (total - outFrames) + (outFrames)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in});
 	const op = Math.min(i, 1 - o);
 	const blur = (1 - i) * 8 + o * 10;
 	return (

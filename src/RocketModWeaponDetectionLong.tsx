@@ -1,11 +1,11 @@
 import React from 'react';
-import {AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Audio, interpolate, Sequence, staticFile, useCurrentFrame} from 'remotion';
 import {Background} from './components/Background';
 import {CronusHero} from './components/CronusHero';
 import {ProfileStack} from './components/ProfileStack';
 import {LightBeam, TransitionStreak} from './components/LightSweep';
 import {SCENES, dur} from './timeline';
-import {E, prog} from './lib/anim';
+import {E} from './lib/anim';
 import {FormatProvider, TL, TLProvider, WIDE} from './tl';
 import {TL_BEFORE, TL_DETECT, TL_FIX, TL_INTRO, TL_OUTRO, TL_TURNON, TL_UNSURE} from './long/tl';
 import {ChapterBefore, ChapterFix, ChapterTurnOn, ChapterUnsure} from './long/ChaptersNew';
@@ -69,7 +69,7 @@ const Layers: React.FC<{c: ChapterDef}> = ({c}) => {
 
 const Chapter: React.FC<{c: ChapterDef; first: boolean}> = ({c, first}) => {
 	const f = useCurrentFrame();
-	const fade = first ? 1 : prog(f, 0, OV, E.outSoft);
+	const fade = first ? 1 : interpolate(f, [0, (0) + (OV)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.outSoft});
 	return (
 		<AbsoluteFill style={{opacity: fade}}>
 			<TLProvider tl={c.tl}>
@@ -88,13 +88,13 @@ export const RocketModWeaponDetectionLong: React.FC = () => {
 	const frame = useCurrentFrame();
 	const outro = CHAPTER_STARTS[CHAPTER_STARTS.length - 1];
 	const beamAt = outro + (936 - 456);
-	const hud = Math.min(1, Math.max(0, (frame - 24) / 30)) * (1 - prog(frame, LONG_DURATION - 40, 20));
-	const black = prog(frame, LONG_DURATION - 28, 28);
+	const hud = Math.min(1, Math.max(0, (frame - 24) / 30)) * (1 - interpolate(frame, [LONG_DURATION - 40, (LONG_DURATION - 40) + (20)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
+	const black = interpolate(frame, [LONG_DURATION - 28, (LONG_DURATION - 28) + (28)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	return (
 		<FormatProvider format={WIDE}>
 			<AbsoluteFill style={{background: '#000'}}>
 				<Audio src={staticFile('audio/soundtrack-long.wav')} />
-				<Background frame={frame} pose={NEUTRAL} power={prog(frame, 4, 34, E.outSoft)} hud={hud} />
+				<Background frame={frame} pose={NEUTRAL} power={interpolate(frame, [4, (4) + (34)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.outSoft})} hud={hud} />
 				{CHAPTERS.map((c, i) => (
 					<Sequence key={c.id} from={CHAPTER_STARTS[i]} durationInFrames={c.dur} name={c.id}>
 						<Chapter c={c} first={i === 0} />
@@ -105,7 +105,7 @@ export const RocketModWeaponDetectionLong: React.FC = () => {
 				))}
 				<LightBeam frame={frame} from={beamAt} dur={36} />
 				<AvatarPip src={AVATAR.long} tall={false} />
-				<Subtitles captions={captions} y={976} size={42} maxWidth={1500} opacity={1 - prog(frame, LONG_DURATION - 40, 12)} />
+				<Subtitles captions={captions} y={976} size={42} maxWidth={1500} opacity={1 - interpolate(frame, [LONG_DURATION - 40, (LONG_DURATION - 40) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})} />
 				<AbsoluteFill style={{background: '#000', opacity: black, pointerEvents: 'none'}} />
 			</AbsoluteFill>
 		</FormatProvider>

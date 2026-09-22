@@ -42,7 +42,7 @@ export const filmFrames = (lines: VoiceLine[], tailSeconds: number, fps = 30): n
 /**
  * 0..1 visibility of a beat that fades in `edge` s before `from` and fades out `edge` s before `to`
  * (or stays fully in if `to` is null, e.g. the last beat of a film). Frame in, seconds out — matches the
- * `prog(frame, from*fps, dur*fps)` calls used everywhere else in this codebase.
+ * `interpolate(frame, [from*fps, from*fps + dur*fps], [0, 1], {...})` calls used everywhere else in this codebase.
  */
 export const beatWindow = (frame: number, from: number, to: number | null, edge = 0.27, fps = 30) => {
 	const a = Math.min(1, Math.max(0, (frame - fr(from - edge, fps)) / fr(edge, fps)));

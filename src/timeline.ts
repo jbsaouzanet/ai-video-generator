@@ -1,7 +1,8 @@
 // Single source of truth for timing. All numbers are GLOBAL frames @30fps.
-import {E, EaseFn, Key, bump, clamp, keyed, prog} from './lib/anim';
+import {E, EaseFn, Key, bump, clamp, keyed} from './lib/anim';
 import {CRONUS, DEVICE} from './config/cronus';
 import {DEMO_PRIMARY, DEMO_SECONDARY, NA_LINE, line} from './oledText';
+import {interpolate} from 'remotion';
 
 export const FPS = 30;
 export const WIDTH = 1920;
@@ -82,7 +83,7 @@ export const poseVelocityKeys = (frame: number, keys: Key<Pose>[]) => {
 };
 export const poseVelocity = (frame: number) => poseVelocityKeys(frame, POSE_KEYS);
 
-export const cronusOpacity = (frame: number) => prog(frame, 4, 34, E.outSoft);
+export const cronusOpacity = (frame: number) => interpolate(frame, [4, (4) + (34)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.outSoft});
 
 // ───────────────────────── Cronus OLED ─────────────────────────
 export type ScreenEvent = {
@@ -123,19 +124,19 @@ export const SCREEN_PULSES = [118, 318, 420, 518, 896];
 
 /** 0..1 amount of highlight around the OLED */
 export const screenHighlight = (frame: number) => {
-	const base = 0.3 * prog(frame, 100, 24) * (1 - prog(frame, 240, 30));
+	const base = 0.3 * interpolate(frame, [100, (100) + (24)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - interpolate(frame, [240, (240) + (30)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
 	const plateau =
-		prog(frame, 112, 24) * (1 - prog(frame, 236, 24)) * (0.75 + 0.25 * Math.sin(frame / 8));
+		interpolate(frame, [112, (112) + (24)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - interpolate(frame, [236, (236) + (24)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})) * (0.75 + 0.25 * Math.sin(frame / 8));
 	let peaks = 0;
 	for (const p of SCREEN_PULSES) peaks = Math.max(peaks, bump(frame, p + 6, 26));
-	const s4 = prog(frame, 468, 16) * (1 - prog(frame, 560, 20)) * 0.35;
+	const s4 = interpolate(frame, [468, (468) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - interpolate(frame, [560, (560) + (20)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})) * 0.35;
 	return clamp(Math.max(base, plateau, peaks, s4));
 };
 
 // specular sweep across the device (-0.3..1.3 across width)
 export const sweepAt = (frame: number) => {
-	const a = prog(frame, 58, 46, E.inOutSoft);
-	const b = prog(frame, 936, 34, E.inOutSoft);
+	const a = interpolate(frame, [58, (58) + (46)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft});
+	const b = interpolate(frame, [936, (936) + (34)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft});
 	if (frame < 200) return -0.4 + 1.8 * a;
 	if (frame > 900) return -0.4 + 1.8 * b;
 	return -1;
@@ -160,13 +161,13 @@ export const profileBoxAt = (i: number, frame: number): Box => {
 	]);
 };
 
-export const profileEnter = (i: number, frame: number) => prog(frame, 112 + i * 16, 26, E.out);
-export const profileExit = (frame: number) => prog(frame, 448, 22, E.in);
+export const profileEnter = (i: number, frame: number) => interpolate(frame, [112 + i * 16, (112 + i * 16) + (26)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+export const profileExit = (frame: number) => interpolate(frame, [448, (448) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in});
 
 /** 0..1 how "lit" a profile card is (Primary=0, Secondary=1) */
 export const profileActive = (i: number, frame: number) => {
-	if (i === 0) return prog(frame, 318, 10) * (1 - 0.72 * prog(frame, 420, 12));
-	return prog(frame, 420, 10);
+	if (i === 0) return interpolate(frame, [318, (318) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - 0.72 * interpolate(frame, [420, (420) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
+	return interpolate(frame, [420, (420) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 };
 
 export const profileLearned = (i: number, frame: number) => {

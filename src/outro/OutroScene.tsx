@@ -1,10 +1,10 @@
 import React from 'react';
-import {AbsoluteFill, Audio, Img, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Audio, Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import tlData from './timeline.json';
 import tlShort from './timeline-short.json';
 import gen from '../config/intro.generated.json';
 import {C, FONT} from '../theme';
-import {E, bump, clamp, lerp, prog, rand, springIn} from '../lib/anim';
+import {E, bump, clamp, lerp, rand, springIn} from '../lib/anim';
 import {FeatureTitle} from '../components/FeatureTitle';
 import {Glass} from '../components/ui';
 import {Subtitles} from '../components/Subtitles';
@@ -99,7 +99,7 @@ export const OutroScene: React.FC<{tall: boolean; audio?: string; variant?: Outr
 	const CLICK = {like: T.like + 0.12, sub: T.sub + 0.22};
 	const total = outroFrames(variant);
 	const sp = (at: number, cfg: Record<string, number> = {}) => springIn(frame, 30, at * 30, {damping: 15, stiffness: 190, mass: 0.8, ...cfg});
-	const p = (at: number, dur = 0.5, easing = E.out) => prog(frame, at * 30, dur * 30, easing);
+	const p = (at: number, dur = 0.5, easing = E.out) => interpolate(frame, [at * 30, (at * 30) + (dur * 30)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: easing});
 
 	// ── layout ──
 	const L = isShort
@@ -130,7 +130,7 @@ export const OutroScene: React.FC<{tall: boolean; audio?: string; variant?: Outr
 	const bub2 = sp(T.help);
 	const seeP = p(T.see - 0.05, 0.5);
 	const nextLit = p(T.next - 0.1, 0.5);
-	const outP = prog(frame, total - 9, 9, E.in);
+	const outP = interpolate(frame, [total - 9, (total - 9) + (9)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in});
 
 	const cursor = (() => {
 		// arrow flies to the SUBSCRIBE button and taps it

@@ -1,12 +1,12 @@
 import React from 'react';
-import {AbsoluteFill} from 'remotion';
+import {AbsoluteFill, interpolate} from 'remotion';
 import {useFormat} from '../tl';
-import {E, prog} from '../lib/anim';
+import {E} from '../lib/anim';
 
 /** Thin diagonal light streak that crosses the frame at scene boundaries. */
 export const TransitionStreak: React.FC<{frame: number; at: number; dur?: number; strength?: number}> = ({frame, at, dur = 18, strength = 0.5}) => {
 	const {width: WIDTH} = useFormat();
-	const t = prog(frame, at, dur, E.inOutSoft);
+	const t = interpolate(frame, [at, (at) + (dur)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft});
 	if (frame < at || frame > at + dur) return null;
 	const x = -400 + t * (WIDTH + 800);
 	const fade = Math.sin(Math.PI * t);
@@ -32,7 +32,7 @@ export const TransitionStreak: React.FC<{frame: number; at: number; dur?: number
 export const LightBeam: React.FC<{frame: number; from: number; dur: number}> = ({frame, from, dur}) => {
 	const {width: WIDTH} = useFormat();
 	if (frame < from || frame > from + dur) return null;
-	const t = prog(frame, from, dur, E.inOutSoft);
+	const t = interpolate(frame, [from, (from) + (dur)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft});
 	const x = -700 + t * (WIDTH + 1400);
 	return (
 		<AbsoluteFill style={{pointerEvents: 'none', mixBlendMode: 'screen', opacity: Math.sin(Math.PI * t) * 0.85}}>

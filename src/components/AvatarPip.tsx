@@ -1,6 +1,6 @@
 import React from 'react';
-import {OffthreadVideo, staticFile, useCurrentFrame} from 'remotion';
-import {E, prog} from '../lib/anim';
+import {interpolate, OffthreadVideo, staticFile, useCurrentFrame} from 'remotion';
+import {E} from '../lib/anim';
 
 /**
  * Picture-in-picture presenter: rounded frame in the bottom-right corner, the clip starts at film frame 0.
@@ -10,7 +10,7 @@ import {E, prog} from '../lib/anim';
 export const AvatarPip: React.FC<{src: string | null; tall: boolean; size?: number}> = ({src, tall, size = tall ? 260 : 300}) => {
 	const frame = useCurrentFrame();
 	if (!src) return null;
-	const enter = prog(frame, 18, 16, E.out);
+	const enter = interpolate(frame, [18, (18) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	const pos: React.CSSProperties = tall ? {right: 30, bottom: 120} : {right: 40, bottom: 40};
 	return (
 		<div

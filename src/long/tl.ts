@@ -2,9 +2,10 @@
 // and its first/last pose matches its neighbours so the cross-dissolve between chapters is invisible.
 // Reused scenes (hook, profiles, detect, auto, docs, end) keep their ORIGINAL frame numbers ("virtual frames"):
 // the chapter simply plays them from `orig`, see RocketModWeaponDetectionLong.tsx.
-import {E, bump, clamp, prog} from '../lib/anim';
+import {E, bump, clamp} from '../lib/anim';
 import {EV, K, POSES, POSE_KEYS, Pose, ScreenEvent, SCREEN_PULSES, profileActive, profileLearned, screenHighlight, sweepAt} from '../timeline';
 import {WIDE33, makeTL} from '../tl';
+import {interpolate} from 'remotion';
 
 const P = POSES;
 
@@ -15,7 +16,7 @@ export const L_POSE: Record<string, Pose> = {
 };
 
 const blank: ScreenEvent = {f: 0, on: 1, title: '', line: ''};
-const hl = (pulses: number[], base = 0.25) => (f: number) => clamp(Math.max(base * prog(f, 4, 20), ...pulses.map((p) => bump(f, p + 6, 26))));
+const hl = (pulses: number[], base = 0.25) => (f: number) => clamp(Math.max(base * interpolate(f, [4, (4) + (20)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}), ...pulses.map((p) => bump(f, p + 6, 26))));
 
 // A · intro (hook + profiles): the original 33 s timeline as is
 export const TL_INTRO = WIDE33;
@@ -52,8 +53,8 @@ export const TL_DETECT = makeTL({
 	highlight: screenHighlight,
 	profile: {
 		box: (i) => ({x: 1450, y: i === 0 ? 360 : 570, w: 370, h: 170, compact: 1}),
-		enter: (i, f) => prog(f, 246 + i * 8, 22, E.out),
-		exit: (f) => prog(f, 448, 22, E.in),
+		enter: (i, f) => interpolate(f, [246 + i * 8, (246 + i * 8) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}),
+		exit: (f) => interpolate(f, [448, (448) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in}),
 		active: profileActive,
 		learned: profileLearned,
 		touch: (i, f) => Math.max(bump(f, i === 0 ? 336 : 438, 22)),

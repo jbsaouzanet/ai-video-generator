@@ -1,6 +1,7 @@
 import React from 'react';
 import {C, FONT} from '../theme';
-import {E, clamp, keyed, prog} from '../lib/anim';
+import {E, clamp, keyed} from '../lib/anim';
+import {interpolate} from 'remotion';
 
 /**
  * Stylised browser view of rocketmod.org/documentation/weapon-detect/ps5-per-profile.
@@ -43,7 +44,7 @@ const DEFAULT_CURSOR: CursorKeys = [
 const CLICKS = [56, 100, 138, 166];
 
 const Mark: React.FC<{lf: number; at: number; dur?: number; children: React.ReactNode}> = ({lf, at, dur = 12, children}) => {
-	const p = prog(lf, at, dur, E.outSoft);
+	const p = interpolate(lf, [at, (at) + (dur)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.outSoft});
 	return (
 		<span
 			style={{
@@ -151,11 +152,11 @@ export const DocumentationPanel: React.FC<{
 	const scroll = keyed(lf, scrollKeys).y;
 	const cur = keyed(lf, cursorKeys);
 	const vis = enter * (1 - exit);
-	const tag = prog(lf, 94, 12, E.back);
-	const saved = prog(lf, 172, 12, E.back);
-	const deviceLit = prog(lf, 146, 10) * (1 - 0.3 * prog(lf, 162, 10));
-	const typeLit = prog(lf, 158, 10) * (1 - 0.3 * prog(lf, 168, 10));
-	const keyLit = prog(lf, 132, 8);
+	const tag = interpolate(lf, [94, (94) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.back});
+	const saved = interpolate(lf, [172, (172) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.back});
+	const deviceLit = interpolate(lf, [146, (146) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - 0.3 * interpolate(lf, [162, (162) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
+	const typeLit = interpolate(lf, [158, (158) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - 0.3 * interpolate(lf, [168, (168) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
+	const keyLit = interpolate(lf, [132, (132) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 
 	return (
 		<div
@@ -297,7 +298,7 @@ export const DocumentationPanel: React.FC<{
 				<div style={{position: 'absolute', left: 0, right: 0, bottom: 0, height: 70, background: 'linear-gradient(0deg,#0a0f18,transparent)'}} />
 
 				{/* cursor */}
-				<div style={{position: 'absolute', left: cur.x, top: cur.y, opacity: prog(lf, 18, 8)}}>
+				<div style={{position: 'absolute', left: cur.x, top: cur.y, opacity: interpolate(lf, [18, (18) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})}}>
 					{CLICKS.map((c) => {
 						const t = (lf - c) / 14;
 						if (t < 0 || t > 1) return null;

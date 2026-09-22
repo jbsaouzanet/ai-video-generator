@@ -1,6 +1,6 @@
 import React from 'react';
 import {C, FONT} from '../../theme';
-import {E, prog} from '../../lib/anim';
+import {E} from '../../lib/anim';
 import {FeatureTitle} from '../../components/FeatureTitle';
 import {SignalLine} from '../../components/SignalLine';
 import {SceneTransition} from '../../components/SceneTransition';
@@ -8,6 +8,7 @@ import {SCENES, dur, screenRect} from '../../timeline';
 import {useTL} from '../../tl';
 import {dropPath} from '../../tall';
 import {useScene} from '../../lib/useScene';
+import {interpolate} from 'remotion';
 
 /** Vertical scene 2: two profile cards side by side, wires drop onto the Cronus display below. */
 export const SceneTall2Profiles: React.FC = () => {
@@ -23,10 +24,10 @@ export const SceneTall2Profiles: React.FC = () => {
 		{x: scr.cx + 72, y: scr.y - 30},
 	];
 	const paths = cards.map((b, i) => dropPath(b.x + b.w / 2, b.y + b.h + 14, ends[i].x, ends[i].y));
-	const reveal = [prog(gf, 150, 30, E.outSoft), prog(gf, 160, 30, E.outSoft)];
-	const head = [prog(gf, 184, 34, E.inOutSoft) * 1.2, prog(gf, 198, 34, E.inOutSoft) * 1.2];
-	const arrive = prog(gf, 214, 14);
-	const rule = prog(gf, 208, 22, E.out);
+	const reveal = [interpolate(gf, [150, (150) + (30)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.outSoft}), interpolate(gf, [160, (160) + (30)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.outSoft})];
+	const head = [interpolate(gf, [184, (184) + (34)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft}) * 1.2, interpolate(gf, [198, (198) + (34)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft}) * 1.2];
+	const arrive = interpolate(gf, [214, (214) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const rule = interpolate(gf, [208, (208) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 
 	return (
 		<SceneTransition total={total} inFrames={10} outFrames={18} drift={0}>

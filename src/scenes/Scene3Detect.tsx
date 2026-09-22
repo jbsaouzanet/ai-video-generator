@@ -1,6 +1,6 @@
 import React from 'react';
 import {C, FONT} from '../theme';
-import {E, prog, bump, clamp} from '../lib/anim';
+import {E, bump, clamp} from '../lib/anim';
 import {FeatureTitle} from '../components/FeatureTitle';
 import {SignalLine, elbow} from '../components/SignalLine';
 import {ScreenCallout, calloutHeight} from '../components/ScreenCallout';
@@ -11,6 +11,7 @@ import {useTL} from '../tl';
 import {DEMO_PRIMARY, DEMO_SECONDARY} from '../oledText';
 import {SceneTransition} from '../components/SceneTransition';
 import {useScene} from '../lib/useScene';
+import {interpolate} from 'remotion';
 
 const WEAPONS: Weapon[] = [
 	{cat: DEMO_PRIMARY.category, name: DEMO_PRIMARY.name},
@@ -31,8 +32,8 @@ const Banner: React.FC<{gf: number}> = ({gf}) => {
 	const b = BEATS.find((x) => gf >= x.from && gf < x.to);
 	if (!b) return null;
 	const t = gf - b.from;
-	const inP = prog(gf, b.from, 12, E.out);
-	const outP = prog(gf, b.to - 6, 6, E.in);
+	const inP = interpolate(gf, [b.from, (b.from) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const outP = interpolate(gf, [b.to - 6, (b.to - 6) + (6)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in});
 	const op = inP * (1 - outP);
 	return (
 		<div style={{position: 'absolute', left: 0, right: 0, top: 812, textAlign: 'center', opacity: op}}>
@@ -53,7 +54,7 @@ const Banner: React.FC<{gf: number}> = ({gf}) => {
 			>
 				{b.main}
 			</div>
-			<div style={{marginTop: 14, fontFamily: FONT.mono, fontSize: 18, letterSpacing: '0.3em', color: b.hot ? C.blueHi : C.dim, opacity: prog(t, 6, 10)}}>{b.sub}</div>
+			<div style={{marginTop: 14, fontFamily: FONT.mono, fontSize: 18, letterSpacing: '0.3em', color: b.hot ? C.blueHi : C.dim, opacity: interpolate(t, [6, (6) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})}}>{b.sub}</div>
 		</div>
 	);
 };
@@ -67,10 +68,10 @@ export const Scene3Detect: React.FC = () => {
 	const scr = screenRect(pose);
 	const screen = tl.screenAt(gf);
 
-	const enter = [prog(gf, 246, 22, E.out), prog(gf, 256, 22, E.out)];
+	const enter = [interpolate(gf, [246, (246) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}), interpolate(gf, [256, (256) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})];
 	const active = [
-		prog(gf, 262, 10) * (1 - prog(gf, 368, 10)),
-		prog(gf, 372, 10),
+		interpolate(gf, [262, (262) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - interpolate(gf, [368, (368) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})),
+		interpolate(gf, [372, (372) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}),
 	];
 
 	// input side: weapon -> Cronus
@@ -78,29 +79,29 @@ export const Scene3Detect: React.FC = () => {
 	const contactL = {x: left.x - 4, y: left.y};
 	const rowY = (i: number) => CARD.y + i * (CARD.h + CARD.gap) + CARD.h / 2;
 	const inPaths = [0, 1].map((i) => elbow(CARD.x + CARD.w + 8, rowY(i), contactL.x, contactL.y, 0.42));
-	const inHead = [prog(gf, 296, 26, E.inOutSoft) * 1.18, prog(gf, 398, 26, E.inOutSoft) * 1.18];
-	const inReveal = [prog(gf, 262, 16), prog(gf, 372, 16)];
+	const inHead = [interpolate(gf, [296, (296) + (26)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft}) * 1.18, interpolate(gf, [398, (398) + (26)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft}) * 1.18];
+	const inReveal = [interpolate(gf, [262, (262) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}), interpolate(gf, [372, (372) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})];
 
 	// output side: Cronus -> profile
 	const right = anchor(pose, 'right');
 	const contactR = {x: right.x + 4, y: right.y};
 	const pBox = [tl.profile.box(0, gf), tl.profile.box(1, gf)];
 	const outPaths = pBox.map((b) => elbow(contactR.x, contactR.y, b.x - 10, b.y + b.h / 2, 0.5));
-	const outHead = [prog(gf, 320, 24, E.inOutSoft) * 1.18, prog(gf, 422, 24, E.inOutSoft) * 1.18];
-	const outReveal = [prog(gf, 312, 14), prog(gf, 414, 14)];
+	const outHead = [interpolate(gf, [320, (320) + (24)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft}) * 1.18, interpolate(gf, [422, (422) + (24)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft}) * 1.18];
+	const outReveal = [interpolate(gf, [312, (312) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}), interpolate(gf, [414, (414) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})];
 	const outNode = [bump(gf, 346, 24), bump(gf, 448, 24)];
 
 	// trigger signature panels (above each weapon's line)
 	const waves = [
-		{cat: 'AR', y: rowY(0) - 150, vis: prog(gf, 266, 10) * (1 - prog(gf, 336, 10)), draw: prog(gf, 270, 18, E.inOutSoft), match: prog(gf, 288, 8)},
-		{cat: 'SMG', y: rowY(1) - 150, vis: prog(gf, 378, 10) * (1 - prog(gf, 440, 10)), draw: prog(gf, 382, 16, E.inOutSoft), match: prog(gf, 398, 8)},
+		{cat: 'AR', y: rowY(0) - 150, vis: interpolate(gf, [266, (266) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - interpolate(gf, [336, (336) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})), draw: interpolate(gf, [270, (270) + (18)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft}), match: interpolate(gf, [288, (288) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})},
+		{cat: 'SMG', y: rowY(1) - 150, vis: interpolate(gf, [378, (378) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - interpolate(gf, [440, (440) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})), draw: interpolate(gf, [382, (382) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft}), match: interpolate(gf, [398, (398) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})},
 	];
 
 	// magnified OLED
 	const cw = 470;
 	const cx = 960 - (cw + 28) / 2;
 	const cy = 44;
-	const calloutIn = prog(gf, 246, 22, E.out);
+	const calloutIn = interpolate(gf, [246, (246) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	const hl = tl.highlight(gf);
 	const sBox = {x: scr.cx, y: scr.y - 20};
 	const leader = `M${sBox.x} ${sBox.y} V${cy + calloutHeight(cw) - 14}`;
@@ -125,7 +126,7 @@ export const Scene3Detect: React.FC = () => {
 			<WeaponSelector weapons={WEAPONS} x={CARD.x} y={CARD.y} w={CARD.w} h={CARD.h} gap={CARD.gap} enter={enter} active={active} exit={0} />
 
 			{inPaths.map((d, i) => (
-				<SignalLine key={`in${i}`} d={d} reveal={inReveal[i] * (1 - (i === 0 ? prog(gf, 366, 8) : prog(gf, 456, 10)))} head={inHead[i]} len={0.14} endNode={inReveal[i] > 0.9 ? contactL : null} nodeGlow={bump(gf, i === 0 ? 318 : 420, 20)} />
+				<SignalLine key={`in${i}`} d={d} reveal={inReveal[i] * (1 - (i === 0 ? interpolate(gf, [366, (366) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) : interpolate(gf, [456, (456) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})))} head={inHead[i]} len={0.14} endNode={inReveal[i] > 0.9 ? contactL : null} nodeGlow={bump(gf, i === 0 ? 318 : 420, 20)} />
 			))}
 			{outPaths.map((d, i) => (
 				<SignalLine key={`out${i}`} d={d} reveal={outReveal[i]} head={outHead[i]} len={0.16} endNode={outReveal[i] > 0.9 ? {x: pBox[i].x - 10, y: pBox[i].y + pBox[i].h / 2} : null} nodeGlow={outNode[i]} base={0.22} />

@@ -1,7 +1,7 @@
 import React from 'react';
-import {useCurrentFrame} from 'remotion';
+import {interpolate, useCurrentFrame} from 'remotion';
 import {C, FONT} from '../theme';
-import {E, clamp, prog} from '../lib/anim';
+import {E, clamp} from '../lib/anim';
 import {FeatureTitle} from '../components/FeatureTitle';
 import {TextScrim} from '../components/TextScrim';
 import {ScreenCallout} from '../components/ScreenCallout';
@@ -40,17 +40,17 @@ export const ChapterAmbig: React.FC = () => {
 	const screen = tl.screenAt(f);
 	const hl = tl.highlight(f);
 	const L = (n: string, o = 0) => lf('ambig', n, o);
-	const cardIn = prog(f, L('ambig.before', -0.2), 22, E.out);
-	const after = prog(f, L('ambig.oledAfter'), 12);
+	const cardIn = interpolate(f, [L('ambig.before', -0.2), (L('ambig.before', -0.2)) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const after = interpolate(f, [L('ambig.oledAfter'), (L('ambig.oledAfter')) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	const before = 1 - after;
-	const q = prog(f, L('ambig.qmark'), 14, E.out);
-	const rem = prog(f, L('ambig.remember'), 16, E.out);
+	const q = interpolate(f, [L('ambig.qmark'), (L('ambig.qmark')) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const rem = interpolate(f, [L('ambig.remember'), (L('ambig.remember')) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	const l2r = win(f, L('ambig.keys'), L('ambig.l2right', 0.5));
-	const ph2 = prog(f, L('ambig.phase2'), 22, E.out);
+	const ph2 = interpolate(f, [L('ambig.phase2'), (L('ambig.phase2')) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	const keys3 = win(f, L('ambig.keys3'), L('ambig.list', 0.3));
-	const listIn = prog(f, L('ambig.list', -0.1), 16, E.out);
+	const listIn = interpolate(f, [L('ambig.list', -0.1), (L('ambig.list', -0.1)) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	const sel = f >= L('ambig.sel') ? 1 : 0;
-	const act = prog(f, L('ambig.activate'), 10);
+	const act = interpolate(f, [L('ambig.activate'), (L('ambig.activate')) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	const SL = ['S1 AR MXR-17', 'S2 SMG Dravec 45', 'S3 HG 1911'];
 	return (
 		<>
@@ -115,7 +115,7 @@ export const ChapterAmbig: React.FC = () => {
 					</div>
 				</Glass>
 			</div>
-			<ScreenCallout x={1250} y={60} w={520} state={screen} frame={f} enter={prog(f, 18, 24, E.out)} glow={clamp(hl * 1.3)} />
+			<ScreenCallout x={1250} y={60} w={520} state={screen} frame={f} enter={interpolate(f, [18, (18) + (24)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})} glow={clamp(hl * 1.3)} />
 		</>
 	);
 };
@@ -138,16 +138,16 @@ export const ChapterTeach: React.FC = () => {
 		{t: 'Pick a category', right: <>{['AR', 'LMG', 'SMG', 'PISTOL', 'SNIPER', 'SHOTGUN'].map((c, i) => <Tag key={c} hot={i === 0 && f >= S[4] + 10} size={13}>{c}</Tag>)}</>},
 		{t: 'Pick a name (optional)', right: <><Tag size={14}>NO NAME</Tag><Tag hot={f >= S[5] + 10} size={14}>AN-94</Tag><KeyCap label="CROSS" pressed={pressed(L('teach.saved', -0.3))} size={20} wide /></>},
 	];
-	const notes = prog(f, L('teach.notes'), 18, E.out);
-	const saved = prog(f, L('teach.saved'), 12, E.back);
+	const notes = interpolate(f, [L('teach.notes'), (L('teach.notes')) + (18)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const saved = interpolate(f, [L('teach.saved'), (L('teach.saved')) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.back});
 	return (
 		<>
 			<FeatureTitle x={90} y={68} width={900} delay={4} lines={[{text: 'TEACH WEAPON', size: 50, gradient: true, glow: 'rgba(47,139,255,.35)'}]} />
 			{rows.map((r, i) => {
 				const next = S[i + 1] ?? 99999;
-				const active = prog(f, S[i], 10) * (1 - 0.6 * prog(f, next, 12));
-				const done = prog(f, next, 10);
-				const e = prog(f, L('teach.stepperIn') + i * 6, 22, E.out);
+				const active = interpolate(f, [S[i], (S[i]) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - 0.6 * interpolate(f, [next, (next) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
+				const done = interpolate(f, [next, (next) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+				const e = interpolate(f, [L('teach.stepperIn') + i * 6, (L('teach.stepperIn') + i * 6) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 				return (
 					<div key={i} style={{position: 'absolute', inset: 0, ...rise(e)}}>
 						<Glass x={90} y={140 + i * 100} w={1090} h={88} lit={active}>
@@ -173,7 +173,7 @@ export const ChapterTeach: React.FC = () => {
 			<div style={{position: 'absolute', left: 1240 + 250, top: 420, opacity: saved, transform: `scale(${clamp(saved)})`}}>
 				<Tag size={20} hot>SLOT SAVED</Tag>
 			</div>
-			<ScreenCallout x={1240} y={56} w={540} state={screen} frame={f} enter={prog(f, 16, 24, E.out)} glow={clamp(hl * 1.3)} />
+			<ScreenCallout x={1240} y={56} w={540} state={screen} frame={f} enter={interpolate(f, [16, (16) + (24)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})} glow={clamp(hl * 1.3)} />
 		</>
 	);
 };
@@ -185,11 +185,11 @@ export const ChapterEdit: React.FC = () => {
 	const screen = tl.screenAt(f);
 	const hl = tl.highlight(f);
 	const L = (n: string, o = 0) => lf('edit', n, o);
-	const cardIn = prog(f, L('edit.cardIn'), 24, E.out);
+	const cardIn = interpolate(f, [L('edit.cardIn'), (L('edit.cardIn')) + (24)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	const selRow = f >= L('edit.row') ? 1 : 0;
 	const changed = f >= L('edit.change', 0.2);
 	const sq = win(f, L('edit.square'), L('edit.square', 0.4));
-	const conf = prog(f, L('edit.confirm'), 16, E.out);
+	const conf = interpolate(f, [L('edit.confirm'), (L('edit.confirm')) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	const cell = (label: string, value: string, on: boolean) => (
 		<div style={{flex: 1, padding: '14px 22px', borderRadius: 12, background: on ? 'rgba(47,139,255,.16)' : 'transparent', border: `1px solid ${on ? C.blueHi : 'rgba(255,255,255,.08)'}`, boxShadow: on ? '0 0 30px rgba(47,139,255,.35)' : undefined}}>
 			<div style={{fontFamily: FONT.mono, fontSize: 15, letterSpacing: '0.26em', color: C.dim}}>{label}</div>
@@ -221,7 +221,7 @@ export const ChapterEdit: React.FC = () => {
 				<span style={{fontFamily: FONT.mono, fontSize: 17, color: C.dim, letterSpacing: '0.16em'}}>CHANGE THE VALUE</span>
 			</div>
 			<div style={{position: 'absolute', left: 90, top: 660, opacity: cardIn, fontFamily: FONT.mono, fontSize: 16, letterSpacing: '0.16em', color: C.dim}}>ON NAME: <span style={{color: C.blueHi}}>CROSS</span> OPENS THE FULL NAME LIST</div>
-			<div style={{position: 'absolute', left: 90, top: 730, display: 'flex', alignItems: 'center', gap: 14, opacity: prog(f, L('edit.square', -0.3), 16)}}>
+			<div style={{position: 'absolute', left: 90, top: 730, display: 'flex', alignItems: 'center', gap: 14, opacity: interpolate(f, [L('edit.square', -0.3), (L('edit.square', -0.3)) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})}}>
 				<KeyCap label="SQUARE" pressed={sq} size={26} wide />
 				<span style={{fontFamily: FONT.display, fontWeight: 700, fontSize: 40, color: '#fff'}}>DELETES THE SLOT</span>
 			</div>
@@ -236,7 +236,7 @@ export const ChapterEdit: React.FC = () => {
 					</div>
 				</Glass>
 			</div>
-			<ScreenCallout x={1290} y={64} w={470} state={screen} frame={f} enter={prog(f, 16, 24, E.out)} glow={clamp(hl * 1.3)} />
+			<ScreenCallout x={1290} y={64} w={470} state={screen} frame={f} enter={interpolate(f, [16, (16) + (24)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})} glow={clamp(hl * 1.3)} />
 		</>
 	);
 };
@@ -246,9 +246,9 @@ export const ChapterCheat: React.FC = () => {
 	const f = useCurrentFrame();
 	const L = (n: string, o = 0) => lf('cheat', n, o);
 	const lit = [
-		prog(f, L('cheat.switch'), 12) * (1 - 0.5 * prog(f, L('cheat.escape'), 12)),
-		prog(f, L('cheat.escape'), 12),
-		...[0, 1, 2, 3].map((i) => prog(f, L('cheat.recap', i * 0.45), 12)),
+		interpolate(f, [L('cheat.switch'), (L('cheat.switch')) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - 0.5 * interpolate(f, [L('cheat.escape'), (L('cheat.escape')) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})),
+		interpolate(f, [L('cheat.escape'), (L('cheat.escape')) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}),
+		...[0, 1, 2, 3].map((i) => interpolate(f, [L('cheat.recap', i * 0.45), (L('cheat.recap', i * 0.45)) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})),
 	];
 	const rows: {keys: React.ReactNode; text: string}[] = [
 		{keys: <Tag size={17} hot={lit[0] > 0.5}>AIM → ANTI RECOIL</Tag>, text: 'ONE switch for ALL your weapons'},
@@ -261,9 +261,9 @@ export const ChapterCheat: React.FC = () => {
 	return (
 		<>
 			<FeatureTitle x={90} y={66} width={1000} delay={4} lines={[{text: 'CHEAT SHEET', size: 60, gradient: true, glow: 'rgba(47,139,255,.35)'}]} />
-			<div style={{position: 'absolute', left: 96, top: 148, fontFamily: FONT.mono, fontSize: 17, letterSpacing: '0.26em', color: C.blueHi, opacity: prog(f, 16, 14)}}>PER WEAPON · PS5</div>
+			<div style={{position: 'absolute', left: 96, top: 148, fontFamily: FONT.mono, fontSize: 17, letterSpacing: '0.26em', color: C.blueHi, opacity: interpolate(f, [16, (16) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})}}>PER WEAPON · PS5</div>
 			{rows.map((r, i) => {
-				const e = prog(f, L('cheat.titleIn', 0.15) + i * 5, 22, E.out);
+				const e = interpolate(f, [L('cheat.titleIn', 0.15) + i * 5, (L('cheat.titleIn', 0.15) + i * 5) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 				return (
 					<div key={i} style={{position: 'absolute', inset: 0, ...rise(e)}}>
 						<Glass x={90} y={186 + i * 112} w={1120} h={100} lit={lit[i]}>
@@ -283,10 +283,10 @@ export const ChapterCheat: React.FC = () => {
 export const ChapterEnd: React.FC = () => {
 	const f = useCurrentFrame();
 	const L = (n: string, o = 0) => lf('end', n, o);
-	const url = prog(f, L('end.url'), 16, E.out);
+	const url = interpolate(f, [L('end.url'), (L('end.url')) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	return (
 		<>
-			<TextScrim x={960} y={240} rx={900} ry={250} opacity={prog(f, L('end.title'), 20)} />
+			<TextScrim x={960} y={240} rx={900} ry={250} opacity={interpolate(f, [L('end.title'), (L('end.title')) + (20)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})} />
 			<FeatureTitle x={960} y={70} width={1700} align="center" delay={Math.max(0, L('end.title'))} lines={[{text: 'ROCKETMOD', size: 210, gradient: true, tracking: 0.04, glow: 'rgba(47,139,255,.55)'}]} />
 			<FeatureTitle x={960} y={300} width={1700} align="center" delay={Math.max(0, L('end.brand'))} lines={[{text: 'Per Weapon mode', size: 58, weight: 500, tracking: 0.12, color: C.ice}]} />
 			<div style={{position: 'absolute', left: 0, right: 0, top: 392, textAlign: 'center', fontFamily: FONT.mono, fontSize: 26, letterSpacing: '0.14em', color: C.blueHi, opacity: url, transform: `translateY(${(1 - url) * 12}px)`, textShadow: '0 0 20px rgba(47,139,255,.7)'}}>

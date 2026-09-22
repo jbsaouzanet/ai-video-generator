@@ -1,7 +1,7 @@
 import React from 'react';
-import {AbsoluteFill, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
 import {C, FONT} from '../theme';
-import {E, prog} from '../lib/anim';
+import {E} from '../lib/anim';
 import {FeatureTitle} from '../components/FeatureTitle';
 import {SCENES, dur} from '../timeline';
 import {TextScrim} from '../components/TextScrim';
@@ -10,11 +10,11 @@ import {TextScrim} from '../components/TextScrim';
 export const Scene1Hook: React.FC = () => {
 	const frame = useCurrentFrame();
 	const total = dur(SCENES.hook);
-	const out = prog(frame, total - 16, 14, E.in);
-	const sub = prog(frame, 56, 20, E.out);
+	const out = interpolate(frame, [total - 16, (total - 16) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in});
+	const sub = interpolate(frame, [56, (56) + (20)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	return (
 		<AbsoluteFill style={{opacity: 1 - out, transform: `translateX(${-out * 120}px)`, filter: out > 0 ? `blur(${out * 12}px)` : undefined}}>
-			<TextScrim x={960} y={250} rx={1000} ry={260} opacity={prog(frame, 20, 30)} />
+			<TextScrim x={960} y={250} rx={1000} ry={260} opacity={interpolate(frame, [20, (20) + (30)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})} />
 			<FeatureTitle
 				x={960}
 				y={78}

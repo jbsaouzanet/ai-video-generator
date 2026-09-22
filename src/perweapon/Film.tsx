@@ -1,12 +1,12 @@
 import React from 'react';
-import {AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Audio, interpolate, Sequence, staticFile, useCurrentFrame} from 'remotion';
 import {Background} from '../components/Background';
 import {CronusHero} from '../components/CronusHero';
 import {LightBeam, TransitionStreak} from '../components/LightSweep';
 import {Subtitles} from '../components/Subtitles';
 import {AvatarPip} from '../components/AvatarPip';
 import {AVATAR} from '../config/avatar';
-import {E, prog} from '../lib/anim';
+import {E} from '../lib/anim';
 import {FormatProvider, TL, TLProvider, WIDE} from '../tl';
 import {CHAPTERS, FPS, OV, TOTAL, cue} from './cues';
 import {TL_AMBIG, TL_CHEAT, TL_EDIT, TL_END, TL_FIRST, TL_HOOK, TL_TEACH, TL_TUNE, TL_TURN, TL_WHY} from './tl';
@@ -41,8 +41,8 @@ const Layers: React.FC<{C: React.FC}> = ({C}) => {
 const Chapter: React.FC<{id: string; dur: number; first: boolean; last: boolean}> = ({id, dur, first, last}) => {
 	const f = useCurrentFrame();
 	const d = DEFS[id];
-	const a = first ? 1 : prog(f, 0, OV, E.outSoft);
-	const b = last ? 1 : 1 - prog(f, dur - OV, OV, E.in);
+	const a = first ? 1 : interpolate(f, [0, (0) + (OV)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.outSoft});
+	const b = last ? 1 : 1 - interpolate(f, [dur - OV, (dur - OV) + (OV)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in});
 	return (
 		<AbsoluteFill style={{opacity: Math.min(a, b)}}>
 			<TLProvider tl={d.tl}>
@@ -57,13 +57,13 @@ const NEUTRAL = {x: 960, y: 600, h: 600, rz: 0, rx: 0, ry: 0};
 /** 1920x1080 · ~117 s · everything hangs on the voice-over cue sheet (see scripts/audio/pw-cues.mjs) */
 export const RocketModPerWeapon: React.FC = () => {
 	const frame = useCurrentFrame();
-	const hud = Math.min(1, Math.max(0, (frame - 24) / 30)) * (1 - prog(frame, TOTAL - 40, 20));
-	const black = prog(frame, TOTAL - 28, 28);
+	const hud = Math.min(1, Math.max(0, (frame - 24) / 30)) * (1 - interpolate(frame, [TOTAL - 40, (TOTAL - 40) + (20)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
+	const black = interpolate(frame, [TOTAL - 28, (TOTAL - 28) + (28)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	return (
 		<FormatProvider format={WIDE}>
 			<AbsoluteFill style={{background: '#000'}}>
 				<Audio src={staticFile('audio/soundtrack-pw.wav')} />
-				<Background frame={frame} pose={NEUTRAL} power={prog(frame, 4, 34, E.outSoft)} hud={hud} label="PS5 · PER WEAPON" />
+				<Background frame={frame} pose={NEUTRAL} power={interpolate(frame, [4, (4) + (34)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.outSoft})} hud={hud} label="PS5 · PER WEAPON" />
 				{CHAPTERS.map((c, i) => (
 					<Sequence key={c.id} from={c.startF} durationInFrames={c.durF} name={c.id}>
 						<Chapter id={c.id} dur={c.durF} first={i === 0} last={i === CHAPTERS.length - 1} />
@@ -74,7 +74,7 @@ export const RocketModPerWeapon: React.FC = () => {
 				))}
 				<LightBeam frame={frame} from={Math.round(cue('end.beam') * FPS)} dur={36} />
 				<AvatarPip src={AVATAR.perweapon} tall={false} />
-				<Subtitles captions={subs} y={976} size={42} maxWidth={1500} opacity={1 - prog(frame, TOTAL - 40, 12)} />
+				<Subtitles captions={subs} y={976} size={42} maxWidth={1500} opacity={1 - interpolate(frame, [TOTAL - 40, (TOTAL - 40) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})} />
 				<AbsoluteFill style={{background: '#000', opacity: black, pointerEvents: 'none'}} />
 			</AbsoluteFill>
 		</FormatProvider>

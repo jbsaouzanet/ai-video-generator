@@ -1,7 +1,7 @@
 import React from 'react';
-import {AbsoluteFill} from 'remotion';
+import {AbsoluteFill, interpolate} from 'remotion';
 import {C, FONT} from '../theme';
-import {E, prog} from '../lib/anim';
+import {E} from '../lib/anim';
 import {FeatureTitle} from '../components/FeatureTitle';
 import {SignalLine, elbow} from '../components/SignalLine';
 import {SCENES, dur, deviceBounds, screenRect} from '../timeline';
@@ -21,12 +21,12 @@ export const Scene2Profiles: React.FC = () => {
 	const end = {x: scr.x - 16, y: scr.cy};
 	const paths = cards.map((b, i) => elbow(b.x + b.w + 8, b.y + b.h / 2, end.x, end.y + (i === 0 ? -14 : 14), 0.42));
 
-	const reveal = [prog(gf, 150, 30, E.outSoft), prog(gf, 160, 30, E.outSoft)];
-	const head = [prog(gf, 184, 34, E.inOutSoft) * 1.2, prog(gf, 198, 34, E.inOutSoft) * 1.2];
-	const arrive = prog(gf, 214, 14);
+	const reveal = [interpolate(gf, [150, (150) + (30)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.outSoft}), interpolate(gf, [160, (160) + (30)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.outSoft})];
+	const head = [interpolate(gf, [184, (184) + (34)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft}) * 1.2, interpolate(gf, [198, (198) + (34)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft}) * 1.2];
+	const arrive = interpolate(gf, [214, (214) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 
-	const tag = prog(gf, 168, 20, E.out);
-	const rule = prog(gf, 208, 22, E.out);
+	const tag = interpolate(gf, [168, (168) + (20)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const rule = interpolate(gf, [208, (208) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 
 	return (
 		<SceneTransition total={total} inFrames={10} outFrames={18} drift={0}>

@@ -1,7 +1,7 @@
 import React from 'react';
-import {AbsoluteFill, useVideoConfig} from 'remotion';
+import {AbsoluteFill, interpolate, useVideoConfig} from 'remotion';
 import {C, FONT} from '../../theme';
-import {E, prog, springIn} from '../../lib/anim';
+import {E, springIn} from '../../lib/anim';
 import {FeatureTitle} from '../../components/FeatureTitle';
 import {TextScrim} from '../../components/TextScrim';
 import {SCENES} from '../../timeline';
@@ -17,7 +17,7 @@ const Word: React.FC<{gf: number; t: string; from: number; to: number; color: st
 	const {fps} = useVideoConfig();
 	if (gf < from || gf >= to) return null;
 	const s = springIn(gf, fps, from, {damping: 14, stiffness: 240, mass: 0.7});
-	const out = prog(gf, to - 5, 5, E.in);
+	const out = interpolate(gf, [to - 5, (to - 5) + (5)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in});
 	return (
 		<div
 			style={{
@@ -45,10 +45,10 @@ const Word: React.FC<{gf: number; t: string; from: number; to: number; color: st
 /** Vertical scene 6: SET IT ONCE, the three-word rhythm, then the brand lockup stacked over the Cronus. */
 export const SceneTall6End: React.FC = () => {
 	const {gf} = useScene(SCENES.end.from);
-	const setOut = prog(gf, 850, 10, E.in);
+	const setOut = interpolate(gf, [850, (850) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in});
 	return (
 		<AbsoluteFill>
-			<TextScrim x={540} y={400} rx={760} ry={420} opacity={prog(gf, 818, 18) * (1 - prog(gf, 978, 20))} />
+			<TextScrim x={540} y={400} rx={760} ry={420} opacity={interpolate(gf, [818, (818) + (18)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - interpolate(gf, [978, (978) + (20)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}))} />
 			<div style={{opacity: 1 - setOut}}>
 				<FeatureTitle x={540} y={190} width={1040} align="center" delay={824 - SCENES.end.from} lines={[{text: 'SET IT', size: 190, gradient: true, glow: 'rgba(47,139,255,.4)'}, {text: 'ONCE.', size: 190, gradient: true, glow: 'rgba(47,139,255,.4)'}]} />
 			</div>
@@ -68,8 +68,8 @@ export const SceneTall6End: React.FC = () => {
 					fontSize: 34,
 					letterSpacing: '0.2em',
 					color: C.blueHi,
-					opacity: prog(gf, 950, 14),
-					transform: `translateY(${(1 - prog(gf, 950, 14)) * 12}px)`,
+					opacity: interpolate(gf, [950, (950) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}),
+					transform: `translateY(${(1 - interpolate(gf, [950, (950) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})) * 12}px)`,
 					textShadow: '0 0 20px rgba(47,139,255,.7)',
 				}}
 			>

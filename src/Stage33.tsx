@@ -1,11 +1,11 @@
 import React from 'react';
-import {AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Audio, interpolate, Sequence, staticFile, useCurrentFrame} from 'remotion';
 import {Background} from './components/Background';
 import {CronusHero} from './components/CronusHero';
 import {ProfileStack} from './components/ProfileStack';
 import {LightBeam, TransitionStreak} from './components/LightSweep';
 import {SCENES, dur} from './timeline';
-import {prog} from './lib/anim';
+import {E} from './lib/anim';
 import {useTL} from './tl';
 import type {Caption} from '@remotion/captions';
 import {Subtitles} from './components/Subtitles';
@@ -34,8 +34,8 @@ export const Stage33: React.FC<{scenes: SceneSet; audio?: string; cardsAbove?: b
 	const tl = useTL();
 	const pose = tl.poseAt(frame);
 	const power = tl.opacity(frame);
-	const hud = Math.min(1, Math.max(0, (frame - 24) / 30)) * (1 - prog(frame, 966, 20));
-	const black = prog(frame, 976, 28);
+	const hud = Math.min(1, Math.max(0, (frame - 24) / 30)) * (1 - interpolate(frame, [966, (966) + (20)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
+	const black = interpolate(frame, [976, (976) + (28)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	const {hook: Hook, profiles: Profiles, detect: Detect, auto: Auto, docs: Docs, end: End} = scenes;
 	return (
 		<AbsoluteFill style={{background: '#000'}}>
@@ -70,7 +70,7 @@ export const Stage33: React.FC<{scenes: SceneSet; audio?: string; cardsAbove?: b
 			))}
 			<LightBeam frame={frame} from={936} dur={36} />
 			{avatar && <AvatarPip src={avatar.src} tall={avatar.tall} />}
-			{subtitles && <Subtitles {...subtitles} opacity={1 - prog(frame, 968, 12)} />}
+			{subtitles && <Subtitles {...subtitles} opacity={1 - interpolate(frame, [968, (968) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})} />}
 			<AbsoluteFill style={{background: '#000', opacity: black, pointerEvents: 'none'}} />
 		</AbsoluteFill>
 	);

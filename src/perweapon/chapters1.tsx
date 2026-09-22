@@ -1,7 +1,7 @@
 import React from 'react';
-import {useCurrentFrame, useVideoConfig} from 'remotion';
+import {interpolate, useCurrentFrame, useVideoConfig} from 'remotion';
 import {C, FONT} from '../theme';
-import {E, clamp, prog, springIn} from '../lib/anim';
+import {E, clamp, springIn} from '../lib/anim';
 import {FeatureTitle} from '../components/FeatureTitle';
 import {TextScrim} from '../components/TextScrim';
 import {SignalLine} from '../components/SignalLine';
@@ -15,10 +15,10 @@ const pixel = (extra: React.CSSProperties = {}): React.CSSProperties => ({fontFa
 // ───────────────────────── 1 · hook ─────────────────────────
 export const ChapterHook: React.FC = () => {
 	const f = useCurrentFrame();
-	const sub = prog(f, 56, 20, E.out);
+	const sub = interpolate(f, [56, (56) + (20)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	return (
 		<>
-			<TextScrim x={960} y={250} rx={1000} ry={260} opacity={prog(f, 20, 30)} />
+			<TextScrim x={960} y={250} rx={1000} ry={260} opacity={interpolate(f, [20, (20) + (30)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})} />
 			<FeatureTitle
 				x={960}
 				y={70}
@@ -72,16 +72,16 @@ const Chip: React.FC<{x: number; y: number; label: string; e: number; lit?: numb
 export const ChapterWhy: React.FC = () => {
 	const f = useCurrentFrame();
 	const L = (n: string, o = 0) => lf('why', n, o);
-	const leftIn = prog(f, L('why.leftIn'), 24, E.out);
-	const chips = [0, 1].map((i) => prog(f, L('why.chips') + i * 8, 18, E.out));
-	const profs = [0, 1].map((i) => prog(f, L('why.profiles') + i * 10, 20, E.out));
-	const lines = prog(f, L('why.lines'), 24, E.outSoft);
-	const wrong = prog(f, L('why.wrong'), 18, E.out);
-	const wrongTag = prog(f, L('why.wrongTag'), 14, E.out);
-	const rightIn = prog(f, L('why.rightIn'), 26, E.out);
+	const leftIn = interpolate(f, [L('why.leftIn'), (L('why.leftIn')) + (24)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const chips = [0, 1].map((i) => interpolate(f, [L('why.chips') + i * 8, (L('why.chips') + i * 8) + (18)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
+	const profs = [0, 1].map((i) => interpolate(f, [L('why.profiles') + i * 10, (L('why.profiles') + i * 10) + (20)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
+	const lines = interpolate(f, [L('why.lines'), (L('why.lines')) + (24)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.outSoft});
+	const wrong = interpolate(f, [L('why.wrong'), (L('why.wrong')) + (18)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const wrongTag = interpolate(f, [L('why.wrongTag'), (L('why.wrongTag')) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const rightIn = interpolate(f, [L('why.rightIn'), (L('why.rightIn')) + (26)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	const slotT = ['why.slot1', 'why.slot2', 'why.slot3'].map((n) => L(n));
-	const slots = slotT.map((t) => prog(f, t, 18, E.out));
-	const noProf = prog(f, L('why.noProfile'), 16, E.out);
+	const slots = slotT.map((t) => interpolate(f, [t, (t) + (18)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
+	const noProf = interpolate(f, [L('why.noProfile'), (L('why.noProfile')) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	const SLOT = [
 		{y: 330, w: 'AR', tag: 'S1', name: 'AR · MXR-17'},
 		{y: 470, w: 'SMG', tag: 'S2', name: 'SMG · Dravec 45'},
@@ -112,7 +112,7 @@ export const ChapterWhy: React.FC = () => {
 			))}
 			<SignalLine d="M304 380 H470 L490 385 H636" reveal={lines} base={0.4} endNode={lines > 0.95 ? {x: 636, y: 385} : null} />
 			<SignalLine d="M304 550 H470 L490 575 H636" reveal={lines * (1 - wrong)} base={0.4 * (1 - wrong)} endNode={lines > 0.95 && wrong < 0.5 ? {x: 636, y: 575} : null} />
-			<SignalLine d="M304 550 H420 L520 385 H636" reveal={wrong} base={0.7} head={wrong > 0.05 ? prog(f, L('why.wrong') + 4, 22, E.inOutSoft) * 1.2 : null} len={0.2} />
+			<SignalLine d="M304 550 H420 L520 385 H636" reveal={wrong} base={0.7} head={wrong > 0.05 ? interpolate(f, [L('why.wrong') + 4, (L('why.wrong') + 4) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft}) * 1.2 : null} len={0.2} />
 			<div style={{position: 'absolute', left: 452, top: 448, width: 56, height: 56, borderRadius: '50%', background: C.blueHi, color: '#04101f', fontFamily: FONT.display, fontWeight: 700, fontSize: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: wrong, transform: `scale(${0.6 + 0.4 * wrong})`, boxShadow: '0 0 30px rgba(109,182,255,.8)'}}>?</div>
 			<div style={{position: 'absolute', left: 110, top: 760, opacity: wrongTag, transform: `translateY(${(1 - wrongTag) * 10}px)`}}>
 				<Tag size={20}>WRONG CATEGORY → WRONG PROFILE</Tag>
@@ -158,7 +158,7 @@ export const ChapterTurn: React.FC = () => {
 	const starts = [L('turn.rowsIn'), L('turn.step1'), L('turn.step2'), L('turn.step3'), L('turn.step4')];
 	const row = (i: number) => {
 		const next = starts[i + 1] ?? 99999;
-		return {enter: prog(f, starts[0] + i * 6, 22, E.out), active: prog(f, starts[i], 10) * (1 - 0.6 * prog(f, next, 12)), done: prog(f, next, 10)};
+		return {enter: interpolate(f, [starts[0] + i * 6, (starts[0] + i * 6) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}), active: interpolate(f, [starts[i], (starts[i]) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - 0.6 * interpolate(f, [next, (next) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})), done: interpolate(f, [next, (next) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})};
 	};
 	const pressed = (n: string, len = 0.5) => win(f, L(n), L(n, len));
 	const hot = (n: string) => (f >= L(n) ? 1 : 0);
@@ -221,11 +221,11 @@ export const ChapterTurn: React.FC = () => {
 			),
 		},
 	];
-	const newRow = prog(f, L('turn.newRow'), 18, E.out);
+	const newRow = interpolate(f, [L('turn.newRow'), (L('turn.newRow')) + (18)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	return (
 		<>
 			<FeatureTitle x={90} y={70} width={900} delay={4} lines={[{text: 'TURN IT ON', size: 66, gradient: true, glow: 'rgba(47,139,255,.35)'}]} />
-			<div style={{position: 'absolute', left: 96, top: 142, fontFamily: FONT.mono, fontSize: 17, letterSpacing: '0.26em', color: C.blueHi, opacity: prog(f, 16, 14)}}>PER WEAPON · SETUP</div>
+			<div style={{position: 'absolute', left: 96, top: 142, fontFamily: FONT.mono, fontSize: 17, letterSpacing: '0.26em', color: C.blueHi, opacity: interpolate(f, [16, (16) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})}}>PER WEAPON · SETUP</div>
 			{rows.map((r, i) => {
 				const s = row(i);
 				return (
@@ -253,7 +253,7 @@ export const ChapterTurn: React.FC = () => {
 					</div>
 				</Glass>
 			</div>
-			<ScreenCallout x={1300} y={64} w={440} state={screen} frame={f} enter={prog(f, 24, 24, E.out)} glow={clamp(hl * 1.3)} />
+			<ScreenCallout x={1300} y={64} w={440} state={screen} frame={f} enter={interpolate(f, [24, (24) + (24)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})} glow={clamp(hl * 1.3)} />
 		</>
 	);
 };
@@ -265,12 +265,12 @@ export const ChapterFirst: React.FC = () => {
 	const screen = tl.screenAt(f);
 	const hl = tl.highlight(f);
 	const L = (n: string, o = 0) => lf('first', n, o);
-	const cardA = prog(f, L('first.cardA'), 22, E.out);
-	const cardB = prog(f, L('first.cardB'), 22, E.out);
-	const litA = prog(f, L('first.oledA'), 10) * (1 - 0.5 * prog(f, L('first.oledB'), 12));
-	const litB = prog(f, L('first.oledB'), 10);
+	const cardA = interpolate(f, [L('first.cardA'), (L('first.cardA')) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const cardB = interpolate(f, [L('first.cardB'), (L('first.cardB')) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const litA = interpolate(f, [L('first.oledA'), (L('first.oledA')) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - 0.5 * interpolate(f, [L('first.oledB'), (L('first.oledB')) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
+	const litB = interpolate(f, [L('first.oledB'), (L('first.oledB')) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	const r2 = win(f, L('first.r2a'), L('first.r2a', 0.35)) || win(f, L('first.r2b'), L('first.r2b', 0.35));
-	const neutral = prog(f, L('first.neutral'), 16, E.out);
+	const neutral = interpolate(f, [L('first.neutral'), (L('first.neutral')) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	const card = (y: number, e: number, lit: number, tag: string, text: string, slot: string) => (
 		<div style={{position: 'absolute', inset: 0, ...rise(e)}}>
 			<Glass x={90} y={y} w={1040} h={190} lit={lit}>
@@ -298,7 +298,7 @@ export const ChapterFirst: React.FC = () => {
 			<div style={{position: 'absolute', left: 90, top: 780, opacity: neutral, transform: `translateY(${(1 - neutral) * 12}px)`}}>
 				<Tag size={18}>NEUTRAL STARTING ANTI-RECOIL · NOTHING ELSE TO DO</Tag>
 			</div>
-			<ScreenCallout x={1250} y={60} w={520} state={screen} frame={f} enter={prog(f, 16, 24, E.out)} glow={clamp(hl * 1.3)} />
+			<ScreenCallout x={1250} y={60} w={520} state={screen} frame={f} enter={interpolate(f, [16, (16) + (24)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})} glow={clamp(hl * 1.3)} />
 		</>
 	);
 };
@@ -311,18 +311,18 @@ export const ChapterTune: React.FC = () => {
 	const screen = tl.screenAt(f);
 	const hl = tl.highlight(f);
 	const L = (n: string, o = 0) => lf('tune', n, o);
-	const pA = prog(f, L('tune.panelA'), 24, E.out);
+	const pA = interpolate(f, [L('tune.panelA'), (L('tune.panelA')) + (24)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	const pB = springIn(f, fps, L('tune.switch', -0.1));
-	const up = prog(f, L('tune.up'), 42, E.inOutSoft);
-	const down = prog(f, L('tune.down'), 30, E.inOutSoft);
+	const up = interpolate(f, [L('tune.up'), (L('tune.up')) + (42)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft});
+	const down = interpolate(f, [L('tune.down'), (L('tune.down')) + (30)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft});
 	const levelA = 0.36 + 0.26 * up - 0.12 * down;
-	const activeA = 1 - prog(f, L('tune.switch'), 10);
-	const activeB = prog(f, L('tune.switch'), 10);
+	const activeA = 1 - interpolate(f, [L('tune.switch'), (L('tune.switch')) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const activeB = interpolate(f, [L('tune.switch'), (L('tune.switch')) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	const upPress = win(f, L('tune.up'), L('tune.up', 1.2));
 	const downPress = win(f, L('tune.down'), L('tune.down', 1.0));
 	const firing = win(f, L('tune.up', -0.3), L('tune.down', 1.2));
-	const perm = prog(f, L('tune.perm'), 16, E.out);
-	const own = prog(f, L('tune.own'), 16, E.out);
+	const perm = interpolate(f, [L('tune.perm'), (L('tune.perm')) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const own = interpolate(f, [L('tune.own'), (L('tune.own')) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	const panel = (x: number, name: string, tag: string, lvl: number, lit: number) => (
 		<Glass x={x} y={150} w={500} h={640} lit={lit}>
 			<div style={{padding: '30px 34px'}}>
@@ -359,7 +359,7 @@ export const ChapterTune: React.FC = () => {
 			<div style={{position: 'absolute', left: 630 + 34, top: 722, opacity: own, transform: `scale(${0.9 + 0.1 * own})`, transformOrigin: 'left center'}}>
 				<Tag hot size={16}>OWN SLOT · OWN VALUES</Tag>
 			</div>
-			<ScreenCallout x={1300} y={64} w={470} state={screen} frame={f} enter={prog(f, 16, 24, E.out)} glow={clamp(hl * 1.3)} />
+			<ScreenCallout x={1300} y={64} w={470} state={screen} frame={f} enter={interpolate(f, [16, (16) + (24)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})} glow={clamp(hl * 1.3)} />
 		</>
 	);
 };

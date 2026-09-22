@@ -1,8 +1,8 @@
 import React, {useMemo} from 'react';
-import {useCurrentFrame, useVideoConfig} from 'remotion';
+import {interpolate, useCurrentFrame, useVideoConfig} from 'remotion';
 import {createTikTokStyleCaptions, type Caption, type TikTokPage} from '@remotion/captions';
 import {C, FONT} from '../theme';
-import {E, prog} from '../lib/anim';
+import {E} from '../lib/anim';
 
 const LEAD = 0.05; // s a page appears before its first word
 const HOLD = 0.3; // s a page stays after its last word (shortened if the next page needs the space)
@@ -44,8 +44,8 @@ export const Subtitles: React.FC<{captions: Caption[]; y: number; size?: number;
 	if (idx === -1) return null;
 	const page = pages[idx];
 	const win = windows[idx];
-	const inP = prog(frame, win.from * fps, 4, E.out);
-	const outP = prog(frame, win.to * fps - 4, 4, E.in);
+	const inP = interpolate(frame, [win.from * fps, (win.from * fps) + (4)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const outP = interpolate(frame, [win.to * fps - 4, (win.to * fps - 4) + (4)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in});
 	const tMs = t * 1000;
 	return (
 		<div style={{position: 'absolute', left: (x ?? width / 2) - width / 2, width, top: y, display: 'flex', justifyContent: 'center', pointerEvents: 'none', opacity: opacity * inP * (1 - outP), transform: `translateY(${(1 - inP) * 10}px)`}}>

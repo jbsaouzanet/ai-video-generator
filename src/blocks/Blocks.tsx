@@ -1,7 +1,7 @@
 import React from 'react';
-import {useCurrentFrame} from 'remotion';
+import {interpolate, useCurrentFrame} from 'remotion';
 import {C, FONT} from '../theme';
-import {E, bump, clamp, prog} from '../lib/anim';
+import {E, bump, clamp} from '../lib/anim';
 import {FeatureTitle, TitleLine} from '../components/FeatureTitle';
 export type {TitleLine};
 import {Glass, Gauge, KeyCap, Plus, Tag, rise} from '../components/ui';
@@ -30,8 +30,8 @@ export type Step = {label: React.ReactNode; combo?: string[]; doneAtF?: number};
 export const StepListBlock: React.FC<{x: number; y: number; w: number; h: number; rowGap: number; steps: Step[]; enterAtF: (i: number) => number; frame: number; keySize?: number}> = ({x, y, w, h, rowGap, steps, enterAtF, frame, keySize = 30}) => (
 	<>
 		{steps.map((s, i) => {
-			const e = prog(frame, enterAtF(i) - 6, 18, E.out);
-			const done = s.doneAtF !== undefined ? prog(frame, s.doneAtF, 12) : 0;
+			const e = interpolate(frame, [enterAtF(i) - 6, (enterAtF(i) - 6) + (18)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+			const done = s.doneAtF !== undefined ? interpolate(frame, [s.doneAtF, (s.doneAtF) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) : 0;
 			return (
 				<div key={i} style={{position: 'absolute', inset: 0, ...rise(e, -60)}}>
 					<Glass x={x} y={y + i * rowGap} w={w} h={h} lit={0.15 + 0.5 * e * (1 - done) + 0.1 * done}>
@@ -63,8 +63,8 @@ export const StepListBlock: React.FC<{x: number; y: number; w: number; h: number
 export type FlowChip = {label: string; state: 'dim' | 'bad' | 'good'; enterAtF: number; strikeAtF?: number};
 const RED = '#ff6b7a';
 const FlowChipView: React.FC<{c: FlowChip; frame: number; font: number}> = ({c, frame, font}) => {
-	const e = prog(frame, c.enterAtF - 6, 14, E.out);
-	const struck = c.strikeAtF !== undefined ? prog(frame, c.strikeAtF, 10) : 0;
+	const e = interpolate(frame, [c.enterAtF - 6, (c.enterAtF - 6) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const struck = c.strikeAtF !== undefined ? interpolate(frame, [c.strikeAtF, (c.strikeAtF) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) : 0;
 	const col = c.state === 'good' ? C.blueHi : c.state === 'bad' ? RED : C.ice;
 	return (
 		<div style={{opacity: clamp(e * 1.4), transform: `translateY(${(1 - e) * 18}px) scale(${0.94 + 0.06 * e})`, padding: `${font * 0.34}px ${font * 0.7}px`, borderRadius: 16, position: 'relative', background: c.state === 'good' ? 'rgba(47,139,255,.18)' : 'rgba(255,255,255,.06)', border: `1.5px solid ${c.state === 'good' ? C.blueHi : c.state === 'bad' ? 'rgba(255,107,122,.55)' : 'rgba(255,255,255,.2)'}`, boxShadow: c.state === 'good' ? '0 0 40px rgba(47,139,255,.45)' : undefined, fontFamily: FONT.display, fontWeight: 700, fontSize: font, color: col, whiteSpace: 'nowrap'}}>
@@ -77,7 +77,7 @@ export const ChipFlowBlock: React.FC<{x: number; y: number; chips: FlowChip[]; f
 	<div style={{position: 'absolute', left: x, top: y, width, display: 'flex', flexDirection: vertical ? 'column' : 'row', alignItems: 'center', gap: vertical ? 10 : 22}}>
 		{chips.map((c, i) => (
 			<React.Fragment key={i}>
-				{i > 0 && <div style={{opacity: prog(frame, c.enterAtF - 8, 10), color: C.blueHi, fontSize: font * 1.1, lineHeight: 1}}>{vertical ? '↓' : '→'}</div>}
+				{i > 0 && <div style={{opacity: interpolate(frame, [c.enterAtF - 8, (c.enterAtF - 8) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}), color: C.blueHi, fontSize: font * 1.1, lineHeight: 1}}>{vertical ? '↓' : '→'}</div>}
 				<FlowChipView c={c} frame={frame} font={font} />
 			</React.Fragment>
 		))}
@@ -86,9 +86,9 @@ export const ChipFlowBlock: React.FC<{x: number; y: number; chips: FlowChip[]; f
 
 // ── Live-tune gauge: value bar + key combo, e.g. "hold L2, press Up/Down while firing" ──
 export const TuneGaugeBlock: React.FC<{x: number; y: number; enterAtF: number; frame: number; level: number; upCombo: string[]; downCombo: string[]; upAtF: number; downAtF: number; valueLabel: React.ReactNode; noteAtF?: number; note?: string}> = ({x, y, enterAtF, frame, level, upCombo, downCombo, upAtF, downAtF, valueLabel, noteAtF, note}) => {
-	const e = prog(frame, enterAtF, 16);
-	const pu = prog(frame, upAtF, 8) * (1 - prog(frame, upAtF + 16, 8));
-	const pd = prog(frame, downAtF, 8) * (1 - prog(frame, downAtF + 16, 8));
+	const e = interpolate(frame, [enterAtF, (enterAtF) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const pu = interpolate(frame, [upAtF, (upAtF) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - interpolate(frame, [upAtF + 16, (upAtF + 16) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
+	const pd = interpolate(frame, [downAtF, (downAtF) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - interpolate(frame, [downAtF + 16, (downAtF + 16) + (8)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
 	return (
 		<>
 			<div style={{position: 'absolute', left: x, top: y, opacity: e}}>
@@ -114,7 +114,7 @@ export const TuneGaugeBlock: React.FC<{x: number; y: number; enterAtF: number; f
 				<div style={{fontFamily: FONT.display, fontWeight: 700, fontSize: 64, color: '#fff'}}>{valueLabel}</div>
 			</div>
 			{note && noteAtF !== undefined && (
-				<div style={{position: 'absolute', left: x, top: y + 480, opacity: prog(frame, noteAtF, 16), transform: `translateY(${(1 - prog(frame, noteAtF, 16)) * 14}px)`}}>
+				<div style={{position: 'absolute', left: x, top: y + 480, opacity: interpolate(frame, [noteAtF, (noteAtF) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}), transform: `translateY(${(1 - interpolate(frame, [noteAtF, (noteAtF) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})) * 14}px)`}}>
 					<Tag hot size={28}>{note}</Tag>
 				</div>
 			)}
@@ -125,9 +125,9 @@ export const TuneGaugeBlock: React.FC<{x: number; y: number; enterAtF: number; f
 // ── Compare: a dim column that fades as a lit column of rows takes over, e.g. "old way" vs "new way" ──
 export type CompareRow = {label: string; tag?: string};
 export const CompareBlock: React.FC<{x: number; y: number; w: number; frame: number; oldLabel: string; oldEnterAtF: number; oldDimAtF: number; newLabel: string; newEnterAtF: number; rows: CompareRow[]; rowsStartAtF: number; rowH?: number; rowGap?: number}> = ({x, y, w, frame, oldLabel, oldEnterAtF, oldDimAtF, newLabel, newEnterAtF, rows, rowsStartAtF, rowH = 96, rowGap = 112}) => {
-	const inOld = prog(frame, oldEnterAtF - 6, 18, E.out);
-	const dim = prog(frame, oldDimAtF - 4, 18, E.inOut);
-	const inNew = prog(frame, newEnterAtF - 4, 18, E.out);
+	const inOld = interpolate(frame, [oldEnterAtF - 6, (oldEnterAtF - 6) + (18)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const dim = interpolate(frame, [oldDimAtF - 4, (oldDimAtF - 4) + (18)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOut});
+	const inNew = interpolate(frame, [newEnterAtF - 4, (newEnterAtF - 4) + (18)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	return (
 		<>
 			<div style={{opacity: 1 - 0.62 * dim}}>
@@ -138,7 +138,7 @@ export const CompareBlock: React.FC<{x: number; y: number; w: number; frame: num
 			<div style={{position: 'absolute', inset: 0, ...rise(inNew, 0)}}>
 				<div style={mono({position: 'absolute', left: x, top: y + 60, fontSize: 24, color: C.blueHi})}>{newLabel}</div>
 				{rows.map((r, i) => {
-					const e = prog(frame, rowsStartAtF + i * 4, 16, E.out);
+					const e = interpolate(frame, [rowsStartAtF + i * 4, (rowsStartAtF + i * 4) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 					return (
 						<div key={r.label} style={{position: 'absolute', inset: 0, opacity: clamp(e * 1.4), transform: `translateY(${(1 - e) * 22}px)`}}>
 							<Glass x={x} y={y + 100 + i * rowGap} w={w} h={rowH} lit={0.2 + 0.4 * e}>
@@ -160,7 +160,7 @@ export const EndLockupBlock: React.FC<{x: number; y: number; width: number; alig
 	const frame = useCurrentFrame();
 	return (
 		<>
-			{scrim && <TextScrim x={align === 'center' ? x : x + width / 2} y={y + titleSize * 0.7} rx={width * 0.55} ry={titleSize * 1.5} opacity={prog(frame, delayF - 20, 18)} />}
+			{scrim && <TextScrim x={align === 'center' ? x : x + width / 2} y={y + titleSize * 0.7} rx={width * 0.55} ry={titleSize * 1.5} opacity={interpolate(frame, [delayF - 20, (delayF - 20) + (18)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})} />}
 			<FeatureTitle x={x} y={y} width={width} align={align} delay={delayF} lines={[{text: title, size: titleSize, gradient: true, tracking: 0.03, glow: 'rgba(47,139,255,.55)'}]} />
 			{tagline && <FeatureTitle x={x} y={y + titleSize * 1.16} width={width} align={align} delay={delayF + 12} lines={[{text: tagline, size: taglineSize, weight: 500, tracking: 0.1, color: C.ice}]} />}
 		</>

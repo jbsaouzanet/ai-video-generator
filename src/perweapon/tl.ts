@@ -1,9 +1,10 @@
 // Per Weapon film: camera path + OLED events of each chapter (local frames, derived from the cue sheet).
 // The first pose of a chapter = the last pose of the previous one, so the cross-dissolve is invisible.
-import {E, bump, clamp, prog} from '../lib/anim';
+import {E, bump, clamp} from '../lib/anim';
 import {K, POSES, Pose, ScreenEvent, cronusOpacity, sweepAt} from '../timeline';
 import {TL, makeTL} from '../tl';
 import {lf} from './cues';
+import {interpolate} from 'remotion';
 
 const P = POSES;
 export const PW_POSE: Record<string, Pose> = {
@@ -18,7 +19,7 @@ export const PW_POSE: Record<string, Pose> = {
 	end: P.endLock,
 };
 
-const hl = (pulses: number[], base = 0.25) => (f: number) => clamp(Math.max(base * prog(f, 4, 20), ...pulses.map((p) => bump(f, p + 6, 26))));
+const hl = (pulses: number[], base = 0.25) => (f: number) => clamp(Math.max(base * interpolate(f, [4, (4) + (20)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}), ...pulses.map((p) => bump(f, p + 6, 26))));
 const sorted = (ev: ScreenEvent[]) => [...ev].sort((a, b) => a.f - b.f);
 const pulsesOf = (ev: ScreenEvent[]) => ev.filter((e) => e.f > 0 && (e.title || e.line)).map((e) => e.f);
 

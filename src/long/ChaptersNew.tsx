@@ -1,7 +1,7 @@
 import React from 'react';
-import {useCurrentFrame, useVideoConfig} from 'remotion';
+import {interpolate, useCurrentFrame, useVideoConfig} from 'remotion';
 import {C, FONT} from '../theme';
-import {E, bump, clamp, prog, springIn} from '../lib/anim';
+import {E, bump, clamp, springIn} from '../lib/anim';
 import {FeatureTitle} from '../components/FeatureTitle';
 import {SignalLine, elbow} from '../components/SignalLine';
 import {ScreenCallout, calloutHeight} from '../components/ScreenCallout';
@@ -42,8 +42,8 @@ export const ChapterBefore: React.FC = () => {
 	const c1 = springIn(lf, fps, 28);
 	const c2 = springIn(lf, fps, 80);
 	const on = springIn(lf, fps, 140, {damping: 16, stiffness: 140});
-	const line = prog(lf, 146, 16);
-	const head = prog(lf, 150, 32, E.inOutSoft) * 1.18;
+	const line = interpolate(lf, [146, (146) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const head = interpolate(lf, [150, (150) + (32)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOutSoft}) * 1.18;
 	const badge = springIn(lf, fps, 178, {damping: 12, stiffness: 200});
 	const r2 = bump(lf, 60, 60) + bump(lf, 190, 50) * 0.6;
 	const path = elbow(996, 745, a.x - 6, a.y, 0.4);
@@ -154,7 +154,7 @@ export const ChapterTurnOn: React.FC = () => {
 	const tl = useTL();
 	const screen = tl.screenAt(lf);
 	const hl = tl.highlight(lf);
-	const calloutIn = prog(lf, 24, 24, E.out);
+	const calloutIn = interpolate(lf, [24, (24) + (24)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	const Y0 = 196;
 	const ROW = 136;
 	const STEP = 152;
@@ -162,14 +162,14 @@ export const ChapterTurnOn: React.FC = () => {
 	return (
 		<>
 			<FeatureTitle x={90} y={70} width={900} delay={4} lines={[{text: 'TURN IT ON', size: 66, gradient: true, glow: 'rgba(47,139,255,.35)'}]} />
-			<div style={{position: 'absolute', left: 96, top: 142, fontFamily: FONT.mono, fontSize: 17, letterSpacing: '0.26em', color: C.blueHi, opacity: prog(lf, 16, 14)}}>SETUP · 5 STEPS · ONCE</div>
+			<div style={{position: 'absolute', left: 96, top: 142, fontFamily: FONT.mono, fontSize: 17, letterSpacing: '0.26em', color: C.blueHi, opacity: interpolate(lf, [16, (16) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})}}>SETUP · 5 STEPS · ONCE</div>
 
 			{STEPS.map((s, i) => {
 				const start = C_STEPS[i];
 				const next = C_STEPS[i + 1] ?? 9999;
-				const enter = prog(lf, 10 + i * 6, 22, E.out);
-				const active = prog(lf, start, 10) * (1 - 0.6 * prog(lf, next, 12));
-				const done = prog(lf, start + 60, 10);
+				const enter = interpolate(lf, [10 + i * 6, (10 + i * 6) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+				const active = interpolate(lf, [start, (start) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - 0.6 * interpolate(lf, [next, (next) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
+				const done = interpolate(lf, [start + 60, (start + 60) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 				const press = (a: number, b: number) => (lf >= start + a && lf <= start + b ? 1 : 0);
 				return (
 					<div key={s.n} style={{position: 'absolute', inset: 0, ...rise(enter)}}>
@@ -200,15 +200,15 @@ export const ChapterUnsure: React.FC = () => {
 	const screen = tl.screenAt(lf);
 	const hl = tl.highlight(lf);
 	const pose = tl.poseAt(lf);
-	const calloutIn = prog(lf, 18, 24, E.out);
-	const chips = [prog(lf, 34, 22, E.out), prog(lf, 44, 22, E.out)];
-	const chosen = prog(lf, E_T.chosen, 10);
+	const calloutIn = interpolate(lf, [18, (18) + (24)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const chips = [interpolate(lf, [34, (34) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}), interpolate(lf, [44, (44) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})];
+	const chosen = interpolate(lf, [E_T.chosen, (E_T.chosen) + (10)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	const active = [chosen, 0];
 	const keys1 = springIn(lf, useVideoConfig().fps, 120);
 	const k = (a: number, b: number) => (lf >= a && lf <= b ? 1 : 0);
-	const keys2 = prog(lf, 196, 16, E.out);
-	const foot = prog(lf, 300, 16);
-	const eq = prog(lf, 50, 14);
+	const keys2 = interpolate(lf, [196, (196) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const foot = interpolate(lf, [300, (300) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
+	const eq = interpolate(lf, [50, (50) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	const top = pose.y - pose.h / 2;
 
 	return (
@@ -231,11 +231,11 @@ export const ChapterUnsure: React.FC = () => {
 				horizontal
 			/>
 			<div style={{position: 'absolute', left: 1530, top: 150, width: 40, textAlign: 'center', fontFamily: FONT.display, fontWeight: 700, fontSize: 54, color: C.blueHi, opacity: eq}}>=</div>
-			<div style={{position: 'absolute', left: 1230, top: 286, width: 640, textAlign: 'center', fontFamily: FONT.mono, fontSize: 17, letterSpacing: '0.2em', color: C.dim, opacity: prog(lf, 70, 14) * (1 - prog(lf, E_T.chosen + 40, 12))}}>
+			<div style={{position: 'absolute', left: 1230, top: 286, width: 640, textAlign: 'center', fontFamily: FONT.mono, fontSize: 17, letterSpacing: '0.2em', color: C.dim, opacity: interpolate(lf, [70, (70) + (14)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}) * (1 - interpolate(lf, [E_T.chosen + 40, (E_T.chosen + 40) + (12)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}))}}>
 				<span style={{color: C.blueHi}}>?</span> = SAME SIGNATURE · IT CAN'T TELL WHICH
 			</div>
-			<SignalLine d={`M1380 322 V${top + 24}`} reveal={prog(lf, 60, 20)} base={0.25} width={2} />
-			<SignalLine d={`M1720 322 V${top + 24}`} reveal={prog(lf, 64, 20)} base={0.25} width={2} />
+			<SignalLine d={`M1380 322 V${top + 24}`} reveal={interpolate(lf, [60, (60) + (20)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})} base={0.25} width={2} />
+			<SignalLine d={`M1720 322 V${top + 24}`} reveal={interpolate(lf, [64, (64) + (20)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})} base={0.25} width={2} />
 
 			{/* how to answer */}
 			<div style={{position: 'absolute', left: 90, top: 610, opacity: clamp(keys1), transform: `translateY(${(1 - clamp(keys1)) * 16}px)`}}>
@@ -277,10 +277,10 @@ export const ChapterFix: React.FC = () => {
 	const tl = useTL();
 	const screen = tl.screenAt(lf);
 	const hl = tl.highlight(lf);
-	const out = prog(lf, 272, 22, E.in);
+	const out = interpolate(lf, [272, (272) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.in});
 	const press = (i: number) => (lf >= F_ROWS[i] - 4 && lf <= F_ROWS[i] + 22 ? 1 : 0);
 	const rows = GESTURES(press);
-	const calloutIn = prog(lf, 30, 24, E.out);
+	const calloutIn = interpolate(lf, [30, (30) + (24)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 	return (
 		<div style={{position: 'absolute', inset: 0}}>
 			<div style={{position: 'absolute', inset: 0, opacity: 1 - out, transform: `translateX(${-out * 60}px)`, filter: out > 0 ? `blur(${out * 10}px)` : undefined}}>
@@ -297,7 +297,7 @@ export const ChapterFix: React.FC = () => {
 					lineGap={12}
 				/>
 				{rows.map((g, i) => {
-					const enter = prog(lf, 20 + i * 8, 22, E.out);
+					const enter = interpolate(lf, [20 + i * 8, (20 + i * 8) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out});
 					const active = bump(lf, F_ROWS[i] + 10, 70);
 					return (
 						<div key={i} style={{position: 'absolute', inset: 0, ...rise(enter)}}>
@@ -311,7 +311,7 @@ export const ChapterFix: React.FC = () => {
 						</div>
 					);
 				})}
-				<div style={{position: 'absolute', left: 90, top: 928, opacity: prog(lf, 150, 16), fontFamily: FONT.mono, fontSize: 17, letterSpacing: '0.2em', color: C.dim}}>
+				<div style={{position: 'absolute', left: 90, top: 928, opacity: interpolate(lf, [150, (150) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}), fontFamily: FONT.mono, fontSize: 17, letterSpacing: '0.2em', color: C.dim}}>
 					<span style={{color: C.blueHi}}>●</span> HOLD (MS) IN WEAPON DETECT: 100–1000 · DEFAULT 400
 				</div>
 			</div>
