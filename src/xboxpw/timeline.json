@@ -1,0 +1,1585 @@
+[
+  {
+    "id": "p1",
+    "text": "Per Weapon mode. Now on Xbox.",
+    "caption": "Per Weapon mode. Now on Xbox.",
+    "start": 1.05,
+    "dur": 2.41,
+    "end": 3.46,
+    "file": "audio/build/pw-xbox/voice/p1.wav",
+    "words": [
+      {
+        "t": "Per",
+        "from": 0.03,
+        "to": 0.152
+      },
+      {
+        "t": "Weapon",
+        "from": 0.152,
+        "to": 0.527
+      },
+      {
+        "t": "mode.",
+        "from": 0.527,
+        "to": 0.95
+      },
+      {
+        "t": "Now",
+        "from": 1.182,
+        "to": 1.365
+      },
+      {
+        "t": "on",
+        "from": 1.365,
+        "to": 1.527
+      },
+      {
+        "t": "Xbox.",
+        "from": 1.527,
+        "to": 2.29
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "p2",
+    "text": "Most scripts give one anti-recoil per category. Per Weapon gives every weapon its own.",
+    "caption": "Most scripts give one anti-recoil per category. Per Weapon gives every weapon its own.",
+    "start": 4.56,
+    "dur": 4.98,
+    "end": 9.54,
+    "file": "audio/build/pw-xbox/voice/p2.wav",
+    "words": [
+      {
+        "t": "Most",
+        "from": 0.03,
+        "to": 0.239
+      },
+      {
+        "t": "scripts",
+        "from": 0.239,
+        "to": 0.639
+      },
+      {
+        "t": "give",
+        "from": 0.639,
+        "to": 0.877
+      },
+      {
+        "t": "one",
+        "from": 0.877,
+        "to": 1.114
+      },
+      {
+        "t": "anti-recoil",
+        "from": 1.114,
+        "to": 1.789
+      },
+      {
+        "t": "per",
+        "from": 1.789,
+        "to": 1.939
+      },
+      {
+        "t": "category.",
+        "from": 1.939,
+        "to": 2.789
+      },
+      {
+        "t": "Per",
+        "from": 2.993,
+        "to": 3.102
+      },
+      {
+        "t": "Weapon",
+        "from": 3.102,
+        "to": 3.464
+      },
+      {
+        "t": "gives",
+        "from": 3.464,
+        "to": 3.752
+      },
+      {
+        "t": "every",
+        "from": 3.752,
+        "to": 4.089
+      },
+      {
+        "t": "weapon",
+        "from": 4.089,
+        "to": 4.389
+      },
+      {
+        "t": "its",
+        "from": 4.389,
+        "to": 4.589
+      },
+      {
+        "t": "own.",
+        "from": 4.589,
+        "to": 4.861
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "p3",
+    "text": "On Xbox, it reads your controller's vibration instead of a PS5 trigger.",
+    "caption": "On Xbox, it reads your controller's vibration instead of a PS5 trigger.",
+    "start": 10.14,
+    "dur": 4.94,
+    "end": 15.08,
+    "file": "audio/build/pw-xbox/voice/p3.wav",
+    "words": [
+      {
+        "t": "On",
+        "from": 0.03,
+        "to": 0.179
+      },
+      {
+        "t": "Xbox,",
+        "from": 0.179,
+        "to": 0.942
+      },
+      {
+        "t": "it",
+        "from": 0.992,
+        "to": 1.117
+      },
+      {
+        "t": "reads",
+        "from": 1.117,
+        "to": 1.405
+      },
+      {
+        "t": "your",
+        "from": 1.405,
+        "to": 1.517
+      },
+      {
+        "t": "controller's",
+        "from": 1.517,
+        "to": 2.192
+      },
+      {
+        "t": "vibration",
+        "from": 2.192,
+        "to": 3.08
+      },
+      {
+        "t": "instead",
+        "from": 3.148,
+        "to": 3.429
+      },
+      {
+        "t": "of",
+        "from": 3.429,
+        "to": 3.505
+      },
+      {
+        "t": "a",
+        "from": 3.505,
+        "to": 3.604
+      },
+      {
+        "t": "PS5",
+        "from": 3.604,
+        "to": 4.454
+      },
+      {
+        "t": "trigger.",
+        "from": 4.454,
+        "to": 4.82
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "t1",
+    "text": "You need an Xbox controller, with vibration enabled, on console or PC, and in the game.",
+    "caption": "You need an Xbox controller, with vibration enabled, on console or PC, and in the game.",
+    "start": 16.18,
+    "dur": 5.679,
+    "end": 21.859,
+    "file": "audio/build/pw-xbox/voice/t1.wav",
+    "words": [
+      {
+        "t": "You",
+        "from": 0.03,
+        "to": 0.13
+      },
+      {
+        "t": "need",
+        "from": 0.13,
+        "to": 0.318
+      },
+      {
+        "t": "an",
+        "from": 0.318,
+        "to": 0.443
+      },
+      {
+        "t": "Xbox",
+        "from": 0.443,
+        "to": 1.005
+      },
+      {
+        "t": "controller,",
+        "from": 1.005,
+        "to": 1.578
+      },
+      {
+        "t": "with",
+        "from": 1.92,
+        "to": 2.005
+      },
+      {
+        "t": "vibration",
+        "from": 2.005,
+        "to": 2.605
+      },
+      {
+        "t": "enabled,",
+        "from": 2.605,
+        "to": 3.105
+      },
+      {
+        "t": "on",
+        "from": 3.155,
+        "to": 3.368
+      },
+      {
+        "t": "console",
+        "from": 3.368,
+        "to": 4.03
+      },
+      {
+        "t": "or",
+        "from": 4.03,
+        "to": 4.193
+      },
+      {
+        "t": "PC,",
+        "from": 4.193,
+        "to": 4.773
+      },
+      {
+        "t": "and",
+        "from": 5.035,
+        "to": 5.092
+      },
+      {
+        "t": "in",
+        "from": 5.092,
+        "to": 5.193
+      },
+      {
+        "t": "the",
+        "from": 5.193,
+        "to": 5.28
+      },
+      {
+        "t": "game.",
+        "from": 5.28,
+        "to": 5.559
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "t2",
+    "text": "Open the Cronus menu. Go to Combat, Weapon Detect, and enable it.",
+    "caption": "Open the Cronus menu. Go to Combat, Weapon Detect, and enable it.",
+    "start": 22.309,
+    "dur": 3.988,
+    "end": 26.297,
+    "file": "audio/build/pw-xbox/voice/t2.wav",
+    "words": [
+      {
+        "t": "Open",
+        "from": 0.03,
+        "to": 0.25
+      },
+      {
+        "t": "the",
+        "from": 0.25,
+        "to": 0.338
+      },
+      {
+        "t": "Cronus",
+        "from": 0.338,
+        "to": 0.763
+      },
+      {
+        "t": "menu.",
+        "from": 0.763,
+        "to": 1.413
+      },
+      {
+        "t": "Go",
+        "from": 1.644,
+        "to": 1.725
+      },
+      {
+        "t": "to",
+        "from": 1.725,
+        "to": 1.838
+      },
+      {
+        "t": "Combat,",
+        "from": 1.838,
+        "to": 2.388
+      },
+      {
+        "t": "Weapon",
+        "from": 2.438,
+        "to": 2.763
+      },
+      {
+        "t": "Detect,",
+        "from": 2.763,
+        "to": 3.188
+      },
+      {
+        "t": "and",
+        "from": 3.225,
+        "to": 3.338
+      },
+      {
+        "t": "enable",
+        "from": 3.338,
+        "to": 3.788
+      },
+      {
+        "t": "it.",
+        "from": 3.788,
+        "to": 3.868
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "t3",
+    "text": "Press A. Set Device to Xbox, and Type to Per Weapon.",
+    "caption": "Press A. Set Device to Xbox, and Type to Per Weapon.",
+    "start": 26.747,
+    "dur": 3.452,
+    "end": 30.199,
+    "file": "audio/build/pw-xbox/voice/t3.wav",
+    "words": [
+      {
+        "t": "Press",
+        "from": 0.03,
+        "to": 0.246
+      },
+      {
+        "t": "A.",
+        "from": 0.246,
+        "to": 0.458
+      },
+      {
+        "t": "Set",
+        "from": 0.458,
+        "to": 0.696
+      },
+      {
+        "t": "Device",
+        "from": 0.696,
+        "to": 1.096
+      },
+      {
+        "t": "to",
+        "from": 1.096,
+        "to": 1.233
+      },
+      {
+        "t": "Xbox,",
+        "from": 1.233,
+        "to": 1.974
+      },
+      {
+        "t": "and",
+        "from": 2.234,
+        "to": 2.333
+      },
+      {
+        "t": "Type",
+        "from": 2.333,
+        "to": 2.646
+      },
+      {
+        "t": "to",
+        "from": 2.646,
+        "to": 2.746
+      },
+      {
+        "t": "Per",
+        "from": 2.746,
+        "to": 2.921
+      },
+      {
+        "t": "Weapon.",
+        "from": 2.921,
+        "to": 3.332
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "t4",
+    "text": "Two new rows appear: Teach Weapon, and Tolerance.",
+    "caption": "Two new rows appear: Teach Weapon, and Tolerance.",
+    "start": 30.649,
+    "dur": 2.995,
+    "end": 33.644,
+    "file": "audio/build/pw-xbox/voice/t4.wav",
+    "words": [
+      {
+        "t": "Two",
+        "from": 0.03,
+        "to": 0.164
+      },
+      {
+        "t": "new",
+        "from": 0.164,
+        "to": 0.339
+      },
+      {
+        "t": "rows",
+        "from": 0.339,
+        "to": 0.664
+      },
+      {
+        "t": "appear:",
+        "from": 0.664,
+        "to": 1.107
+      },
+      {
+        "t": "Teach",
+        "from": 1.398,
+        "to": 1.651
+      },
+      {
+        "t": "Weapon,",
+        "from": 1.651,
+        "to": 2.014
+      },
+      {
+        "t": "and",
+        "from": 2.051,
+        "to": 2.176
+      },
+      {
+        "t": "Tolerance.",
+        "from": 2.176,
+        "to": 2.875
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "f1",
+    "text": "Unlike PS5, nothing is known out of the box.",
+    "caption": "Unlike PS5, nothing is known out of the box.",
+    "start": 34.744,
+    "dur": 3.222,
+    "end": 37.966,
+    "file": "audio/build/pw-xbox/voice/f1.wav",
+    "words": [
+      {
+        "t": "Unlike",
+        "from": 0.03,
+        "to": 0.383
+      },
+      {
+        "t": "PS5,",
+        "from": 0.383,
+        "to": 1.229
+      },
+      {
+        "t": "nothing",
+        "from": 1.534,
+        "to": 1.895
+      },
+      {
+        "t": "is",
+        "from": 1.895,
+        "to": 2.045
+      },
+      {
+        "t": "known",
+        "from": 2.045,
+        "to": 2.308
+      },
+      {
+        "t": "out",
+        "from": 2.308,
+        "to": 2.433
+      },
+      {
+        "t": "of",
+        "from": 2.433,
+        "to": 2.508
+      },
+      {
+        "t": "the",
+        "from": 2.508,
+        "to": 2.595
+      },
+      {
+        "t": "box.",
+        "from": 2.595,
+        "to": 3.102
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "f2",
+    "text": "Until you teach a weapon, firing shows nothing. Your profile's manual setting is used instead.",
+    "caption": "Until you teach a weapon, firing shows nothing. Your profile's manual setting is used instead.",
+    "start": 38.416,
+    "dur": 5.983,
+    "end": 44.399,
+    "file": "audio/build/pw-xbox/voice/f2.wav",
+    "words": [
+      {
+        "t": "Until",
+        "from": 0.03,
+        "to": 0.187
+      },
+      {
+        "t": "you",
+        "from": 0.187,
+        "to": 0.35
+      },
+      {
+        "t": "teach",
+        "from": 0.35,
+        "to": 0.625
+      },
+      {
+        "t": "a",
+        "from": 0.625,
+        "to": 0.725
+      },
+      {
+        "t": "weapon,",
+        "from": 0.725,
+        "to": 1.196
+      },
+      {
+        "t": "firing",
+        "from": 1.385,
+        "to": 1.85
+      },
+      {
+        "t": "shows",
+        "from": 1.85,
+        "to": 2.2
+      },
+      {
+        "t": "nothing.",
+        "from": 2.2,
+        "to": 2.937
+      },
+      {
+        "t": "Your",
+        "from": 3.062,
+        "to": 3.212
+      },
+      {
+        "t": "profile's",
+        "from": 3.212,
+        "to": 3.875
+      },
+      {
+        "t": "manual",
+        "from": 3.875,
+        "to": 4.35
+      },
+      {
+        "t": "setting",
+        "from": 4.35,
+        "to": 4.737
+      },
+      {
+        "t": "is",
+        "from": 4.737,
+        "to": 4.9
+      },
+      {
+        "t": "used",
+        "from": 4.9,
+        "to": 5.287
+      },
+      {
+        "t": "instead.",
+        "from": 5.287,
+        "to": 5.864
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "h1",
+    "text": "Open Teach Weapon, and pick an empty slot.",
+    "caption": "Open Teach Weapon, and pick an empty slot.",
+    "start": 45.499,
+    "dur": 2.482,
+    "end": 47.981,
+    "file": "audio/build/pw-xbox/voice/h1.wav",
+    "words": [
+      {
+        "t": "Open",
+        "from": 0.03,
+        "to": 0.287
+      },
+      {
+        "t": "Teach",
+        "from": 0.287,
+        "to": 0.587
+      },
+      {
+        "t": "Weapon,",
+        "from": 0.587,
+        "to": 1.042
+      },
+      {
+        "t": "and",
+        "from": 1.174,
+        "to": 1.262
+      },
+      {
+        "t": "pick",
+        "from": 1.262,
+        "to": 1.499
+      },
+      {
+        "t": "an",
+        "from": 1.499,
+        "to": 1.624
+      },
+      {
+        "t": "empty",
+        "from": 1.624,
+        "to": 1.974
+      },
+      {
+        "t": "slot.",
+        "from": 1.974,
+        "to": 2.362
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "h2",
+    "text": "Fire two or three times. The screen shows your controller's vibration values.",
+    "caption": "Fire two or three times. The screen shows your controller's vibration values.",
+    "start": 48.431,
+    "dur": 4.922,
+    "end": 53.353,
+    "file": "audio/build/pw-xbox/voice/h2.wav",
+    "words": [
+      {
+        "t": "Fire",
+        "from": 0.03,
+        "to": 0.344
+      },
+      {
+        "t": "two",
+        "from": 0.344,
+        "to": 0.669
+      },
+      {
+        "t": "or",
+        "from": 0.669,
+        "to": 0.832
+      },
+      {
+        "t": "three",
+        "from": 0.832,
+        "to": 1.082
+      },
+      {
+        "t": "times.",
+        "from": 1.082,
+        "to": 1.844
+      },
+      {
+        "t": "The",
+        "from": 1.969,
+        "to": 2.107
+      },
+      {
+        "t": "screen",
+        "from": 2.107,
+        "to": 2.557
+      },
+      {
+        "t": "shows",
+        "from": 2.557,
+        "to": 2.832
+      },
+      {
+        "t": "your",
+        "from": 2.832,
+        "to": 2.944
+      },
+      {
+        "t": "controller's",
+        "from": 2.944,
+        "to": 3.594
+      },
+      {
+        "t": "vibration",
+        "from": 3.594,
+        "to": 4.219
+      },
+      {
+        "t": "values.",
+        "from": 4.219,
+        "to": 4.802
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "h3",
+    "text": "Once they're stable, confirm, pick a category, and save.",
+    "caption": "Once they're stable, confirm, pick a category, and save.",
+    "start": 53.803,
+    "dur": 3.121,
+    "end": 56.924,
+    "file": "audio/build/pw-xbox/voice/h3.wav",
+    "words": [
+      {
+        "t": "Once",
+        "from": 0.03,
+        "to": 0.187
+      },
+      {
+        "t": "they're",
+        "from": 0.187,
+        "to": 0.349
+      },
+      {
+        "t": "stable,",
+        "from": 0.349,
+        "to": 0.824
+      },
+      {
+        "t": "confirm,",
+        "from": 0.899,
+        "to": 1.536
+      },
+      {
+        "t": "pick",
+        "from": 1.696,
+        "to": 1.787
+      },
+      {
+        "t": "a",
+        "from": 1.787,
+        "to": 1.849
+      },
+      {
+        "t": "category,",
+        "from": 1.849,
+        "to": 2.449
+      },
+      {
+        "t": "and",
+        "from": 2.487,
+        "to": 2.624
+      },
+      {
+        "t": "save.",
+        "from": 2.624,
+        "to": 3.001
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "h4",
+    "text": "Fire it again, and it claims its own slot, automatically.",
+    "caption": "Fire it again, and it claims its own slot, automatically.",
+    "start": 57.524,
+    "dur": 3.302,
+    "end": 60.826,
+    "file": "audio/build/pw-xbox/voice/h4.wav",
+    "words": [
+      {
+        "t": "Fire",
+        "from": 0.03,
+        "to": 0.319
+      },
+      {
+        "t": "it",
+        "from": 0.319,
+        "to": 0.406
+      },
+      {
+        "t": "again,",
+        "from": 0.406,
+        "to": 0.83
+      },
+      {
+        "t": "and",
+        "from": 1.011,
+        "to": 1.069
+      },
+      {
+        "t": "it",
+        "from": 1.069,
+        "to": 1.156
+      },
+      {
+        "t": "claims",
+        "from": 1.156,
+        "to": 1.469
+      },
+      {
+        "t": "its",
+        "from": 1.469,
+        "to": 1.644
+      },
+      {
+        "t": "own",
+        "from": 1.644,
+        "to": 1.919
+      },
+      {
+        "t": "slot,",
+        "from": 1.919,
+        "to": 2.287
+      },
+      {
+        "t": "automatically.",
+        "from": 2.464,
+        "to": 3.182
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "u1",
+    "text": "Too high or too low? Hold LT, and press Up or Down, while firing.",
+    "caption": "Too high or too low? Hold LT, and press Up or Down, while firing.",
+    "start": 61.926,
+    "dur": 4.034,
+    "end": 65.96,
+    "file": "audio/build/pw-xbox/voice/u1.wav",
+    "words": [
+      {
+        "t": "Too",
+        "from": 0.03,
+        "to": 0.206
+      },
+      {
+        "t": "high",
+        "from": 0.206,
+        "to": 0.518
+      },
+      {
+        "t": "or",
+        "from": 0.518,
+        "to": 0.681
+      },
+      {
+        "t": "too",
+        "from": 0.681,
+        "to": 0.893
+      },
+      {
+        "t": "low?",
+        "from": 0.893,
+        "to": 1.205
+      },
+      {
+        "t": "Hold",
+        "from": 1.604,
+        "to": 1.756
+      },
+      {
+        "t": "LT,",
+        "from": 1.756,
+        "to": 2.193
+      },
+      {
+        "t": "and",
+        "from": 2.231,
+        "to": 2.343
+      },
+      {
+        "t": "press",
+        "from": 2.343,
+        "to": 2.606
+      },
+      {
+        "t": "Up",
+        "from": 2.606,
+        "to": 2.781
+      },
+      {
+        "t": "or",
+        "from": 2.781,
+        "to": 2.893
+      },
+      {
+        "t": "Down,",
+        "from": 2.893,
+        "to": 3.193
+      },
+      {
+        "t": "while",
+        "from": 3.231,
+        "to": 3.443
+      },
+      {
+        "t": "firing.",
+        "from": 3.443,
+        "to": 3.914
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "u2",
+    "text": "It's permanent, for that exact weapon.",
+    "caption": "It's permanent, for that exact weapon.",
+    "start": 66.41,
+    "dur": 2.182,
+    "end": 68.592,
+    "file": "audio/build/pw-xbox/voice/u2.wav",
+    "words": [
+      {
+        "t": "It's",
+        "from": 0.03,
+        "to": 0.185
+      },
+      {
+        "t": "permanent,",
+        "from": 0.185,
+        "to": 0.71
+      },
+      {
+        "t": "for",
+        "from": 0.76,
+        "to": 0.885
+      },
+      {
+        "t": "that",
+        "from": 0.885,
+        "to": 1.135
+      },
+      {
+        "t": "exact",
+        "from": 1.135,
+        "to": 1.635
+      },
+      {
+        "t": "weapon.",
+        "from": 1.635,
+        "to": 2.062
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "a1",
+    "text": "Two taught weapons feel too similar? Hold LT, and press Left or Right, to switch.",
+    "caption": "Two taught weapons feel too similar? Hold LT, and press Left or Right, to switch.",
+    "start": 69.692,
+    "dur": 5.01,
+    "end": 74.702,
+    "file": "audio/build/pw-xbox/voice/a1.wav",
+    "words": [
+      {
+        "t": "Two",
+        "from": 0.03,
+        "to": 0.158
+      },
+      {
+        "t": "taught",
+        "from": 0.158,
+        "to": 0.433
+      },
+      {
+        "t": "weapons",
+        "from": 0.433,
+        "to": 0.833
+      },
+      {
+        "t": "feel",
+        "from": 0.833,
+        "to": 1.096
+      },
+      {
+        "t": "too",
+        "from": 1.096,
+        "to": 1.321
+      },
+      {
+        "t": "similar?",
+        "from": 1.321,
+        "to": 1.983
+      },
+      {
+        "t": "Hold",
+        "from": 2.21,
+        "to": 2.396
+      },
+      {
+        "t": "LT,",
+        "from": 2.396,
+        "to": 2.933
+      },
+      {
+        "t": "and",
+        "from": 3.009,
+        "to": 3.134
+      },
+      {
+        "t": "press",
+        "from": 3.134,
+        "to": 3.446
+      },
+      {
+        "t": "Left",
+        "from": 3.446,
+        "to": 3.759
+      },
+      {
+        "t": "or",
+        "from": 3.759,
+        "to": 3.921
+      },
+      {
+        "t": "Right,",
+        "from": 3.921,
+        "to": 4.209
+      },
+      {
+        "t": "to",
+        "from": 4.258,
+        "to": 4.396
+      },
+      {
+        "t": "switch.",
+        "from": 4.396,
+        "to": 4.89
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "to1",
+    "text": "Vibration drifts more than a PS5 trigger, shot to shot.",
+    "caption": "Vibration drifts more than a PS5 trigger, shot to shot.",
+    "start": 75.802,
+    "dur": 3.5,
+    "end": 79.302,
+    "file": "audio/build/pw-xbox/voice/to1.wav",
+    "words": [
+      {
+        "t": "Vibration",
+        "from": 0.03,
+        "to": 0.506
+      },
+      {
+        "t": "drifts",
+        "from": 0.506,
+        "to": 0.881
+      },
+      {
+        "t": "more",
+        "from": 0.881,
+        "to": 1.068
+      },
+      {
+        "t": "than",
+        "from": 1.068,
+        "to": 1.168
+      },
+      {
+        "t": "a",
+        "from": 1.168,
+        "to": 1.268
+      },
+      {
+        "t": "PS5",
+        "from": 1.268,
+        "to": 2.031
+      },
+      {
+        "t": "trigger,",
+        "from": 2.031,
+        "to": 2.424
+      },
+      {
+        "t": "shot",
+        "from": 2.694,
+        "to": 2.931
+      },
+      {
+        "t": "to",
+        "from": 2.931,
+        "to": 3.068
+      },
+      {
+        "t": "shot.",
+        "from": 3.068,
+        "to": 3.38
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "to2",
+    "text": "Tolerance sets the margin. Too tight, and a weapon just isn't recognized.",
+    "caption": "Tolerance sets the margin. Too tight, and a weapon just isn't recognized.",
+    "start": 79.752,
+    "dur": 4.48,
+    "end": 84.232,
+    "file": "audio/build/pw-xbox/voice/to2.wav",
+    "words": [
+      {
+        "t": "Tolerance",
+        "from": 0.03,
+        "to": 0.512
+      },
+      {
+        "t": "sets",
+        "from": 0.512,
+        "to": 0.812
+      },
+      {
+        "t": "the",
+        "from": 0.812,
+        "to": 0.912
+      },
+      {
+        "t": "margin.",
+        "from": 0.912,
+        "to": 1.637
+      },
+      {
+        "t": "Too",
+        "from": 1.841,
+        "to": 2.025
+      },
+      {
+        "t": "tight,",
+        "from": 2.025,
+        "to": 2.406
+      },
+      {
+        "t": "and",
+        "from": 2.576,
+        "to": 2.65
+      },
+      {
+        "t": "a",
+        "from": 2.65,
+        "to": 2.75
+      },
+      {
+        "t": "weapon",
+        "from": 2.75,
+        "to": 3.137
+      },
+      {
+        "t": "just",
+        "from": 3.137,
+        "to": 3.362
+      },
+      {
+        "t": "isn't",
+        "from": 3.362,
+        "to": 3.612
+      },
+      {
+        "t": "recognized.",
+        "from": 3.612,
+        "to": 4.361
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "to3",
+    "text": "Too loose, and it confidently applies the wrong weapon's setting.",
+    "caption": "Too loose, and it confidently applies the wrong weapon's setting.",
+    "start": 84.682,
+    "dur": 3.283,
+    "end": 87.965,
+    "file": "audio/build/pw-xbox/voice/to3.wav",
+    "words": [
+      {
+        "t": "Too",
+        "from": 0.03,
+        "to": 0.19
+      },
+      {
+        "t": "loose,",
+        "from": 0.19,
+        "to": 0.59
+      },
+      {
+        "t": "and",
+        "from": 0.627,
+        "to": 0.727
+      },
+      {
+        "t": "it",
+        "from": 0.727,
+        "to": 0.827
+      },
+      {
+        "t": "confidently",
+        "from": 0.827,
+        "to": 1.44
+      },
+      {
+        "t": "applies",
+        "from": 1.44,
+        "to": 1.965
+      },
+      {
+        "t": "the",
+        "from": 1.965,
+        "to": 2.102
+      },
+      {
+        "t": "wrong",
+        "from": 2.102,
+        "to": 2.44
+      },
+      {
+        "t": "weapon's",
+        "from": 2.44,
+        "to": 2.852
+      },
+      {
+        "t": "setting.",
+        "from": 2.852,
+        "to": 3.163
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "to4",
+    "text": "When in doubt, keep it tight.",
+    "caption": "When in doubt, keep it tight.",
+    "start": 88.415,
+    "dur": 1.405,
+    "end": 89.82,
+    "file": "audio/build/pw-xbox/voice/to4.wav",
+    "words": [
+      {
+        "t": "When",
+        "from": 0.03,
+        "to": 0.115
+      },
+      {
+        "t": "in",
+        "from": 0.115,
+        "to": 0.277
+      },
+      {
+        "t": "doubt,",
+        "from": 0.277,
+        "to": 0.615
+      },
+      {
+        "t": "keep",
+        "from": 0.665,
+        "to": 0.877
+      },
+      {
+        "t": "it",
+        "from": 0.877,
+        "to": 0.99
+      },
+      {
+        "t": "tight.",
+        "from": 0.99,
+        "to": 1.285
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "e1",
+    "text": "Forty eight personal slots, kept after a power off, and a reflash.",
+    "caption": "Forty eight personal slots, kept after a power off, and a reflash.",
+    "start": 90.92,
+    "dur": 3.776,
+    "end": 94.696,
+    "file": "audio/build/pw-xbox/voice/e1.wav",
+    "words": [
+      {
+        "t": "Forty",
+        "from": 0.03,
+        "to": 0.303
+      },
+      {
+        "t": "eight",
+        "from": 0.303,
+        "to": 0.528
+      },
+      {
+        "t": "personal",
+        "from": 0.528,
+        "to": 0.965
+      },
+      {
+        "t": "slots,",
+        "from": 0.965,
+        "to": 1.494
+      },
+      {
+        "t": "kept",
+        "from": 1.647,
+        "to": 1.84
+      },
+      {
+        "t": "after",
+        "from": 1.84,
+        "to": 2.09
+      },
+      {
+        "t": "a",
+        "from": 2.09,
+        "to": 2.153
+      },
+      {
+        "t": "power",
+        "from": 2.153,
+        "to": 2.528
+      },
+      {
+        "t": "off,",
+        "from": 2.528,
+        "to": 2.778
+      },
+      {
+        "t": "and",
+        "from": 2.815,
+        "to": 2.915
+      },
+      {
+        "t": "a",
+        "from": 2.915,
+        "to": 2.978
+      },
+      {
+        "t": "reflash.",
+        "from": 2.978,
+        "to": 3.656
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "e2",
+    "text": "Badly tuned mid fight? Hold View and Y, for one second, to fall back to your profile.",
+    "caption": "Badly tuned mid fight? Hold View and Y, for one second, to fall back to your profile.",
+    "start": 95.296,
+    "dur": 4.946,
+    "end": 100.242,
+    "file": "audio/build/pw-xbox/voice/e2.wav",
+    "words": [
+      {
+        "t": "Badly",
+        "from": 0.03,
+        "to": 0.327
+      },
+      {
+        "t": "tuned",
+        "from": 0.327,
+        "to": 0.664
+      },
+      {
+        "t": "mid",
+        "from": 0.664,
+        "to": 0.877
+      },
+      {
+        "t": "fight?",
+        "from": 0.877,
+        "to": 1.464
+      },
+      {
+        "t": "Hold",
+        "from": 1.677,
+        "to": 1.839
+      },
+      {
+        "t": "View",
+        "from": 1.839,
+        "to": 2.114
+      },
+      {
+        "t": "and",
+        "from": 2.114,
+        "to": 2.239
+      },
+      {
+        "t": "Y,",
+        "from": 2.239,
+        "to": 2.589
+      },
+      {
+        "t": "for",
+        "from": 2.664,
+        "to": 2.789
+      },
+      {
+        "t": "one",
+        "from": 2.789,
+        "to": 3.027
+      },
+      {
+        "t": "second,",
+        "from": 3.027,
+        "to": 3.339
+      },
+      {
+        "t": "to",
+        "from": 3.377,
+        "to": 3.489
+      },
+      {
+        "t": "fall",
+        "from": 3.489,
+        "to": 3.764
+      },
+      {
+        "t": "back",
+        "from": 3.764,
+        "to": 4.039
+      },
+      {
+        "t": "to",
+        "from": 4.039,
+        "to": 4.127
+      },
+      {
+        "t": "your",
+        "from": 4.127,
+        "to": 4.239
+      },
+      {
+        "t": "profile.",
+        "from": 4.239,
+        "to": 4.826
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "n1",
+    "text": "The full guide is on Rocket Mod dot org.",
+    "caption": "The full guide is on Rocket Mod dot org.",
+    "start": 101.342,
+    "dur": 2.367,
+    "end": 103.709,
+    "file": "audio/build/pw-xbox/voice/n1.wav",
+    "words": [
+      {
+        "t": "The",
+        "from": 0.03,
+        "to": 0.086
+      },
+      {
+        "t": "full",
+        "from": 0.086,
+        "to": 0.323
+      },
+      {
+        "t": "guide",
+        "from": 0.323,
+        "to": 0.698
+      },
+      {
+        "t": "is",
+        "from": 0.698,
+        "to": 0.811
+      },
+      {
+        "t": "on",
+        "from": 0.811,
+        "to": 1.011
+      },
+      {
+        "t": "Rocket",
+        "from": 1.011,
+        "to": 1.448
+      },
+      {
+        "t": "Mod",
+        "from": 1.448,
+        "to": 1.773
+      },
+      {
+        "t": "dot",
+        "from": 1.773,
+        "to": 2.048
+      },
+      {
+        "t": "org.",
+        "from": 2.048,
+        "to": 2.247
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "n2",
+    "text": "Rocket Mod. Per Weapon. On Xbox.",
+    "caption": "Rocket Mod. Per Weapon. On Xbox.",
+    "start": 104.309,
+    "dur": 2.455,
+    "end": 106.764,
+    "file": "audio/build/pw-xbox/voice/n2.wav",
+    "words": [
+      {
+        "t": "Rocket",
+        "from": 0.03,
+        "to": 0.41
+      },
+      {
+        "t": "Mod.",
+        "from": 0.41,
+        "to": 0.785
+      },
+      {
+        "t": "Per",
+        "from": 0.835,
+        "to": 1.01
+      },
+      {
+        "t": "Weapon.",
+        "from": 1.01,
+        "to": 1.36
+      },
+      {
+        "t": "On",
+        "from": 1.41,
+        "to": 1.585
+      },
+      {
+        "t": "Xbox.",
+        "from": 1.585,
+        "to": 2.335
+      }
+    ],
+    "wordsQuality": "exact"
+  }
+]

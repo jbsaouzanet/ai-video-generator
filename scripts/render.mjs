@@ -3,18 +3,21 @@
 // DELIVERABLE RULES (enforced before AND after the render):
 //   short = ALWAYS vertical 9:16 (height > width, 1080x1920)
 //   long  = ALWAYS horizontal (width > height) AND at least 70 s (1 min 10)
-// File name of a deliverable: rocketmod-<per-profile|per-weapon>[-9x16]-vN-<long|short>.mp4  (N = next free number for that name)
+// File name of a deliverable: <base>-vN-<long|short>.mp4  (N = next free number for that name; `base` comes
+// from the matching topics/<slug>/topic.json)
 //
-//   node scripts/render.mjs short     -> RocketModWeaponDetectionShort  1080x1920  33.5 s  out/rocketmod-per-profile-9x16-vN-short.mp4
-//   node scripts/render.mjs long      -> RocketModWeaponDetectionLong   1920x1080  90 s    out/rocketmod-per-profile-vN-long.mp4
-//   node scripts/render.mjs perweapon -> RocketModPerWeapon             1920x1080  117 s   out/rocketmod-per-weapon-vN-long.mp4
-//   node scripts/render.mjs draft     -> RocketModWeaponDetection       1920x1080  33.5 s  out/drafts/rocketmod-per-profile-16x9-draft-vN.mp4
+// Targets are read from every topics/<slug>/topic.json (see docs/NEW-VIDEO-PLAYBOOK.md): each topic's
+// non-null `formats.short` / `formats.long` becomes a target named `<slug>-short` / `<slug>-long`.
+// A few short-hand aliases from before the registry existed still work (see ALIASES below).
+//   node scripts/render.mjs per-weapon-xbox-long -> RocketModPerWeaponXbox 1920x1080 108.6 s out/rocketmod-per-weapon-xbox-vN-long.mp4
+//   node scripts/render.mjs draft                -> RocketModWeaponDetection 1920x1080 33.5 s out/drafts/rocketmod-per-profile-16x9-draft-vN.mp4
 //        (16:9 33 s is neither short nor long: a working draft. No category, not delivered.)
 //
 // After a successful, rule-compliant render the mp4 is also copied to the delivery folder (never overwrites there either).
 //   default ~/Koofr/RocketAIM ; override with DELIVERY_DIR=<path> ; disable with DELIVERY_DIR=none
-// extra args are passed to remotion, e.g.  node scripts/render.mjs short --concurrency=2
+// extra args are passed to remotion, e.g.  node scripts/render.mjs per-weapon-xbox-long --concurrency=2
 import {DEFAULT_DELIVERY} from './delivery-dir.mjs';
+import {loadTopics} from './topics.mjs';
 import {execFileSync, spawnSync} from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -22,12 +25,23 @@ import path from 'node:path';
 const MIN_LONG_SECONDS = 70;
 
 // w/h/seconds are what each composition is DECLARED to be (checked before rendering); the real file is re-checked with ffprobe afterwards.
-const TARGETS = {
-	short: {comp: 'RocketModWeaponDetectionShort', dir: 'out', base: 'rocketmod-per-profile-9x16', cat: 'short', w: 1080, h: 1920, seconds: 33.5},
-	long: {comp: 'RocketModWeaponDetectionLong', dir: 'out', base: 'rocketmod-per-profile', cat: 'long', w: 1920, h: 1080, seconds: 90},
-	perweapon: {comp: 'RocketModPerWeapon', dir: 'out', base: 'rocketmod-per-weapon', cat: 'long', entry: 'src/index-perweapon.ts', w: 1920, h: 1080, seconds: 117.07},
-	perweaponshort: {comp: 'RocketModPerWeaponShort', dir: 'out', base: 'rocketmod-per-weapon-9x16', cat: 'short', entry: 'src/index-perweapon.ts', w: 1080, h: 1920, seconds: 33.07},
-	draft: {comp: 'RocketModWeaponDetection', dir: 'out/drafts', base: 'rocketmod-per-profile-16x9-draft', w: 1920, h: 1080, seconds: 33.5},
+const TARGETS = {};
+for (const topic of loadTopics()) {
+	for (const cat of ['short', 'long']) {
+		const f = topic.formats?.[cat];
+		if (!f) continue;
+		TARGETS[`${topic.slug}-${cat}`] = {comp: f.comp, dir: 'out', base: f.base, cat, entry: f.entry, w: f.w, h: f.h, seconds: f.seconds};
+	}
+}
+TARGETS.draft = {comp: 'RocketModWeaponDetection', dir: 'out/drafts', base: 'rocketmod-per-profile-16x9-draft', w: 1920, h: 1080, seconds: 33.5};
+
+// short-hands from before the topic registry existed: still valid, still show up in `npm run`
+const ALIASES = {
+	short: 'per-profile-short',
+	long: 'per-profile-long',
+	perweapon: 'per-weapon-long',
+	perweaponshort: 'per-weapon-short',
+	perweaponxbox: 'per-weapon-xbox-long',
 };
 
 /** returns a list of rule violations (empty = OK) */
@@ -39,10 +53,11 @@ const violations = (cat, w, h, seconds) => {
 	return v;
 };
 
-const [target, ...extra] = process.argv.slice(2);
+const [targetArg, ...extra] = process.argv.slice(2);
+const target = ALIASES[targetArg] ?? targetArg;
 const t = TARGETS[target];
 if (!t) {
-	console.error(`usage: node scripts/render.mjs <${Object.keys(TARGETS).join('|')}> [remotion args]`);
+	console.error(`usage: node scripts/render.mjs <${Object.keys(TARGETS).join('|')}> [remotion args]\n(short-hands: ${Object.keys(ALIASES).join('|')})`);
 	process.exit(1);
 }
 

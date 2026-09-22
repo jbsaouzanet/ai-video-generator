@@ -200,3 +200,92 @@ npm run render:perweaponshort        # -> out/rocketmod-per-weapon-9x16-vN-short
 node scripts/attach-clips.mjs out/rocketmod-per-weapon-9x16-vN-short.mp4 --intro warp --outro   # short end card (outro-short-9x16)
 ```
 Decision log: the AI avatar (SadTalker + body motion, `src/config/avatar.ts`) was tried and dropped by the user ("le visage fait vraiment artificiel"): all films render without it (`AVATAR.* = null`). Realistic options offered instead: filmed presenter (recommended), online avatar service, rented GPU model.
+
+## Sales pitch (after the intro of every film): one per mode, long and short
+The message (user's words, 2026-09-21): most scripts tie a weapon to a CATEGORY and give the category one anti-recoil, which is not precise. RocketMod **Per Profile** assigns the weapon to Profile 1 or Profile 2, each with its own precise anti-recoil. **Per Weapon** assigns an anti-recoil to EACH WEAPON, not to a category (the user says no script ever did that). Game updated? No problem: you update the script yourself, without waiting for RocketMod.
+- Per Profile films use the `pp` pitch, Per Weapon films the `pw` pitch; long films `full` (~17 s), short films `short` (~14 s). Voice scripts `audio/voice.pitch-<pp|pp-short|pw|pw-short>.script.json` (lines a1 problem, a2 RocketMod, a3 update, optional a4 "Perfect anti-recoil. Perfect aim assist." = currently left out for clarity), scene `src/pitch/PitchScene.tsx` (mode + variant, every animation on a spoken word), root `src/pitch/RootPitch.tsx` (6 compositions), entry `src/index-pitch.ts`, sound `scripts/audio/profiles/pitch-common.mjs` (+ 4 tiny profile files).
+```bash
+for k in pp pp-short pw pw-short; do node scripts/audio/voice.mjs audio/voice.pitch-$k.script.json audio/build/pitch-$k && cp audio/build/pitch-$k/voice.timeline.json src/pitch/timeline-$k.json; done
+node scripts/audio/subtitles.mjs audio/build/pitch-pp/voice.timeline.json src/subtitles/pitch-pp-16x9.json 58 audio/subtitles/pitch-pp.en.srt   # + pitch-pp-9x16.json (32), pitch-pp-short-9x16.json (32, pitch-pp-short.en.srt); same for pw
+node scripts/audio/soundtrack.mjs pitch-pp && node scripts/audio/finalize.mjs audio/build/pitch-pp/soundtrack.raw.wav public/audio/pitch-pp.wav <seconds>   # each of the 4 versions
+node scripts/render-pitch.mjs --concurrency=2     # -> out/pitch/pitch-<pp|pw>-<16x9|9x16|short-9x16>-vN.mp4
+node scripts/attach-clips.mjs <raw film.mp4> --intro warp --pitch --outro --new-version   # picks pp or pw from the file name
+```
+Claims to keep honest: "no script has done that" (Per Weapon) is the user's claim; "update it yourself" is backed by the docs (Per Weapon: Teach Weapon, live tuning, editable slots; Per Profile: wipe and re-learn). Because the pitch is a separate clip, changing its wording never requires re-rendering the films.
+
+## Transitions between the clips of a final video
+`attach-clips.mjs` joins intro, pitch, film and end card with a 0.6 s **vertical slide up + blur peak** (ffmpeg `xfade=slideup` on the last/first 18 frames of neighbouring clips, plus a gaussian-blur pulse blended in by a triangle in time) and an audio crossfade. Everything is one x264 pass (crf 15, AAC 192k, ~2 min for a 2-minute film) where the expensive filters only see the 18 frames of a transition; running xfade + blend over a whole film took ~25 min. Each join overlaps 0.6 s, so the total is `sum - 3 x 0.6 s` and the `.en.srt` is computed from the real clip start times. `--no-transitions` = the old hard cuts by stream copy. Other styles tried on a real join: hblur (horizontal streaks), smoothup, wipeup, vuslice, squeezev, zoomin (pixelated: ugly), fadegrays.
+
+## Covers / thumbnails (one per video)
+`src/covers/Covers.tsx` (`<Cover slug tall>`, Cronus photo + punchy claim + struck-out chip; copy comes from `topics/<slug>/topic.json`'s `cover` field, see "Topic registry" below), root `src/covers/RootCovers.tsx` (iterates `topics/index.ts`), entry `src/index-covers.ts`. Composition ids are `Cover-<slug>-<16x9|9x16>`. Still frames, render at frame 100:
+```bash
+npx remotion still src/index-covers.ts Cover-per-weapon-xbox-16x9 out/covers/cover-per-weapon-xbox-16x9.png --frame=100
+ffmpeg -i out/covers/cover-per-weapon-xbox-16x9.png -vf scale=1280:720 -q:v 2 <name>-cover.jpg      # long: YouTube 1280x720 (< 2 MB); shorts stay 1080x1920
+```
+Delivered to Koofr `RocketAIM\covers\<final video name>-cover.jpg` (+ full-size PNG in `covers\png\`). A one-off variant that reuses a topic's cover with a different top line (e.g. the Patreon Quip announcement) passes `kickerOverride` instead of getting its own topic — see `Cover-per-weapon-patreon-16x9` in `RootCovers.tsx`.
+
+## Platform badges on covers
+Every cover shows PS5 / Xbox / PC badges, top-right (opposite the logo): `public/logos/{playstation,xbox,pc}.svg` (Simple Icons, CC0), `Mark`/`PlatformRow` in `src/covers/Covers.tsx`. Note: the weapon-detect docs only describe DualSense (PS5) support; Xbox/PC compatibility for this feature was asserted by the user, not verified against a doc.
+
+## Cover copy (2026-09-22)
+The Per Weapon cover no longer reads "1 WEAPON = 1 ANTI-RECOIL" as a headline: the user's point is that RocketMod is an ANTI-RECOIL DETECTION SYSTEM, and "each weapon gets its own anti-recoil" is a consequence of that, not the whole story. Headline "ANTI-RECOIL DETECTION SYSTEM" + 3 chips (✗ ONE PER CATEGORY, ✓ ONE PER WEAPON, ✓ RUNS BY ITSELF). Per Profile cover keeps its headline but gained a third chip and a new bottom pill ("SET IT ONCE. NOTHING ELSE TO DO") to make the "nothing to do after setup" point explicit on both covers, per the user's follow-up. `COPY.chips` is now a list (was two hardcoded bad/good fields) and `HEAD_SIZE` holds the wide/tall headline font sizes per mode explicitly (was a scattered ternary) so the two are easy to tell apart and re-tune.
+
+## Reusable blocks + Xbox Per Weapon (the first topic built on them)
+`src/lib/beats.ts` (word-driven timing: `wordAt`, `beatWindow`, `filmFrames`, `fr` — factored out of the ad hoc
+helpers first written in `PWShort.tsx`/`PitchScene.tsx`), `src/config/platforms.ts` (button-label maps per
+Device: `PLATFORMS.ps5` / `.xbox`), `src/blocks/Blocks.tsx` (`TitleBlock`, `StepListBlock`, `ChipFlowBlock`,
+`TuneGaugeBlock`, `CompareBlock`, `EndLockupBlock` — data-driven, no topic-specific text baked in). A new topic
+composes a scene from these instead of writing bespoke layout/animation code each time; see
+`docs/NEW-VIDEO-PLAYBOOK.md` for the end-to-end recipe.
+
+`src/xboxpw/Film.tsx` (entry `src/index-xboxpw.ts`, target `perweaponxbox`) is the first film built this way:
+facts from `docs/SOURCE-xbox-per-weapon.md`, voice `audio/voice.pw-xbox.script.json`, sound
+`scripts/audio/profiles/pw-xbox.mjs`. Cover mode `pwx` in `src/covers/Covers.tsx`. Reuses the `pw` pitch as-is
+(its claims — "no other script does this", "update it yourself" — hold on Xbox too; no platform-specific
+pitch variant was needed).
+
+**Bug found while building it, fixed everywhere:** `src/components/Background.tsx` had the bottom-left corner
+watermark **hardcoded** to `"PS5 · PER PROFILE"`, wrong for every other film. It is now a `label` prop
+(defaults to the old string so nothing regresses silently); every caller now passes the right one
+(`RocketModWeaponDetectionLong`/`Stage33` keep the default, `perweapon/Film.tsx` and
+`perweapon/short/PWShort.tsx` now pass `"PS5 · PER WEAPON"`, `xboxpw/Film.tsx` passes
+`"XBOX · PER WEAPON"`, `covers/Covers.tsx` now reads it from each topic's `cover.backgroundLabel`). **The
+already-published PS5 Per Weapon video (long, live on YouTube) still has the wrong corner text** —
+re-render + re-deliver only if the user asks, never silently. (Decision, 2026-09-22: left as is.)
+
+## Topic registry (`topics/<slug>/topic.json`)
+Single source of truth per topic, read by three places instead of five hardcoded tables:
+- `scripts/topics.mjs` — `loadTopics()` scans `topics/*/topic.json` (Node-side: `render.mjs`,
+  `attach-clips.mjs`, `export-for-upload.mjs` all use this; safe to add topics here with zero other edits).
+- `topics/index.ts` — the one hand-maintained list (`import` + push) for code that runs **inside the Remotion
+  bundle** (`src/covers/RootCovers.tsx`/`Covers.tsx`): a browser context can't `fs.readdirSync` a directory at
+  render time, so this file is the one unavoidable extra line per topic on that side.
+- Shape: `{slug, youtubeTitle, pitchMode: 'pw'|'pp', formats: {short: <Format>|null, long: <Format>|null},
+  cover: {...}}`. `Format = {comp, entry?, base, w, h, seconds, captions}` — the exact fields `render.mjs`'s
+  old hardcoded `TARGETS` entries and `attach-clips.mjs`'s old `SRT_FOR` map used to carry. `cover` carries
+  what used to be `Covers.tsx`'s per-mode `COPY`/`HEAD_SIZE` entries verbatim (`kicker`, `head` (2 lines),
+  `chips`, `pill`, `screen: {title, line}`, `backgroundLabel`, `headSize: {wide, tall}`).
+- `render.mjs` target names become `<slug>-<short|long>` (e.g. `per-weapon-xbox-long`); the old short-hand
+  names (`short`, `long`, `perweapon`, `perweaponshort`, `perweaponxbox`) still work as `ALIASES` in that file.
+- Verified behaviour-preserving when built (2026-09-22): re-ran `attach-clips.mjs` on the already-shipped Xbox
+  film through the new topic lookup into a scratch delivery dir — identical 139.10 s output and identical 61
+  captions; re-rendered all 5 shipped covers under their new `Cover-<slug>-*` ids and diffed pixel-for-pixel
+  against the delivered files (`sharp`, raw buffer diff) — mean/max abs difference 0 (PNG) on every one.
+- See `docs/NEW-VIDEO-PLAYBOOK.md` step 3 for how to add a new topic.
+
+## Direct YouTube upload (planned, not built)
+`scripts/export-for-upload.mjs <slug> <short|long>` copies the latest Koofr-delivered file for a topic + its
+`.srt` + its cover into `Koofr\RocketAIM\youtube\ready-to-upload\`, named `Cronus Zen - RocketAIM -
+<topic.json youtubeTitle>` (filesystem-illegal characters — `: * ? " < > |` — are swapped for `-` in the
+**filename only**; a bare `:` in a Windows filename silently truncates everything after it and corrupts the
+copy, caught and fixed while building this). It also writes a `<name>.metadata.json` sidecar (title incl. the
+real `:`, categoryId, `privacyStatus: "private"`, `containsSyntheticMedia: true`, empty
+`description`/`tags`/`chapters` to fill in) for a future upload script to read without parsing the prose
+`youtube/*.txt` package.
+
+Not yet built: `scripts/youtube-auth.mjs` (one-time OAuth consent, needs the user to first create a Google
+Cloud project + YouTube Data API v3 + an OAuth "Desktop app" client — that part can't be done from here) and
+`scripts/youtube-upload.mjs <slug> <format>` (resumable `videos.insert` + `captions.insert` + `thumbnails.set`
+from the exported files + metadata.json). Always uploads `privacyStatus: private`; going public stays a
+separate, explicit action, same as every other outward-facing step in this project. Full plan:
+`C:\Users\jbsao\.claude\plans\synchronous-cooking-wilkinson.md`.

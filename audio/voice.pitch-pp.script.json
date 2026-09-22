@@ -1,0 +1,30 @@
+{
+	"engine": "kokoro",
+	"voice": "am_onyx=0.3,am_michael=0.7",
+	"speed": 1.1,
+	"vc": {
+		"src": "audio/voiceprints/kokoro-onyx30-michael70.se.pth",
+		"tgt": "audio/voiceprints/user.se.pth",
+		"alpha": 1,
+		"tau": 0.3
+	},
+	"lines": [
+		{
+			"id": "a1",
+			"start": 0.35,
+			"text": "Most scripts tie weapons to a category. That's not precise."
+		},
+		{
+			"id": "a2",
+			"gap": 0.45,
+			"text": "Rocket Mod assigns each weapon to Profile 1 or Profile 2, each with its own precise anti-recoil.",
+			"caption": "RocketMod assigns each weapon to Profile 1 or Profile 2, each with its own precise anti-recoil."
+		},
+		{
+			"id": "a3",
+			"gap": 0.45,
+			"text": "Game updated? No problem. You update the script yourself, without waiting for Rocket Mod.",
+			"caption": "Game updated? No problem. You update the script yourself, without waiting for RocketMod."
+		}
+	]
+}

@@ -1,0 +1,22 @@
+{
+	"slug": "per-weapon-xbox",
+	"youtubeTitle": "Per Weapon Xbox: 1 Anti-Recoil Per Weapon, Not Per Category",
+	"pitchMode": "pw",
+	"formats": {
+		"short": null,
+		"long": {"comp": "RocketModPerWeaponXbox", "entry": "src/index-xboxpw.ts", "base": "rocketmod-per-weapon-xbox", "w": 1920, "h": 1080, "seconds": 108.56, "captions": "pw-xbox.en.srt"}
+	},
+	"cover": {
+		"kicker": "CRONUS ZEN · XBOX",
+		"head": ["ANTI-RECOIL", "DETECTION SYSTEM"],
+		"chips": [
+			{"label": "ONE PER CATEGORY", "kind": "bad"},
+			{"label": "ONE PER WEAPON", "kind": "good"},
+			{"label": "RUNS BY ITSELF", "kind": "good"}
+		],
+		"pill": "VIBRATION, NOT A PS5 TRIGGER",
+		"screen": {"title": "Per Weapon", "line": "S3  SMG Custom 3"},
+		"backgroundLabel": "XBOX · PER WEAPON",
+		"headSize": {"wide": [148, 92], "tall": [128, 78]}
+	}
+}

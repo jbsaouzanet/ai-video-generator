@@ -1,0 +1,35 @@
+1
+00:00:00,330 --> 00:00:02,595
+Most scripts tie weapons to a category.
+
+2
+00:00:02,615 --> 00:00:04,052
+That's not precise.
+
+3
+00:00:04,303 --> 00:00:06,865
+With Per Weapon, an anti-recoil is assigned to each
+
+4
+00:00:06,865 --> 00:00:08,888
+weapon, not to a category.
+
+5
+00:00:08,908 --> 00:00:10,572
+No other script does this.
+
+6
+00:00:10,822 --> 00:00:11,857
+Game updated?
+
+7
+00:00:11,877 --> 00:00:12,966
+No problem.
+
+8
+00:00:12,986 --> 00:00:15,241
+You update the script yourself, without waiting for
+
+9
+00:00:15,241 --> 00:00:16,311
+RocketMod.

@@ -1,0 +1,22 @@
+{
+	"slug": "per-weapon",
+	"youtubeTitle": "Per Weapon: Every Weapon Gets Its Own Anti-Recoil",
+	"pitchMode": "pw",
+	"formats": {
+		"short": {"comp": "RocketModPerWeaponShort", "entry": "src/index-perweapon.ts", "base": "rocketmod-per-weapon-9x16", "w": 1080, "h": 1920, "seconds": 33.07, "captions": "pwshort.en.srt"},
+		"long": {"comp": "RocketModPerWeapon", "entry": "src/index-perweapon.ts", "base": "rocketmod-per-weapon", "w": 1920, "h": 1080, "seconds": 117.07, "captions": "perweapon.en.srt"}
+	},
+	"cover": {
+		"kicker": "CRONUS ZEN · PS5",
+		"head": ["ANTI-RECOIL", "DETECTION SYSTEM"],
+		"chips": [
+			{"label": "ONE PER CATEGORY", "kind": "bad"},
+			{"label": "ONE PER WEAPON", "kind": "good"},
+			{"label": "RUNS BY ITSELF", "kind": "good"}
+		],
+		"pill": "NO OTHER SCRIPT DOES THIS",
+		"screen": {"title": "Per Weapon", "line": "AR - MXR-17"},
+		"backgroundLabel": "PS5 · PER WEAPON",
+		"headSize": {"wide": [148, 92], "tall": [128, 78]}
+	}
+}

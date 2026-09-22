@@ -63,7 +63,7 @@ export const RocketModPerWeapon: React.FC = () => {
 		<FormatProvider format={WIDE}>
 			<AbsoluteFill style={{background: '#000'}}>
 				<Audio src={staticFile('audio/soundtrack-pw.wav')} />
-				<Background frame={frame} pose={NEUTRAL} power={prog(frame, 4, 34, E.outSoft)} hud={hud} />
+				<Background frame={frame} pose={NEUTRAL} power={prog(frame, 4, 34, E.outSoft)} hud={hud} label="PS5 · PER WEAPON" />
 				{CHAPTERS.map((c, i) => (
 					<Sequence key={c.id} from={c.startF} durationInFrames={c.durF} name={c.id}>
 						<Chapter id={c.id} dur={c.durF} first={i === 0} last={i === CHAPTERS.length - 1} />

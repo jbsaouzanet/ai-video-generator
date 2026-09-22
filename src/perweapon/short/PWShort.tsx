@@ -310,7 +310,7 @@ export const RocketModPerWeaponShort: React.FC = () => {
 			<TLProvider tl={TL_SHORT}>
 				<AbsoluteFill style={{background: '#000'}}>
 					<Audio src={staticFile('audio/soundtrack-pwshort.wav')} />
-					<Background frame={frame} pose={pose} power={TL_SHORT.opacity(frame)} hud={hud} />
+					<Background frame={frame} pose={pose} power={TL_SHORT.opacity(frame)} hud={hud} label="PS5 · PER WEAPON" />
 					<CronusHero frame={frame} />
 					<SceneHook f={frame} />
 					<SceneWhy f={frame} />

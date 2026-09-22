@@ -52,7 +52,9 @@ const hudText: React.CSSProperties = {
 	color: C.dim,
 };
 
-export const Background: React.FC<{frame: number; pose: Pose; power: number; hud: number}> = ({frame, pose, power, hud}) => {
+// `label` is the bottom-left corner watermark (device · mode) — pass it explicitly per film/cover instead of
+// assuming PS5 · Per Profile: it was hardcoded here and wrong for every other topic (Per Weapon, Xbox, ...).
+export const Background: React.FC<{frame: number; pose: Pose; power: number; hud: number; label?: string}> = ({frame, pose, power, hud, label = 'PS5 · PER PROFILE'}) => {
 	const {width: WIDTH, height: HEIGHT, tall} = useFormat();
 	const gridShift = (frame * 0.25) % 80;
 	return (
@@ -98,7 +100,7 @@ export const Background: React.FC<{frame: number; pose: Pose; power: number; hud
 				<Corner pos="br" />
 				<div style={{...hudText, left: 78, top: 40}}>ROCKETMOD // WEAPON DETECT</div>
 				<div style={{...hudText, right: 78, top: 40}}>{tc(frame)}</div>
-				<div style={{...hudText, left: 78, bottom: 40, color: C.dim2}}>PS5 · PER PROFILE</div>
+				<div style={{...hudText, left: 78, bottom: 40, color: C.dim2}}>{label}</div>
 				<div style={{...hudText, right: 78, bottom: 40, color: C.dim2}}>ROCKETMOD.ORG</div>
 			</div>
 

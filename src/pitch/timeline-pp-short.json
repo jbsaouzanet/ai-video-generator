@@ -1,0 +1,198 @@
+[
+  {
+    "id": "a1",
+    "text": "Most scripts tie weapons to a category. Not precise.",
+    "caption": "Most scripts tie weapons to a category. Not precise.",
+    "start": 0.3,
+    "dur": 3.198,
+    "end": 3.498,
+    "file": "audio/build/pitch-pp-short/voice/a1.wav",
+    "words": [
+      {
+        "t": "Most",
+        "from": 0.03,
+        "to": 0.216
+      },
+      {
+        "t": "scripts",
+        "from": 0.216,
+        "to": 0.591
+      },
+      {
+        "t": "tie",
+        "from": 0.591,
+        "to": 0.841
+      },
+      {
+        "t": "weapons",
+        "from": 0.841,
+        "to": 1.216
+      },
+      {
+        "t": "to",
+        "from": 1.216,
+        "to": 1.304
+      },
+      {
+        "t": "a",
+        "from": 1.304,
+        "to": 1.366
+      },
+      {
+        "t": "category.",
+        "from": 1.366,
+        "to": 2.005
+      },
+      {
+        "t": "Not",
+        "from": 2.292,
+        "to": 2.466
+      },
+      {
+        "t": "precise.",
+        "from": 2.466,
+        "to": 3.078
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "a2",
+    "text": "Rocket Mod assigns each weapon to Profile 1 or 2, with its own precise anti-recoil.",
+    "caption": "RocketMod assigns each weapon to Profile 1 or 2, with its own precise anti-recoil.",
+    "start": 3.898,
+    "dur": 5.159,
+    "end": 9.057,
+    "file": "audio/build/pitch-pp-short/voice/a2.wav",
+    "words": [
+      {
+        "t": "RocketMod",
+        "from": 0.03,
+        "to": 0.643
+      },
+      {
+        "t": "assigns",
+        "from": 0.643,
+        "to": 1.118
+      },
+      {
+        "t": "each",
+        "from": 1.118,
+        "to": 1.381
+      },
+      {
+        "t": "weapon",
+        "from": 1.381,
+        "to": 1.706
+      },
+      {
+        "t": "to",
+        "from": 1.706,
+        "to": 1.806
+      },
+      {
+        "t": "Profile",
+        "from": 1.806,
+        "to": 2.306
+      },
+      {
+        "t": "1",
+        "from": 2.306,
+        "to": 2.468
+      },
+      {
+        "t": "or",
+        "from": 2.468,
+        "to": 2.593
+      },
+      {
+        "t": "2,",
+        "from": 2.593,
+        "to": 2.888
+      },
+      {
+        "t": "with",
+        "from": 3.274,
+        "to": 3.343
+      },
+      {
+        "t": "its",
+        "from": 3.343,
+        "to": 3.518
+      },
+      {
+        "t": "own",
+        "from": 3.518,
+        "to": 3.781
+      },
+      {
+        "t": "precise",
+        "from": 3.781,
+        "to": 4.306
+      },
+      {
+        "t": "anti-recoil.",
+        "from": 4.306,
+        "to": 5.039
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "a3",
+    "text": "Game updated? Update it yourself, without waiting for Rocket Mod.",
+    "caption": "Game updated? Update it yourself, without waiting for RocketMod.",
+    "start": 9.457,
+    "dur": 3.762,
+    "end": 13.219,
+    "file": "audio/build/pitch-pp-short/voice/a3.wav",
+    "words": [
+      {
+        "t": "Game",
+        "from": 0.03,
+        "to": 0.248
+      },
+      {
+        "t": "updated?",
+        "from": 0.248,
+        "to": 0.841
+      },
+      {
+        "t": "Update",
+        "from": 1.142,
+        "to": 1.461
+      },
+      {
+        "t": "it",
+        "from": 1.461,
+        "to": 1.536
+      },
+      {
+        "t": "yourself,",
+        "from": 1.536,
+        "to": 2.023
+      },
+      {
+        "t": "without",
+        "from": 2.061,
+        "to": 2.398
+      },
+      {
+        "t": "waiting",
+        "from": 2.398,
+        "to": 2.773
+      },
+      {
+        "t": "for",
+        "from": 2.773,
+        "to": 2.898
+      },
+      {
+        "t": "RocketMod.",
+        "from": 2.898,
+        "to": 3.642
+      }
+    ],
+    "wordsQuality": "exact"
+  }
+]

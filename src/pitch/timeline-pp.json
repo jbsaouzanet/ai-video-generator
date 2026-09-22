@@ -1,0 +1,233 @@
+[
+  {
+    "id": "a1",
+    "text": "Most scripts tie weapons to a category. That's not precise.",
+    "caption": "Most scripts tie weapons to a category. That's not precise.",
+    "start": 0.35,
+    "dur": 3.523,
+    "end": 3.873,
+    "file": "audio/build/pitch-pp/voice/a1.wav",
+    "words": [
+      {
+        "t": "Most",
+        "from": 0.03,
+        "to": 0.216
+      },
+      {
+        "t": "scripts",
+        "from": 0.216,
+        "to": 0.616
+      },
+      {
+        "t": "tie",
+        "from": 0.616,
+        "to": 0.866
+      },
+      {
+        "t": "weapons",
+        "from": 0.866,
+        "to": 1.241
+      },
+      {
+        "t": "to",
+        "from": 1.241,
+        "to": 1.328
+      },
+      {
+        "t": "a",
+        "from": 1.328,
+        "to": 1.391
+      },
+      {
+        "t": "category.",
+        "from": 1.391,
+        "to": 2.019
+      },
+      {
+        "t": "That's",
+        "from": 2.316,
+        "to": 2.516
+      },
+      {
+        "t": "not",
+        "from": 2.516,
+        "to": 2.741
+      },
+      {
+        "t": "precise.",
+        "from": 2.741,
+        "to": 3.402
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "a2",
+    "text": "Rocket Mod assigns each weapon to Profile 1 or Profile 2, each with its own precise anti-recoil.",
+    "caption": "RocketMod assigns each weapon to Profile 1 or Profile 2, each with its own precise anti-recoil.",
+    "start": 4.323,
+    "dur": 6.129,
+    "end": 10.452,
+    "file": "audio/build/pitch-pp/voice/a2.wav",
+    "words": [
+      {
+        "t": "RocketMod",
+        "from": 0.03,
+        "to": 0.649
+      },
+      {
+        "t": "assigns",
+        "from": 0.649,
+        "to": 1.149
+      },
+      {
+        "t": "each",
+        "from": 1.149,
+        "to": 1.386
+      },
+      {
+        "t": "weapon",
+        "from": 1.386,
+        "to": 1.686
+      },
+      {
+        "t": "to",
+        "from": 1.686,
+        "to": 1.786
+      },
+      {
+        "t": "Profile",
+        "from": 1.786,
+        "to": 2.274
+      },
+      {
+        "t": "1",
+        "from": 2.274,
+        "to": 2.561
+      },
+      {
+        "t": "or",
+        "from": 2.561,
+        "to": 2.661
+      },
+      {
+        "t": "Profile",
+        "from": 2.661,
+        "to": 3.174
+      },
+      {
+        "t": "2,",
+        "from": 3.174,
+        "to": 3.686
+      },
+      {
+        "t": "each",
+        "from": 3.918,
+        "to": 4.136
+      },
+      {
+        "t": "with",
+        "from": 4.136,
+        "to": 4.274
+      },
+      {
+        "t": "its",
+        "from": 4.274,
+        "to": 4.474
+      },
+      {
+        "t": "own",
+        "from": 4.474,
+        "to": 4.761
+      },
+      {
+        "t": "precise",
+        "from": 4.761,
+        "to": 5.286
+      },
+      {
+        "t": "anti-recoil.",
+        "from": 5.286,
+        "to": 6.009
+      }
+    ],
+    "wordsQuality": "exact"
+  },
+  {
+    "id": "a3",
+    "text": "Game updated? No problem. You update the script yourself, without waiting for Rocket Mod.",
+    "caption": "Game updated? No problem. You update the script yourself, without waiting for RocketMod.",
+    "start": 10.902,
+    "dur": 5.291,
+    "end": 16.193,
+    "file": "audio/build/pitch-pp/voice/a3.wav",
+    "words": [
+      {
+        "t": "Game",
+        "from": 0.03,
+        "to": 0.249
+      },
+      {
+        "t": "updated?",
+        "from": 0.249,
+        "to": 0.842
+      },
+      {
+        "t": "No",
+        "from": 1.085,
+        "to": 1.237
+      },
+      {
+        "t": "problem.",
+        "from": 1.237,
+        "to": 1.835
+      },
+      {
+        "t": "You",
+        "from": 2.194,
+        "to": 2.274
+      },
+      {
+        "t": "update",
+        "from": 2.274,
+        "to": 2.662
+      },
+      {
+        "t": "the",
+        "from": 2.662,
+        "to": 2.749
+      },
+      {
+        "t": "script",
+        "from": 2.749,
+        "to": 3.062
+      },
+      {
+        "t": "yourself,",
+        "from": 3.062,
+        "to": 3.549
+      },
+      {
+        "t": "without",
+        "from": 3.587,
+        "to": 3.924
+      },
+      {
+        "t": "waiting",
+        "from": 3.924,
+        "to": 4.274
+      },
+      {
+        "t": "for",
+        "from": 4.274,
+        "to": 4.399
+      },
+      {
+        "t": "RocketMod.",
+        "from": 4.399,
+        "to": 5.171
+      }
+    ],
+    "wordsQuality": "exact"
+  }
+]

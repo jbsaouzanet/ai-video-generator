@@ -1,0 +1,35 @@
+1
+00:00:00,280 --> 00:00:01,666
+Most scripts tie weapons to a
+
+2
+00:00:01,666 --> 00:00:02,522
+category.
+
+3
+00:00:02,542 --> 00:00:03,678
+Not precise.
+
+4
+00:00:03,878 --> 00:00:05,704
+RocketMod assigns each weapon to
+
+5
+00:00:05,704 --> 00:00:07,679
+Profile 1 or 2, with its own
+
+6
+00:00:07,679 --> 00:00:09,237
+precise anti-recoil.
+
+7
+00:00:09,437 --> 00:00:10,529
+Game updated?
+
+8
+00:00:10,549 --> 00:00:11,480
+Update it yourself,
+
+9
+00:00:11,480 --> 00:00:13,399
+without waiting for RocketMod.

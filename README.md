@@ -88,6 +88,7 @@ Design idea: one continuous camera. The device is not part of any scene; it is r
 so scenes only own the graphics around it. The device pixels are never repainted, only masked, lit and overlaid.
 
 More detail (audio pipeline, subtitles sync, intro variants, final assembly, voice engines) is in [`docs/DEV-NOTES.md`](docs/DEV-NOTES.md).
+Shipping a new topic (a new platform of an existing mode, or a new mode entirely)? Start from [`docs/NEW-VIDEO-PLAYBOOK.md`](docs/NEW-VIDEO-PLAYBOOK.md).
 
 ## License
 

@@ -24,7 +24,8 @@
     "intro:audio": "node scripts/audio/intro-sting.mjs all",
     "intro:render": "node scripts/render-intro.mjs all",
     "intro:deliver": "node scripts/deliver-intro.mjs",
-    "render:perweaponshort": "node scripts/render.mjs perweaponshort"
+    "render:perweaponshort": "node scripts/render.mjs perweaponshort",
+    "render:perweaponxbox": "node scripts/render.mjs perweaponxbox"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.526",

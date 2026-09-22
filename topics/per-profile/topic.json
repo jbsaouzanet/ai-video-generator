@@ -1,0 +1,22 @@
+{
+	"slug": "per-profile",
+	"youtubeTitle": "Automatic Weapon Detection",
+	"pitchMode": "pp",
+	"formats": {
+		"short": {"comp": "RocketModWeaponDetectionShort", "base": "rocketmod-per-profile-9x16", "w": 1080, "h": 1920, "seconds": 33.5, "captions": "short.en.srt"},
+		"long": {"comp": "RocketModWeaponDetectionLong", "base": "rocketmod-per-profile", "w": 1920, "h": 1080, "seconds": 90, "captions": "long90.en.srt"}
+	},
+	"cover": {
+		"kicker": "CRONUS ZEN · PS5",
+		"head": ["AUTO WEAPON", "DETECTION"],
+		"chips": [
+			{"label": "SWITCHING BY HAND", "kind": "bad"},
+			{"label": "AUTOMATIC", "kind": "good"},
+			{"label": "RUNS BY ITSELF", "kind": "good"}
+		],
+		"pill": "SET IT ONCE. NOTHING ELSE TO DO",
+		"screen": {"title": "Primary", "line": "AR - MXR-17"},
+		"backgroundLabel": "PS5 · PER PROFILE",
+		"headSize": {"wide": [166, 166], "tall": [150, 150]}
+	}
+}

@@ -1,0 +1,183 @@
+1
+00:00:01,030 --> 00:00:02,162
+Per Weapon mode.
+
+2
+00:00:02,182 --> 00:00:03,640
+Now on Xbox.
+
+3
+00:00:04,540 --> 00:00:07,483
+Most scripts give one anti-recoil per category.
+
+4
+00:00:07,503 --> 00:00:09,721
+Per Weapon gives every weapon its own.
+
+5
+00:00:10,120 --> 00:00:13,744
+On Xbox, it reads your controller's vibration instead of a
+
+6
+00:00:13,744 --> 00:00:15,260
+PS5 trigger.
+
+7
+00:00:16,160 --> 00:00:19,285
+You need an Xbox controller, with vibration enabled,
+
+8
+00:00:19,285 --> 00:00:22,039
+on console or PC, and in the game.
+
+9
+00:00:22,289 --> 00:00:23,883
+Open the Cronus menu.
+
+10
+00:00:23,903 --> 00:00:26,477
+Go to Combat, Weapon Detect, and enable it.
+
+11
+00:00:26,727 --> 00:00:27,205
+Press A.
+
+12
+00:00:27,205 --> 00:00:30,379
+Set Device to Xbox, and Type to Per Weapon.
+
+13
+00:00:30,629 --> 00:00:32,663
+Two new rows appear: Teach Weapon,
+
+14
+00:00:32,663 --> 00:00:33,824
+and Tolerance.
+
+15
+00:00:34,724 --> 00:00:38,146
+Unlike PS5, nothing is known out of the box.
+
+16
+00:00:38,396 --> 00:00:41,408
+Until you teach a weapon, firing shows nothing.
+
+17
+00:00:41,428 --> 00:00:44,580
+Your profile's manual setting is used instead.
+
+18
+00:00:45,479 --> 00:00:48,161
+Open Teach Weapon, and pick an empty slot.
+
+19
+00:00:48,411 --> 00:00:50,330
+Fire two or three times.
+
+20
+00:00:50,350 --> 00:00:53,533
+The screen shows your controller's vibration values.
+
+21
+00:00:53,783 --> 00:00:56,252
+Once they're stable, confirm, pick a category,
+
+22
+00:00:56,252 --> 00:00:57,104
+and save.
+
+23
+00:00:57,504 --> 00:00:59,918
+Fire it again, and it claims its own slot,
+
+24
+00:00:59,938 --> 00:01:01,006
+automatically.
+
+25
+00:01:01,906 --> 00:01:03,431
+Too high or too low?
+
+26
+00:01:03,480 --> 00:01:06,140
+Hold LT, and press Up or Down, while firing.
+
+27
+00:01:06,390 --> 00:01:08,772
+It's permanent, for that exact weapon.
+
+28
+00:01:09,672 --> 00:01:11,832
+Two taught weapons feel too similar?
+
+29
+00:01:11,852 --> 00:01:13,901
+Hold LT, and press Left or Right,
+
+30
+00:01:13,901 --> 00:01:14,882
+to switch.
+
+31
+00:01:15,782 --> 00:01:18,426
+Vibration drifts more than a PS5 trigger,
+
+32
+00:01:18,446 --> 00:01:19,482
+shot to shot.
+
+33
+00:01:19,732 --> 00:01:21,523
+Tolerance sets the margin.
+
+34
+00:01:21,543 --> 00:01:24,413
+Too tight, and a weapon just isn't recognized.
+
+35
+00:01:24,662 --> 00:01:27,534
+Too loose, and it confidently applies the wrong weapon's
+
+36
+00:01:27,534 --> 00:01:28,145
+setting.
+
+37
+00:01:28,395 --> 00:01:30,000
+When in doubt, keep it tight.
+
+38
+00:01:30,900 --> 00:01:33,698
+Forty eight personal slots, kept after a power off,
+
+39
+00:01:33,698 --> 00:01:34,876
+and a reflash.
+
+40
+00:01:35,276 --> 00:01:36,903
+Badly tuned mid fight?
+
+41
+00:01:36,923 --> 00:01:38,635
+Hold View and Y, for one second,
+
+42
+00:01:38,635 --> 00:01:40,422
+to fall back to your profile.
+
+43
+00:01:41,322 --> 00:01:43,889
+The full guide is on Rocket Mod dot org.
+
+44
+00:01:44,289 --> 00:01:45,094
+Rocket Mod.
+
+45
+00:01:45,094 --> 00:01:45,669
+Per Weapon.
+
+46
+00:01:45,669 --> 00:01:46,944
+On Xbox.

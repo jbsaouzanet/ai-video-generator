@@ -1,0 +1,32 @@
+{
+	"engine": "kokoro",
+	"voice": "am_onyx=0.3,am_michael=0.7",
+	"speed": 1.06,
+	"vc": {"src": "audio/voiceprints/kokoro-onyx30-michael70.se.pth", "tgt": "audio/voiceprints/user.se.pth", "alpha": 1, "tau": 0.3},
+	"lines": [
+		{"id": "p1", "start": 1.05, "text": "Per Weapon mode. Now on Xbox."},
+		{"id": "p2", "gap": 1.1, "text": "Most scripts give one anti-recoil per category. Per Weapon gives every weapon its own."},
+		{"id": "p3", "gap": 0.6, "text": "On Xbox, it reads your controller's vibration instead of a PS5 trigger."},
+		{"id": "t1", "gap": 1.1, "text": "You need an Xbox controller, with vibration enabled, on console or PC, and in the game."},
+		{"id": "t2", "gap": 0.45, "text": "Open the Cronus menu. Go to Combat, Weapon Detect, and enable it."},
+		{"id": "t3", "gap": 0.45, "text": "Press A. Set Device to Xbox, and Type to Per Weapon."},
+		{"id": "t4", "gap": 0.45, "text": "Two new rows appear: Teach Weapon, and Tolerance."},
+		{"id": "f1", "gap": 1.1, "text": "Unlike PS5, nothing is known out of the box."},
+		{"id": "f2", "gap": 0.45, "text": "Until you teach a weapon, firing shows nothing. Your profile's manual setting is used instead."},
+		{"id": "h1", "gap": 1.1, "text": "Open Teach Weapon, and pick an empty slot."},
+		{"id": "h2", "gap": 0.45, "text": "Fire two or three times. The screen shows your controller's vibration values."},
+		{"id": "h3", "gap": 0.45, "text": "Once they're stable, confirm, pick a category, and save."},
+		{"id": "h4", "gap": 0.6, "text": "Fire it again, and it claims its own slot, automatically."},
+		{"id": "u1", "gap": 1.1, "text": "Too high or too low? Hold LT, and press Up or Down, while firing."},
+		{"id": "u2", "gap": 0.45, "text": "It's permanent, for that exact weapon."},
+		{"id": "a1", "gap": 1.1, "text": "Two taught weapons feel too similar? Hold LT, and press Left or Right, to switch."},
+		{"id": "to1", "gap": 1.1, "text": "Vibration drifts more than a PS5 trigger, shot to shot."},
+		{"id": "to2", "gap": 0.45, "text": "Tolerance sets the margin. Too tight, and a weapon just isn't recognized."},
+		{"id": "to3", "gap": 0.45, "text": "Too loose, and it confidently applies the wrong weapon's setting."},
+		{"id": "to4", "gap": 0.45, "text": "When in doubt, keep it tight."},
+		{"id": "e1", "gap": 1.1, "text": "Forty eight personal slots, kept after a power off, and a reflash."},
+		{"id": "e2", "gap": 0.6, "text": "Badly tuned mid fight? Hold View and Y, for one second, to fall back to your profile."},
+		{"id": "n1", "gap": 1.1, "text": "The full guide is on Rocket Mod dot org."},
+		{"id": "n2", "gap": 0.6, "text": "Rocket Mod. Per Weapon. On Xbox."}
+	]
+}

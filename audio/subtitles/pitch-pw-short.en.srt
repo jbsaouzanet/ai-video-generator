@@ -1,0 +1,35 @@
+1
+00:00:00,280 --> 00:00:01,666
+Most scripts tie weapons to a
+
+2
+00:00:01,666 --> 00:00:02,522
+category.
+
+3
+00:00:02,542 --> 00:00:03,680
+Not precise.
+
+4
+00:00:03,880 --> 00:00:05,357
+With Per Weapon, every weapon
+
+5
+00:00:05,357 --> 00:00:07,104
+gets its own anti-recoil.
+
+6
+00:00:07,124 --> 00:00:08,790
+No other script does this.
+
+7
+00:00:08,990 --> 00:00:10,082
+Game updated?
+
+8
+00:00:10,102 --> 00:00:11,033
+Update it yourself,
+
+9
+00:00:11,033 --> 00:00:12,924
+without waiting for RocketMod.

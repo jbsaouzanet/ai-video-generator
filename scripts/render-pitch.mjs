@@ -7,9 +7,10 @@ import fs from 'node:fs';
 const args = process.argv.slice(2);
 const extra = args.filter((a) => a.startsWith('--'));
 const fmt = args.find((a) => !a.startsWith('--')) ?? 'all';
-const formats = fmt === 'all' ? ['16x9', '9x16', 'short-9x16'] : [fmt];
-if (!formats.every((f) => ['16x9', '9x16', 'short-9x16'].includes(f))) {
-	console.error('usage: node scripts/render-pitch.mjs [16x9|9x16|short-9x16] [remotion args]');
+const NAMES = ['pp-16x9', 'pp-9x16', 'pp-short-9x16', 'pw-16x9', 'pw-9x16', 'pw-short-9x16'];
+const formats = fmt === 'all' ? NAMES : [fmt];
+if (!formats.every((f) => NAMES.includes(f))) {
+	console.error('usage: node scripts/render-pitch.mjs [pp-16x9|pp-9x16|pp-short-9x16|pw-16x9|pw-9x16|pw-short-9x16] [remotion args]');
 	process.exit(1);
 }
 fs.mkdirSync('out/pitch', {recursive: true});
