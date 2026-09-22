@@ -11,10 +11,13 @@ import {Inspector} from './inspector/Inspector';
 import {EDITOR_TOPICS} from './topics';
 
 // only per-weapon-xbox has a VideoProject today — this map exists so a future 2nd/3rd project doesn't need
-// editing here, just an entry with its own real voice timeline.
+// editing here, just an entry with its own real voice timeline. Only needed for 'beat'-timed clips — a
+// project that's entirely 'hard'-timed (e.g. per-weapon, chapter-based) never reads this, but the lookup
+// still needs a safe fallback since resolveTimingStartSeconds's signature doesn't make `lines` optional.
 const TIMELINE_BY_SLUG: Record<string, VoiceLine[]> = {
 	'per-weapon-xbox': xboxTimelineData as unknown as VoiceLine[],
 };
+const EMPTY_TIMELINE: VoiceLine[] = [];
 
 export const App: React.FC = () => {
 	const [selectedSlug, setSelectedSlug] = useState(EDITOR_TOPICS[0].slug);
@@ -23,7 +26,7 @@ export const App: React.FC = () => {
 	const totalSeconds = topic.durationInFrames / topic.fps;
 	const clips = useMemo<PositionedClip[]>(() => {
 		if (!topic.hasProject) return [];
-		const lines = TIMELINE_BY_SLUG[topic.slug];
+		const lines = TIMELINE_BY_SLUG[topic.slug] ?? EMPTY_TIMELINE;
 		const flat = topic.project.tracks.flatMap((t) => t.clips);
 		return flat.map((c, i) => {
 			const startSeconds = resolveTimingStartSeconds(c.timing, lines);

@@ -1,0 +1,30 @@
+{
+	"id": "per-weapon",
+	"name": "Per Weapon, PS5",
+	"settings": {"fps": 30, "width": 1920, "height": 1080, "tailSeconds": 0},
+	"assets": [],
+	"tracks": [
+		{
+			"id": "chapters",
+			"name": "Chapters",
+			"kind": "video",
+			"renderMode": "sequence",
+			"crossDissolveFrames": 10,
+			"clips": [
+				{"id": "hook", "shot": "perweapon/hook", "timing": {"kind": "hard", "start": 0, "duration": 5.467}},
+				{"id": "why", "shot": "perweapon/why", "timing": {"kind": "hard", "start": 5.133, "duration": 12.667}},
+				{"id": "turn", "shot": "perweapon/turn", "timing": {"kind": "hard", "start": 17.467, "duration": 19.1}},
+				{"id": "first", "shot": "perweapon/first", "timing": {"kind": "hard", "start": 36.233, "duration": 10.4}},
+				{"id": "tune", "shot": "perweapon/tune", "timing": {"kind": "hard", "start": 46.3, "duration": 11.7}},
+				{"id": "ambig", "shot": "perweapon/ambig", "timing": {"kind": "hard", "start": 57.667, "duration": 13.133}},
+				{"id": "teach", "shot": "perweapon/teach", "timing": {"kind": "hard", "start": 70.467, "duration": 19.667}},
+				{"id": "edit", "shot": "perweapon/edit", "timing": {"kind": "hard", "start": 89.767, "duration": 9.2}},
+				{"id": "cheat", "shot": "perweapon/cheat", "timing": {"kind": "hard", "start": 98.633, "duration": 11.633}},
+				{"id": "end", "shot": "perweapon/end", "timing": {"kind": "hard", "start": 109.933, "duration": 8.233}}
+			]
+		}
+	],
+	"metadata": {
+		"note": "Second topic ported to the model, deliberately structurally different from per-weapon-xbox: chapter cross-dissolve (renderMode: 'sequence', not 'self-gating'), each chapter owning its own camera timeline (TL_HOOK/TL_WHY/...) instead of one project-wide continuous pose. start/duration for every clip are the exact CHAPTERS.startF/durF from src/perweapon/cues.json converted to seconds (fps=30), not eyeballed. Camera/Background/audio/LightBeam/TransitionStreak/AvatarPip/captions/black-fade stay hand-written in src/perweapon/FilmFromProject.tsx, same deferral as the Xbox slice."
+	}
+}
