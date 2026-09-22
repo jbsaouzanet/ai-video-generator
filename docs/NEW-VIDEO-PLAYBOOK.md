@@ -52,10 +52,16 @@ Pick the nearest sibling and copy its shape, don't start from a blank file:
   the way the Per Weapon short's tuning scene does).
 - New platform of **Per Profile** -> copy `src/RocketModWeaponDetectionLong.tsx` / `src/long/ChaptersNew.tsx`
   the same way.
-- A **new mode outside weapon-detect** (Rapid Fire, etc.) -> there is no template yet; build the smallest
-  scene set that covers the doc's own sections (typically: hook, what it does, before you start, turn it on,
-  how it behaves, troubleshooting, end), following the pattern of `src/perweapon/short/PWShort.tsx` (voice-word
-  driven, `W(line, word)` timing helper) since that is the clearest self-contained example.
+- A **new mode outside weapon-detect** (Rapid Fire, etc.) -> check the doc's own content against
+  `src/video/patterns/feature-explanation.ts` first (hook / why-compare / turn-it-on / first-use / teach /
+  live-tune / edge-case / escape-hatch / platform-caveat / outro-facts / end-lockup — extracted from all 3
+  shipped weapon-detect topics, see that file's README for the raw comparison). It may or may not fit a
+  topic from a different product family — that's a hypothesis to check against the real doc, not an
+  assumption — but if it does, reuse `src/video/shots/` (title/compare/step-list/tune-gauge/chip-flow/
+  end-lockup) for whichever beats it covers instead of hand-rolling scene JSX from scratch, following the
+  `src/xboxpw/Film.tsx` + `src/video/projects/per-weapon-xbox.json` pairing as the reference (voice-word
+  driven, `W(line, word)` timing helper, beats now expressible as data). Only build bespoke scene components
+  for beats the existing shots genuinely don't cover — same as Xbox's Tolerance meter.
 
 Wire the local-frame-from-word-time pattern (`lf`/`W` helpers keyed to the voice timeline) rather than hand
 timing frames — it is what keeps every scene change re-syncing for free when a line of the script changes.
