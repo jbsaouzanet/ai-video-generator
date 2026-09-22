@@ -27,9 +27,15 @@ export const HardTimingSchema = z.object({
 export const BeatTimingSchema = z.object({
 	kind: z.literal('beat'),
 	lineId: z.string(),
-	word: z.string(),
+	/** anchor word; ignored when `atLineStart` is true (anchors to lineStart(lineId) instead — e.g. "the
+	 * moment this line begins speaking", used when no specific word is the real anchor) */
+	word: z.string().default(''),
+	atLineStart: z.boolean().default(false),
 	/** which occurrence of `word` in `lineId`, 0-based (default: first) */
 	nth: z.number().int().nonnegative().default(0),
+	/** seconds added after the resolved word time — matches the `W(...) - 0.4` pattern hand-written in every
+	 * existing Film.tsx, kept as durable data (survives a script edit) instead of a baked frame number */
+	offsetSeconds: z.number().default(0),
 	/** seconds of fade in/out around the beat window (beatWindow()'s `edge` param) */
 	edge: z.number().default(0.27),
 	/** if set, the clip's visible window ends at this OTHER beat instead of running to the project end */

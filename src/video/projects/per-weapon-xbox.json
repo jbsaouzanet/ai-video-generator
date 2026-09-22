@@ -1,0 +1,33 @@
+{
+	"id": "per-weapon-xbox",
+	"name": "Per Weapon, Xbox",
+	"settings": {"fps": 30, "width": 1920, "height": 1080, "tailSeconds": 1.8},
+	"assets": [],
+	"tracks": [
+		{
+			"id": "scenes",
+			"name": "Scenes",
+			"kind": "video",
+			"clips": [
+				{"id": "hook", "shot": "xboxpw/hook", "timing": {"kind": "hard", "start": 0, "duration": 6.499}},
+				{"id": "why", "shot": "xboxpw/why", "timing": {"kind": "beat", "lineId": "p2", "word": "category", "nth": 0, "offsetSeconds": 0, "edge": 0.27}},
+				{"id": "setup", "shot": "xboxpw/setup", "timing": {"kind": "beat", "lineId": "t1", "word": "need", "nth": 0, "offsetSeconds": -0.4, "edge": 0.27}},
+				{"id": "first", "shot": "xboxpw/first", "timing": {"kind": "beat", "lineId": "f1", "word": "Unlike", "nth": 0, "offsetSeconds": -0.4, "edge": 0.27}},
+				{"id": "teach", "shot": "xboxpw/teach", "timing": {"kind": "beat", "lineId": "h1", "word": "Open", "nth": 0, "offsetSeconds": -0.4, "edge": 0.27}},
+				{"id": "tune", "shot": "xboxpw/tune", "timing": {"kind": "beat", "lineId": "u1", "word": "high", "nth": 0, "offsetSeconds": -0.4, "edge": 0.27}},
+				{"id": "ambig", "shot": "xboxpw/ambig", "timing": {"kind": "beat", "lineId": "a1", "word": "Two", "nth": 0, "offsetSeconds": -0.4, "edge": 0.27}},
+				{"id": "tolerance", "shot": "xboxpw/tolerance", "timing": {"kind": "beat", "lineId": "to1", "word": "Vibration", "nth": 0, "offsetSeconds": -0.4, "edge": 0.27}},
+				{"id": "outro", "shot": "xboxpw/outro", "timing": {"kind": "beat", "lineId": "e1", "word": "Forty", "nth": 0, "offsetSeconds": -0.4, "edge": 0.27}},
+				{
+					"id": "end-lockup",
+					"shot": "end-lockup",
+					"props": {"x": 960, "y": 220, "width": 1500, "title": "ROCKETMOD", "titleSize": 190, "tagline": "Per Weapon · Xbox", "taglineSize": 56, "delayF": 3058},
+					"timing": {"kind": "beat", "lineId": "n1", "atLineStart": true, "offsetSeconds": -0.4}
+				}
+			]
+		}
+	],
+	"metadata": {
+		"note": "First vertical slice (docs/ARCHITECTURE.md). The SCENE CONTENT (what appears, in what order, with what text) is driven by this file via src/video/adapters/remotion/GenericScenes.tsx. Camera pose, Background, CronusHero, audio, LightBeam/TransitionStreak, captions and the black fade-out stay hand-written in src/xboxpw/FilmFromProject.tsx for now, per ARCHITECTURE.md's deliberate deferral of primitives/camera generalization to a later pass. `timing` here is durable, human/AI-readable metadata (word-anchored, survives a script edit) — this slice's scenes still self-gate their own on/off via beatWindow() internally, matching the original src/xboxpw/Film.tsx exactly, so this JSON does not yet drive visibility, only content/order/props."
+	}
+}

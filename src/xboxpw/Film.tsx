@@ -19,14 +19,14 @@ import {ChipFlowBlock, CompareBlock, EndLockupBlock, StepListBlock, TitleBlock, 
 // audio/voice.pw-xbox.script.json (facts: docs/SOURCE-xbox-per-weapon.md). Built from the reusable
 // src/blocks + src/lib/beats + src/config/platforms so a future topic reuses the same pieces.
 const LINES = tlData as unknown as VoiceLine[];
-const W = (id: string, word: string, nth = 0) => wordAt(LINES, id, word, nth);
+export const W = (id: string, word: string, nth = 0) => wordAt(LINES, id, word, nth);
 const TAIL = 1.8;
 export const xboxPwFrames = () => filmFrames(LINES, TAIL);
 const XBOX = PLATFORMS.xbox;
 
 // ── camera: one pose per scene, held for that scene's beats ──
 const X = 960;
-const POSE: Record<string, Pose> = {
+export const POSE: Record<string, Pose> = {
 	below: {x: X, y: 1340, h: 500, rz: -9, rx: 34, ry: 6},
 	hook: {x: X, y: 800, h: 610, rz: 0, rx: 5, ry: -3},
 	why: {x: 1440, y: 580, h: 700, rz: -1, rx: 5, ry: -9},
@@ -40,7 +40,7 @@ const POSE: Record<string, Pose> = {
 	end: {x: 960, y: 830, h: 560, rz: 0, rx: 5, ry: 0},
 };
 
-const scene = {
+export const scene = {
 	hook: 0,
 	why: W('p2', 'category'),
 	setup: W('t1', 'need') - 0.4,
@@ -79,7 +79,7 @@ const poseKeys = [
 
 // ── Cronus OLED events, matching the exact on-screen text from docs/SOURCE-xbox-per-weapon.md ──
 const per = (line: string, f: number): ScreenEvent => ({f, on: 1, title: 'Per Weapon', line});
-const events: ScreenEvent[] = [
+export const events: ScreenEvent[] = [
 	{f: 0, on: 0, title: '', line: ''},
 	{f: fr(W('p1', 'Weapon')), on: 1, title: 'Type', line: 'Per Weapon', kind: 'type' as const},
 	{f: fr(W('t3', 'Device')), on: 1, title: 'Device', line: 'Xbox', kind: 'type' as const},
@@ -101,7 +101,7 @@ const mono = (extra: React.CSSProperties = {}): React.CSSProperties => ({fontFam
 const win = (f: number, from: number, to: number | null) => beatWindow(f, from, to);
 
 // ── 1 · hook ──
-const SceneHook: React.FC<{f: number}> = ({f}) => (
+export const SceneHook: React.FC<{f: number}> = ({f}) => (
 	<AbsoluteFill style={{opacity: win(f, scene.hook, scene.why)}}>
 		<TitleBlock x={960} y={110} width={1700} align="center" kicker="CRONUS ZEN" lines={[{text: 'WEAPON DETECT', size: 72, weight: 600, tracking: 0.28, color: C.blueHi, glow: 'rgba(47,139,255,.6)'}, {text: 'PER WEAPON, XBOX', size: 150, gradient: true, glow: 'rgba(47,139,255,.35)'}]} delayF={20} />
 		<div style={{position: 'absolute', left: 0, right: 0, top: 470, display: 'flex', justifyContent: 'center', opacity: interpolate(f, [fr(W('p3', 'vibration')) - 6, (fr(W('p3', 'vibration')) - 6) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}), transform: `translateY(${(1 - interpolate(f, [fr(W('p3', 'vibration')) - 6, (fr(W('p3', 'vibration')) - 6) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})) * 16}px)`}}>
@@ -111,14 +111,14 @@ const SceneHook: React.FC<{f: number}> = ({f}) => (
 );
 
 // ── 2 · why: category (1 anti-recoil) vs per weapon (each its own) ──
-const SceneWhy: React.FC<{f: number}> = ({f}) => (
+export const SceneWhy: React.FC<{f: number}> = ({f}) => (
 	<AbsoluteFill style={{opacity: win(f, scene.why, scene.setup)}}>
 		<CompareBlock x={80} y={260} w={1000} frame={f} oldLabel="MOST SCRIPTS · ONE ANTI-RECOIL PER CATEGORY" oldEnterAtF={fr(scene.why)} oldDimAtF={fr(W('p2', 'Per', 1))} newLabel="PER WEAPON · ITS OWN ANTI-RECOIL, EACH" newEnterAtF={fr(W('p2', 'Per', 1))} rows={[{label: 'AR', tag: 'OWN'}, {label: 'SMG', tag: 'OWN'}, {label: 'PISTOL', tag: 'OWN'}]} rowsStartAtF={fr(W('p2', 'own'))} rowH={88} rowGap={106} />
 	</AbsoluteFill>
 );
 
 // ── 3 · before you start + turn it on ──
-const SceneSetup: React.FC<{f: number}> = ({f}) => (
+export const SceneSetup: React.FC<{f: number}> = ({f}) => (
 	<AbsoluteFill style={{opacity: win(f, scene.setup, scene.first)}}>
 		<TitleBlock x={960} y={120} width={1500} align="center" kicker="XBOX · CONSOLE OR PC" lines={[{text: 'TURN IT ON', size: 108, gradient: true, glow: 'rgba(47,139,255,.4)'}]} delayF={fr(scene.setup) + 4} />
 		<StepListBlock
@@ -140,7 +140,7 @@ const SceneSetup: React.FC<{f: number}> = ({f}) => (
 );
 
 // ── 4 · without teaching, nothing is known ──
-const SceneFirst: React.FC<{f: number}> = ({f}) => (
+export const SceneFirst: React.FC<{f: number}> = ({f}) => (
 	<AbsoluteFill style={{opacity: win(f, scene.first, scene.teach)}}>
 		<TitleBlock x={960} y={120} width={1500} align="center" lines={[{text: 'NOTHING TAUGHT YET', size: 100, gradient: true, glow: 'rgba(47,139,255,.4)'}]} delayF={fr(scene.first) + 4} />
 		<div style={{position: 'absolute', left: 0, right: 0, top: 700, display: 'flex', justifyContent: 'center', opacity: interpolate(f, [fr(W('f2', 'used')) - 6, (fr(W('f2', 'used')) - 6) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}), transform: `translateY(${(1 - interpolate(f, [fr(W('f2', 'used')) - 6, (fr(W('f2', 'used')) - 6) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})) * 16}px)`}}>
@@ -150,7 +150,7 @@ const SceneFirst: React.FC<{f: number}> = ({f}) => (
 );
 
 // ── 5 · teach weapon wizard ──
-const SceneTeach: React.FC<{f: number}> = ({f}) => (
+export const SceneTeach: React.FC<{f: number}> = ({f}) => (
 	<AbsoluteFill style={{opacity: win(f, scene.teach, scene.tune)}}>
 		<TitleBlock x={960} y={100} width={1500} align="center" lines={[{text: 'TEACH WEAPON', size: 116, gradient: true, glow: 'rgba(47,139,255,.4)'}]} delayF={fr(scene.teach) + 4} />
 		<StepListBlock
@@ -172,7 +172,7 @@ const SceneTeach: React.FC<{f: number}> = ({f}) => (
 );
 
 // ── 6 · live tune ──
-const SceneTune: React.FC<{f: number}> = ({f}) => {
+export const SceneTune: React.FC<{f: number}> = ({f}) => {
 	const level = 0.5 + 0.14 * interpolate(f, [fr(W('u1', 'Up')) + 4, (fr(W('u1', 'Up')) + 4) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOut}) - 0.2 * interpolate(f, [fr(W('u1', 'Down')) + 4, (fr(W('u1', 'Down')) + 4) + (22)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.inOut});
 	return (
 		<AbsoluteFill style={{opacity: win(f, scene.tune, scene.ambig)}}>
@@ -183,7 +183,7 @@ const SceneTune: React.FC<{f: number}> = ({f}) => {
 };
 
 // ── 7 · ambiguity ──
-const SceneAmbig: React.FC<{f: number}> = ({f}) => (
+export const SceneAmbig: React.FC<{f: number}> = ({f}) => (
 	<AbsoluteFill style={{opacity: win(f, scene.ambig, scene.tolerance)}}>
 		<TitleBlock x={960} y={140} width={1500} align="center" lines={[{text: 'TOO SIMILAR?', size: 128, gradient: true, glow: 'rgba(47,139,255,.4)'}]} delayF={fr(scene.ambig) + 4} />
 		<ChipFlowBlock x={330} y={420} frame={f} font={44} chips={[
@@ -210,7 +210,7 @@ const ToleranceMeter: React.FC<{f: number; value: number; enterAtF: number}> = (
 		</div>
 	);
 };
-const SceneTolerance: React.FC<{f: number}> = ({f}) => {
+export const SceneTolerance: React.FC<{f: number}> = ({f}) => {
 	const val = 5 + Math.round(2 * interpolate(f, [fr(W('to4', 'tight')) - 30, (fr(W('to4', 'tight')) - 30) + (20)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out}));
 	return (
 		<AbsoluteFill style={{opacity: win(f, scene.tolerance, scene.outro)}}>
@@ -231,7 +231,7 @@ const SceneTolerance: React.FC<{f: number}> = ({f}) => {
 };
 
 // ── 9 · outro facts: slots + escape hatch ──
-const SceneOutro: React.FC<{f: number}> = ({f}) => (
+export const SceneOutro: React.FC<{f: number}> = ({f}) => (
 	<AbsoluteFill style={{opacity: win(f, scene.outro, scene.end)}}>
 		<TitleBlock x={960} y={130} width={1500} align="center" lines={[{text: `${XBOX.slots} PERSONAL SLOTS`, size: 110, gradient: true, glow: 'rgba(47,139,255,.4)'}]} delayF={fr(scene.outro) + 4} />
 		<div style={{position: 'absolute', left: 0, right: 0, top: 340, display: 'flex', justifyContent: 'center', opacity: interpolate(f, [fr(W('e1', 'reflash')) - 6, (fr(W('e1', 'reflash')) - 6) + (16)], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: E.out})}}>
